@@ -12,15 +12,15 @@
     <title><?= $title; ?></title>
     <!-- select2 -->
     <!-- <link href="<?= base_url(); ?>/vendor/select2/css/select2.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/vendor/datatables/datatables.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/datatables.min.css">
     <!-- <link rel="stylesheet" href="<?= base_url(); ?>/vendor/select2/css/select2-bootstrap4.css"> -->
 
     <!-- Custom fonts for this template-->
-    <link href="<?= base_url(); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
-    <link href="<?= base_url(); ?>/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url(); ?>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>/css/mycss.css">
+    <link href="<?= base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/mycss.css">
 </head>
 
 <body id="page-top">

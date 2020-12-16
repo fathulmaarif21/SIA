@@ -15,15 +15,15 @@
             <div class="card-body">
                 <div class="tab-content mt-3">
                     <div class="tab-pane active" id="trxFakturPembelian" role="tabpanel">
-                        <?= $this->include('admin/fakturPembelian/formFaktur'); ?>
+                        <?php $this->load->view('admin/fakturPembelian/formFaktur'); ?>
                     </div>
 
                     <div class="tab-pane" id="formaddObat" role="tabpanel" aria-labelledby="history-tab">
-                        <?= $this->include('admin/fakturPembelian/formObat'); ?>
+                        <?php $this->load->view('admin/fakturPembelian/formObat'); ?>
                     </div>
 
                     <div class="tab-pane" id="formSupplier" role="tabpanel" aria-labelledby="deals-tab">
-                        <?= $this->include('admin/fakturPembelian/formSupplier'); ?>
+                        <?php $this->load->view('admin/fakturPembelian/formSupplier'); ?>
                     </div>
                 </div>
             </div>

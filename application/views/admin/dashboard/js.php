@@ -1,6 +1,6 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
- <script src="<?= base_url(); ?>/js/gsap.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/js/gsap.min.js"></script>
  <script>
      $(document).ready(function() {
          //  var xxxxx = getTimeServer() * 1000;
@@ -16,7 +16,7 @@
      function realsaldo() {
          let real_saldo = $.ajax({
              type: 'GET',
-             url: '<?= base_url('/real_time_saldo') ?>',
+             url: '<?= base_url('Dashboard/real_time_saldo') ?>',
              async: false,
              success: function(data) {}
          }).responseText;
@@ -27,7 +27,7 @@
      function realtrx() {
          let real_trx = $.ajax({
              type: 'GET',
-             url: '<?php echo site_url('/real_time_trx') ?>',
+             url: '<?php echo site_url('Dashboard/real_time_trx') ?>',
              async: false,
              success: function(data) {}
          }).responseText;
@@ -38,7 +38,7 @@
      function realstok() {
          let real_trx = $.ajax({
              type: 'GET',
-             url: '<?php echo site_url('/real_time_stok') ?>',
+             url: '<?php echo site_url('Dashboard/real_time_stok') ?>',
              async: false,
              success: function(data) {}
          }).responseText;
@@ -49,7 +49,7 @@
      function get_data_expired() {
          $('.row_stok').remove();
          $.ajax({
-             url: "<?php echo site_url('/get_obat_exp') ?>",
+             url: "<?php echo site_url('Dashboard/get_obat_exp') ?>",
              type: "GET",
              dataType: "JSON",
              success: function(data) {

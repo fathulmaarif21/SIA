@@ -14,11 +14,19 @@ class ObatModel extends CI_Model
     var $column_search = array('kd_obat', 'nama_obat', 'harga_jual', 'stok', 'waktu_input');
     var $order = array('kd_obat' => 'desc');
 
+    public function dataObatByName($search)
+    {
+        $this->db->from($this->table);
+        $this->db->select('kd_obat, nama_obat,stok');
+        $this->db->like('nama_obat', $search);
+        $this->db->or_Like('kd_obat', $search);
+        return $this->db->get();
+    }
     function autoKdObat()
     {
         $q = $this->db->query("SELECT MAX(RIGHT(kd_obat,4)) AS kd_obat FROM master_obat");
         $kd = "";
-        if (count($q->num_rows()) > 0) {
+        if ($q->num_rows() > 0) {
             foreach ($q->result() as $k) {
                 $tmp = ((int)$k->kd_obat) + 1;
                 $kd = sprintf("%04s", $tmp);

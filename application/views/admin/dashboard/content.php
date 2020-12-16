@@ -12,7 +12,7 @@
             </div>
 
             <div class="dbox__action">
-                <a href="/trxPenjualan" class="dbox__action__btn btn btn-primary">More Info</a>
+                <a href="<?= base_url('user'); ?>/trxPenjualan" class="dbox__action__btn btn btn-primary">More Info</a>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="dbox__action">
-                <a href="/trxPenjualan" class="dbox__action__btn btn btn-warning">More Info</a>
+                <a href="<?= base_url('user'); ?>/trxPenjualan" class="dbox__action__btn btn btn-warning">More Info</a>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
                 <span class="dbox__title">Stok Obat Kosong</span>
             </div>
             <div class="dbox__action">
-                <a href="/dataObat" class="dbox__action__btn  btn btn-success">More Info</a>
+                <a href="<?= base_url('user'); ?>/dataObat" class="dbox__action__btn  btn btn-success">More Info</a>
             </div>
         </div>
     </div>

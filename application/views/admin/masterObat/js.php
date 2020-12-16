@@ -16,7 +16,7 @@
 
              // Load data for the table's content from an Ajax source
              "ajax": {
-                 "url": "<?= base_url('/admin/getDatatableObat'); ?>",
+                 "url": "<?= base_url('admin/getDatatableObat'); ?>",
                  "type": "POST",
              },
 
@@ -43,7 +43,7 @@
 
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('/admin/getObatbyid') ?>/" + id,
+             url: "<?php echo base_url('admin/getObatbyid') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
@@ -78,7 +78,7 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteObat') ?>/" + id,
+                     url: "<?= base_url('admin/deleteObatById') ?>/" + id,
                      type: "GET",
                      dataType: "JSON",
                      success: function(data) {

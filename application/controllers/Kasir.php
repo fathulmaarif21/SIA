@@ -1,36 +1,31 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-namespace App\Controllers;
-
-use App\Models\KasirModel;
-use App\Models\TrxPenjualanModel;
-use Config\Services;
-
-
-class Kasir extends BaseController
+class Kasir extends CI_Controller
 {
-    protected $dataObat;
     public function __construct()
     {
-        $this->dataObat = new KasirModel();
-        $this->TrxPenjualanModel = new TrxPenjualanModel(Services::request());
+        parent::__construct();
+        $this->load->model('ObatModel', 'dataObat');
+        $this->load->model('TrxPenjualanModel');
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
+
     public function index()
     {
         $data['title'] = 'Kasir';
-        return view('kasir/index', $data);
+        $this->load->view('kasir/index', $data);
     }
 
     public function getObat()
     {
-        $search = $this->request->getPost('search');
-        $data_trx = $this->dataObat->dataObatByName($search)->getResult();
+        $search = $this->input->post('search');
+        $data_trx = $this->dataObat->dataObatByName($search)->result();
         if ($data_trx) {
             foreach ($data_trx as $value) {
                 $selectajax[] = array(
                     'id' => $value->kd_obat,
-                    'text' => $value->nama_obat . ' | ' . $value->stok,
+                    'text' => $value->nama_obat . ' | Stok = ' . $value->stok,
                 );
             }
             echo json_encode($selectajax);
@@ -38,8 +33,8 @@ class Kasir extends BaseController
     }
     public function getObatById()
     {
-        $id = $this->request->getPost('data');
-        $value = $this->dataObat->getObatById($id)->getRow();
+        $id = $this->input->post('data');
+        $value = $this->dataObat->getObatbyid($id);
         $selectajax = array(
             'id' => $value->kd_obat,
             'harga' => $value->harga_jual,
@@ -51,18 +46,18 @@ class Kasir extends BaseController
     }
     public function submitTrx()
     {
-        $tagihan_simpan = $this->request->getPost('tagihan_simpan');
-        $bayar_simpan = $this->request->getPost('bayar_simpan');
-        $kembalian_simpan = $this->request->getPost('kembalian_simpan');
+        $tagihan_simpan = $this->input->post('tagihan_simpan');
+        $bayar_simpan = $this->input->post('bayar_simpan');
+        $kembalian_simpan = $this->input->post('kembalian_simpan');
 
-        $arr_kd_obat = $this->request->getPost('arr_kd_obat');
-        // $arr_stok = $this->request->getPost('arr_stok');
-        $arr_qty = $this->request->getPost('arr_qty');
-        $arr_subtotal = $this->request->getPost('arr_subtotal');
+        $arr_kd_obat = $this->input->post('arr_kd_obat');
+        // $arr_stok = $this->input->post('arr_stok');
+        $arr_qty = $this->input->post('arr_qty');
+        $arr_subtotal = $this->input->post('arr_subtotal');
 
-        $nama = $this->request->getPost('catatanPembeli')[3]['value'];
-        $alamat = $this->request->getPost('catatanPembeli')[4]['value'];
-        $note = $this->request->getPost('catatanPembeli')[5]['value'];
+        $nama = $this->input->post('catatanPembeli')[3]['value'];
+        $alamat = $this->input->post('catatanPembeli')[4]['value'];
+        $note = $this->input->post('catatanPembeli')[5]['value'];
 
 
         if ($arr_kd_obat) {

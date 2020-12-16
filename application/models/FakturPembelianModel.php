@@ -14,17 +14,7 @@ class FakturPembelianModel extends CI_Model
     var $column_search = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
     var $order = array('no_faktur' => 'desc');
 
-    public function addFakturPembelian($data, $detailTrx)
-    {
-        $this->db->transStart();
-        $builder = $this->db->table('faktur_pembelian');
-        $builder->insert($data);
-        $detail = $this->db->table('detail_pembelian');
-        $detail->insertBatch($detailTrx);
-        $this->db->transComplete();
 
-        // return $this->db->insertID();
-    }
     public function getDetailFaktur($kdFaktur)
     {
         $data = $this->db->query("SELECT a.*,b.nama_obat FROM detail_pembelian a LEFT JOIN master_obat b ON a.kd_obat = b.kd_obat WHERE a.no_faktur ='$kdFaktur'");
@@ -100,5 +90,14 @@ class FakturPembelianModel extends CI_Model
     {
         $this->db->where('id_dtl_pembelian', $id);
         $this->db->delete('detail_pembelian');
+    }
+    public function addFakturPembelian($data, $detailTrx)
+    {
+        $this->db->trans_start();
+        $this->db->insert($this->table, $data);
+        $this->db->insert_batch('detail_pembelian', $detailTrx);
+        $this->db->trans_complete();
+
+        // return $this->db->insertID();
     }
 }

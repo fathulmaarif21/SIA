@@ -110,8 +110,8 @@ class TrxPenjualanModel extends CI_Model
         $currendate = date('Y-m-d');
         $q = $this->db->query("SELECT MAX(RIGHT(kd_transaksi,3)) AS kd_max FROM transkasi_penjualan WHERE DATE(waktu_trx)='$currendate'");
         $kd = "";
-        if (count($q->getResultArray()) > 0) {
-            foreach ($q->getResult() as $k) {
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $k) {
                 $tmp = ((int)$k->kd_max) + 1;
                 $kd = sprintf("%03s", $tmp);
             }
@@ -120,21 +120,7 @@ class TrxPenjualanModel extends CI_Model
         }
         return date('dmy') . $kd;
     }
-    public function addTrxPenjualan($allTrx, $detailTrx)
-    {
-        $this->db->transStart();
-        $builder = $this->db->table('transkasi_penjualan');
-        $cek = $builder->insert($allTrx);
-        $detail = $this->db->table('detail_trx_penjualan');
-        $detail->insertBatch($detailTrx);
-        $this->db->transComplete();
-        if ($cek) {
-            return true;
-        } else {
-            return false;
-        }
-        // return $this->db->insertID();
-    }
+
     public function delete_by_id($kd_transaksi)
     {
         $this->db->where('kd_transaksi', $kd_transaksi);
@@ -149,5 +135,18 @@ class TrxPenjualanModel extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM transkasi_penjualan where date(waktu_trx) = '$tgl'");
         return $query;
+    }
+    public function addTrxPenjualan($allTrx, $detailTrx)
+    {
+        $this->db->trans_start();
+        $cek = $this->db->insert($this->table, $allTrx);
+        $this->db->insert_batch('detail_trx_penjualan', $detailTrx);
+        $this->db->trans_complete();
+        if ($cek) {
+            return true;
+        } else {
+            return false;
+        }
+        // return $this->db->insertID();
     }
 }

@@ -1,5 +1,5 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/select2/js/select2.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/select2/js/select2.min.js"></script>
  <script>
      document.addEventListener('keydown', function(e) {
 
@@ -61,7 +61,7 @@
          //   console.log(nm);
          $.ajax({
              type: 'POST',
-             url: '<?= base_url('getObatById'); ?>',
+             url: '<?= base_url('kasir/getObatById'); ?>',
              data: {
                  data: nm
              },
@@ -176,7 +176,7 @@
 
                      $.ajax({
                          type: "POST",
-                         url: "<?= base_url('admin/fakturPembelian'); ?>",
+                         url: "<?= base_url('admin/saveFakturPembelian'); ?>",
                          data: $('form').serialize() + "&totaltrx=" + $('#totalTagihan').text(),
                          success: function(res) {
                              console.table(res);
@@ -224,7 +224,7 @@
          function callSupplier() {
              $.ajax({
                  type: "GET",
-                 url: "<?= base_url('admin/Supplier'); ?>",
+                 url: "<?= base_url('admin/getSupplier'); ?>",
                  dataType: "JSON",
                  async: false,
                  success: function(res) {
@@ -250,7 +250,7 @@
          e.preventDefault();
          $.ajax({
              type: "POST",
-             url: "<?= base_url('admin/Supplier'); ?>",
+             url: "<?= base_url('admin/saveSupplier'); ?>",
              data: $('form').serialize(),
              dataType: "JSON",
              success: function(res) {
@@ -283,7 +283,7 @@
          e.preventDefault();
          $.ajax({
              type: "POST",
-             url: "<?= base_url('admin/addMasterObat'); ?>",
+             url: "<?= base_url('admin/saveObat'); ?>",
              data: $('form').serialize(),
              dataType: "JSON",
              success: function(res) {

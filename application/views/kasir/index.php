@@ -20,7 +20,7 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <?php $this->load->view('admin/fakturPembelian/content'); ?>
+                <?php $this->load->view('kasir/content'); ?>
             </div>
             <!-- /.container-fluid -->
 
@@ -61,4 +61,4 @@
     </div>
 </div>
 <?php $this->load->view('templates/js'); ?>
-<?php $this->load->view('admin/fakturPembelian/js'); ?>
+<?php $this->load->view('kasir/js'); ?>

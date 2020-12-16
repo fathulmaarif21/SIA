@@ -1,5 +1,5 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script>
      var save_method; //for save method string
      var table;
@@ -16,7 +16,7 @@
 
              // Load data for the table's content from an Ajax source
              "ajax": {
-                 "url": "<?= base_url('/admin/getDtSupplier'); ?>",
+                 "url": "<?= base_url('/admin/getDatatableSupplier'); ?>",
                  "type": "POST",
              },
 
@@ -43,7 +43,7 @@
 
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('/admin/SupplierById') ?>/" + id,
+             url: "<?php echo base_url('/admin/getSupplierById') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
@@ -78,7 +78,7 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteSupplier') ?>/" + id,
+                     url: "<?= base_url('/admin/deleteSupplierById') ?>/" + id,
                      type: "GET",
                      dataType: "JSON",
                      success: function(data) {
@@ -90,7 +90,11 @@
                          reload_table();
                      },
                      error: function(jqXHR, textStatus, errorThrown) {
-                         alert('Error deleting data');
+                         Swal.fire(
+                             'Report Server!',
+                             'Data yg di hapus berelasi pda data Faktur',
+                             'error'
+                         )
                      }
                  });
 

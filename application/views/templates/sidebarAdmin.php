@@ -2,7 +2,7 @@
     Admin Menu
 </div>
 <li class="nav-item">
-    <a class="nav-link" href="<?= base_url(); ?>/admin/fakturPembelian">
+    <a class="nav-link" href="<?= base_url(); ?>/admin/viewFaktuPembelian">
         <i class="fas fa-envelope-open-text"></i>
         <span>Faktur Pembelian</span></a>
 </li>

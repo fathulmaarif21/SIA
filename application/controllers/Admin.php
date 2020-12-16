@@ -8,7 +8,7 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->model('ObatModel');
         $this->load->model('TrxPenjualanModel');
-        // $this->load->model('SupplierModel');
+        $this->load->model('SupplierModel');
         $this->load->model('FakturPembelianModel');
         // $this->load->model('UserModel');
         date_default_timezone_set('Asia/Ujung_Pandang');
@@ -59,8 +59,8 @@ class Admin extends CI_Controller
         $autoKdObat = $this->ObatModel->autoKdObat();
         $ObatModel = [
             'kd_obat' => date('dm') . 'O' . $autoKdObat,
-            'nama_obat' => $this->request->getVar('addNamaObat'),
-            'harga_jual' => $this->request->getVar('addHargaJual'),
+            'nama_obat' => $this->input->post('addNamaObat'),
+            'harga_jual' => $this->input->post('addHargaJual'),
             'stok' => 0
         ];
 
@@ -238,14 +238,14 @@ class Admin extends CI_Controller
     // supplier
     public function getSupplier()
     {
-        echo json_encode($this->SupplierModel->findAll());
+        echo json_encode($this->SupplierModel->getAllsupp()->result());
     }
     public function saveSupplier()
     {
-        $this->SupplierModel->save([
-            'nama_supplier' => $this->request->getVar('nama_supplier'),
-            'hp' => $this->request->getVar('no_hp'),
-            'alamat' => $this->request->getVar('alamat'),
+        $this->SupplierModel->addSupplier([
+            'nama_supplier' => $this->input->post('nama_supplier'),
+            'hp' => $this->input->post('no_hp'),
+            'alamat' => $this->input->post('alamat'),
         ]);
         $data = ['status' => true];
         echo json_encode($data);
@@ -265,7 +265,7 @@ class Admin extends CI_Controller
 
     public function getSupplierById($kdSupplier)
     {
-        $data =  $this->SupplierModel->geySupplierbyid($kdSupplier)->getRow();
+        $data =  $this->SupplierModel->geySupplierbyid($kdSupplier)->row();
         echo json_encode($data);
     }
 
@@ -289,30 +289,29 @@ class Admin extends CI_Controller
     // Master Supplier
     public function getDatatableSupplier()
     {
-        if ($this->request->getMethod(true) == 'POST') {
-            $lists =  $this->SupplierModel->get_datatables();
-            $data = [];
-            $no = $this->input->post("start");
-            foreach ($lists as $list) {
-                $no++;
-                $row = [];
-                $row[] = $list->nama_supplier;
-                $row[] = $list->hp;
-                $row[] = $list->alamat;
-                //add html for action
-                $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit(' . "'" . $list->id_suplier . "'" . ')"><i class="far fa-edit"></i> Edit</a>
+
+        $lists =  $this->SupplierModel->get_datatables();
+        $data = [];
+        $no = $this->input->post("start");
+        foreach ($lists as $list) {
+            $no++;
+            $row = [];
+            $row[] = $list->nama_supplier;
+            $row[] = $list->hp;
+            $row[] = $list->alamat;
+            //add html for action
+            $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit(' . "'" . $list->id_suplier . "'" . ')"><i class="far fa-edit"></i> Edit</a>
                 <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteSupplier(' . "'" . $list->id_suplier . "'" . ')"><i class="far fa-trash-alt"></i> Delete</a>';
 
-                $data[] = $row;
-            }
-            $output = [
-                "draw" => $this->input->post('draw'),
-                "recordsTotal" =>  $this->SupplierModel->count_all(),
-                "recordsFiltered" =>  $this->SupplierModel->count_filtered(),
-                "data" => $data
-            ];
-            echo json_encode($output);
+            $data[] = $row;
         }
+        $output = [
+            "draw" => $this->input->post('draw'),
+            "recordsTotal" =>  $this->SupplierModel->count_all(),
+            "recordsFiltered" =>  $this->SupplierModel->count_filtered(),
+            "data" => $data
+        ];
+        echo json_encode($output);
     }
     // end of Master Supplier
 
