@@ -1,5 +1,5 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script>
      $(document).ready(function() {
 
@@ -14,7 +14,7 @@
 
              // Load data for the table's content from an Ajax source
              "ajax": {
-                 "url": "<?= base_url('obatDataTables'); ?>",
+                 "url": "<?= base_url('user/ajax_list'); ?>",
                  "type": "POST",
              },
 

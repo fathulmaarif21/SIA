@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -19,7 +19,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="/kasir">
+        <a class="nav-link" href="<?= base_url(); ?>/kasir">
             <i class="fas fa-cash-register"></i>
             <span>Kasir</span></a>
     </li>
@@ -32,20 +32,20 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="/dataObat">
+        <a class="nav-link" href="<?= base_url(); ?>user/dataObat">
             <i class="fas fa-briefcase-medical"></i>
             <span>Data Obat</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/trxPenjualan">
+        <a class="nav-link" href="<?= base_url(); ?>user/trxPenjualan">
             <i class="fas fa-envelope-open-text"></i>
             <span>Data Transaksi Harian</span></a>
     </li>
     <hr class="sidebar-divider">
     <!-- Heading -->
-    <?php if ($this->session->role_id == 1) {
-        $this->load->view('templates/sidebarAdmin');
-    } ?>
+    <?php
+    $this->load->view('templates/sidebarAdmin');
+    ?>
 
 
 

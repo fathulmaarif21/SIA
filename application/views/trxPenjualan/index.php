@@ -1,9 +1,9 @@
-<?= $this->include('templates/header'); ?>
+<?php $this->load->view('templates/header'); ?>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <?= $this->include('templates/sidebar'); ?>
+    <?php $this->load->view('templates/sidebar'); ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -13,12 +13,12 @@
         <div id="content">
 
             <!-- Topbar -->
-            <?= $this->include('templates/topbar'); ?>
+            <?php $this->load->view('templates/topbar'); ?>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <?= $this->include('trxPenjualan/content'); ?>
+                <?php $this->load->view('trxPenjualan/content'); ?>
             </div>
             <!-- /.container-fluid -->
 
@@ -26,7 +26,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <?= $this->include('templates/footer'); ?>
+        <?php $this->load->view('templates/footer'); ?>
         <!-- End of Footer -->
 
     </div>
@@ -90,5 +90,5 @@
         </div>
     </div>
 </div>
-<?= $this->include('templates/js'); ?>
-<?= $this->include('trxPenjualan/js'); ?>
+<?php $this->load->view('templates/js'); ?>
+<?php $this->load->view('trxPenjualan/js'); ?>

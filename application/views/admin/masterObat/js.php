@@ -43,7 +43,7 @@
 
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('/admin/getObatById') ?>/" + id,
+             url: "<?php echo base_url('/admin/getObatbyid') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {

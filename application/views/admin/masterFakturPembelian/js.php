@@ -1,5 +1,5 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script>
      function detail_trx(id) {
          save_method = 'detail';
@@ -7,7 +7,7 @@
          $('.row_trx').remove();
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('admin/detailFaktur') ?>/" + id,
+             url: "<?php echo base_url('admin/detailFakturPembelian') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
@@ -47,7 +47,7 @@
 
              // Load data for the table's content from an Ajax source
              "ajax": {
-                 "url": "<?= base_url('admin/dtFakturP'); ?>",
+                 "url": "<?= base_url('admin/dtFaktuPembelian'); ?>",
                  "type": "POST",
              },
 
@@ -77,7 +77,7 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteFaktur') ?>/" + id,
+                     url: "<?= base_url('/admin/deleteFakturPembelian') ?>/" + id,
                      type: "GET",
                      dataType: "JSON",
                      success: function(data) {
@@ -111,7 +111,7 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteDtlFaktur') ?>/" + id,
+                     url: "<?= base_url('/admin/deleteDetailFaktur') ?>/" + id,
                      type: "GET",
                      dataType: "JSON",
                      success: function(data) {

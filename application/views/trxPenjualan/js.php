@@ -1,5 +1,5 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script>
      function detail_trx(id) {
          save_method = 'detail';
@@ -7,7 +7,7 @@
          $('.row_trx').remove();
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo site_url('trxPenjualan') ?>/" + id,
+             url: "<?php echo site_url('user/detailTrxPenjualan') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
@@ -44,7 +44,7 @@
 
              // Load data for the table's content from an Ajax source
              "ajax": {
-                 "url": "<?= base_url('trxPenjualan'); ?>",
+                 "url": "<?= base_url('user/ajax_trx_penjualan'); ?>",
                  "type": "POST",
              },
              "order": [

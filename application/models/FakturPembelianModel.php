@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Models;
+defined('BASEPATH') or exit('No direct script access allowed');
 
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\Model;
-
-class FakturPembelianModel extends Model
+class FakturPembelianModel extends CI_Model
 {
-    protected $table = "faktur_pembelian";
-    protected $column_order = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
-    protected $column_search = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
-    protected $order = array('no_faktur' => 'desc');
-    protected $request;
-    protected $dt;
-    function __construct(RequestInterface $request)
+    function __construct()
     {
         parent::__construct();
-        $this->request = $request;
-        $this->dt = $this->db->table($this->table);
+        date_default_timezone_set('Asia/Ujung_Pandang');
     }
+    var $table = "faktur_pembelian";
+    var $column_order = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
+    var $column_search = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
+    var $order = array('no_faktur' => 'desc');
+
     public function addFakturPembelian($data, $detailTrx)
     {
         $this->db->transStart();
@@ -40,53 +35,70 @@ class FakturPembelianModel extends Model
     }
     private function _get_datatables_query()
     {
+
+        $this->db->from($this->table);
+
         $i = 0;
-        foreach ($this->column_search as $item) {
-            if ($this->request->getPost('search')['value']) {
-                if ($i === 0) {
-                    $this->dt->groupStart();
-                    $this->dt->like($item, $this->request->getPost('search')['value']);
+
+        foreach ($this->column_search as $item) // loop column 
+        {
+            if ($_POST['search']['value']) // if datatable send POST for search
+            {
+
+                if ($i === 0) // first loop
+                {
+                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                    $this->db->like($item, $_POST['search']['value']);
                 } else {
-                    $this->dt->orLike($item, $this->request->getPost('search')['value']);
+                    $this->db->or_like($item, $_POST['search']['value']);
                 }
-                if (count($this->column_search) - 1 == $i)
-                    $this->dt->groupEnd();
+
+                if (count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
             }
             $i++;
         }
 
-        if ($this->request->getPost('order')) {
-            $this->dt->orderBy($this->column_order[$this->request->getPost('order')['0']['column']], $this->request->getPost('order')['0']['dir']);
+        if (isset($_POST['order'])) // here order processing
+        {
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($this->order)) {
             $order = $this->order;
-            $this->dt->orderBy(key($order), $order[key($order)]);
+            $this->db->order_by(key($order), $order[key($order)]);
         }
     }
+
     function get_datatables()
     {
         $this->_get_datatables_query();
-        if ($this->request->getPost('length') != -1)
-            $this->dt->limit($this->request->getPost('length'), $this->request->getPost('start'));
-        $query = $this->dt->get();
-        return $query->getResult();
+        if ($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
     }
+
     function count_filtered()
     {
         $this->_get_datatables_query();
-        return $this->dt->countAllResults();
+        $query = $this->db->get();
+        return $query->num_rows();
     }
-    public function count_all()
+
+    function count_all()
     {
-        $tbl_storage = $this->db->table($this->table);
-        return $tbl_storage->countAllResults();
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
     }
+
+
     public function delete_by_id($id)
     {
-        $this->dt->delete(['no_faktur' => $id]);
+        $this->db->where('no_faktur', $id);
+        $this->db->delete($this->table);
     }
     public function deleteDtlFakturPembelian($id)
     {
-        $builder = $this->db->table('detail_pembelian');
-        $builder->delete(['id_dtl_pembelian' => $id]);
+        $this->db->where('id_dtl_pembelian', $id);
+        $this->db->delete('detail_pembelian');
     }
 }

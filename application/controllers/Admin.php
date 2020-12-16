@@ -7,9 +7,9 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ObatModel');
-        // $this->load->model('TrxPenjualanModelModel');
+        $this->load->model('TrxPenjualanModel');
         // $this->load->model('SupplierModel');
-        // $this->load->model('FakturPembelianModel');
+        $this->load->model('FakturPembelianModel');
         // $this->load->model('UserModel');
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
@@ -100,45 +100,43 @@ class Admin extends CI_Controller
     // end of master obat
     //--------------------------------------------------------------------
     // master trx penjualan
-    public function viewMasterTrxPenjualanModel()
+    public function viewMasterTrxPenjualan()
     {
         $data['title'] = 'Master Trx Penjualan';
-        $this->load->view('admin/masterTrxPenjualanModel/index', $data);
+        $this->load->view('admin/masterTrxPenjualan/index', $data);
     }
     public function masterTrxPenjualanModel()
     {
-        if ($this->request->getMethod(true) == 'POST') {
-            $lists =  $this->TrxPenjualanModel->get_datatables();
-            $data = [];
-            $no = $this->input->post("start");
-            foreach ($lists as $list) {
-                $no++;
-                $row = [];
-                $row[] = $list->kd_transaksi;
-                $row[] = $list->nama_pembeli;
-                $row[] = $list->alamat_pembeli;
-                $row[] = $list->note;
-                $row[] = $list->total_trx;
-                $row[] = $list->total_bayar;
-                $row[] = $list->kembalian;
-                $row[] = $list->waktu_trx;
-                //add html for action
-                // onclick="detail_trx(' . "'" . $value->kd_transaksi . "'" . ')"
-                $row[] = '
+        $lists =  $this->TrxPenjualanModel->get_datatables();
+        $data = [];
+        $no = $this->input->post("start");
+        foreach ($lists as $list) {
+            $no++;
+            $row = [];
+            $row[] = $list->kd_transaksi;
+            $row[] = $list->nama_pembeli;
+            $row[] = $list->alamat_pembeli;
+            $row[] = $list->note;
+            $row[] = $list->total_trx;
+            $row[] = $list->total_bayar;
+            $row[] = $list->kembalian;
+            $row[] = $list->waktu_trx;
+            //add html for action
+            // onclick="detail_trx(' . "'" . $value->kd_transaksi . "'" . ')"
+            $row[] = '
             <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->kd_transaksi . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
             <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteTrx(' . "'" . $list->kd_transaksi . "'" . ')" title="Delete" ><i class="fas fa-trash"></i> Delete</a>
             ';
-                $data[] = $row;
-            }
-            $output = [
-                "draw" => $this->input->post('draw'),
-                "recordsTotal" =>  $this->TrxPenjualanModel->count_all(),
-                "recordsFiltered" =>  $this->TrxPenjualanModel->count_filtered(),
-                "data" => $data
-            ];
-            echo json_encode($output);
-            // getTrxPenjualanModelByTime
+            $data[] = $row;
         }
+        $output = [
+            "draw" => $this->input->post('draw'),
+            "recordsTotal" =>  $this->TrxPenjualanModel->count_all(),
+            "recordsFiltered" =>  $this->TrxPenjualanModel->count_filtered(),
+            "data" => $data
+        ];
+        echo json_encode($output);
+        // getTrxPenjualanModelByTime
     }
     public function deleteTrxPenjualanModel($kd_transaksi)
     {
@@ -159,7 +157,7 @@ class Admin extends CI_Controller
     }
     public function detailFakturPembelian($kdFaktur)
     {
-        $data = $this->FakturPembelianModel->getDetailFaktur($kdFaktur)->getResult();
+        $data = $this->FakturPembelianModel->getDetailFaktur($kdFaktur)->result();
         echo json_encode($data);
     }
     public function deleteFakturPembelian($id)
@@ -167,7 +165,7 @@ class Admin extends CI_Controller
         $this->FakturPembelianModel->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
-    public function deleteDtlFakturPembelian($id)
+    public function deleteDetailFaktur($id)
     {
         $this->FakturPembelianModel->deleteDtlFakturPembelian($id);
         echo json_encode(array("status" => TRUE));
@@ -175,35 +173,33 @@ class Admin extends CI_Controller
     // dattable faktur
     public function dtFaktuPembelian()
     {
-        if ($this->request->getMethod(true) == 'POST') {
-            $lists =  $this->FakturPembelianModel->get_datatables();
-            $data = [];
-            $no = $this->input->post("start");
-            foreach ($lists as $list) {
-                $no++;
-                $row = [];
-                $row[] = $list->no_faktur;
-                $row[] = $list->id_suplier;
-                $row[] = $list->total_trx;
-                $row[] = $list->tgl_beli;
-                $row[] = $list->waktu_input;
-                //add html for action
-                // onclick="detail_trx(' . "'" . $value->no_faktur . "'" . ')"
-                $row[] = '
+        $lists =  $this->FakturPembelianModel->get_datatables();
+        $data = [];
+        $no = $this->input->post("start");
+        foreach ($lists as $list) {
+            $no++;
+            $row = [];
+            $row[] = $list->no_faktur;
+            $row[] = $list->id_suplier;
+            $row[] = $list->total_trx;
+            $row[] = $list->tgl_beli;
+            $row[] = $list->waktu_input;
+            //add html for action
+            // onclick="detail_trx(' . "'" . $value->no_faktur . "'" . ')"
+            $row[] = '
             <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->no_faktur . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
             <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteTrx(' . "'" . $list->no_faktur . "'" . ')" title="Delete" ><i class="fas fa-trash"></i> Delete</a>
             ';
-                $data[] = $row;
-            }
-            $output = [
-                "draw" => $this->input->post('draw'),
-                "recordsTotal" =>  $this->FakturPembelianModel->count_all(),
-                "recordsFiltered" =>  $this->FakturPembelianModel->count_filtered(),
-                "data" => $data
-            ];
-            echo json_encode($output);
-            // getTrxPenjualanModelByTime
+            $data[] = $row;
         }
+        $output = [
+            "draw" => $this->input->post('draw'),
+            "recordsTotal" =>  $this->FakturPembelianModel->count_all(),
+            "recordsFiltered" =>  $this->FakturPembelianModel->count_filtered(),
+            "data" => $data
+        ];
+        echo json_encode($output);
+        // getTrxPenjualanModelByTime
     }
     public function saveFakturPembelian()
     {
@@ -323,7 +319,7 @@ class Admin extends CI_Controller
     // UserManagement
     public function viewUserManagement()
     {
-        $data['users'] = $this->UserModel->getAllUser()->getResult();
+        $data['users'] = $this->UserModel->getAllUser()->result();
         // dd($data);
         $data['title'] = 'User Management';
         $this->load->view('admin/userManagement/index', $data);
@@ -406,7 +402,7 @@ class Admin extends CI_Controller
     //             'max_size[fileUpdate,4096]',
     //         ],
     //     ]);
-    //     $cekUsername = $this->UserModel->cekUserUpdate($id_user, $usernameUpdate)->getResultArray();
+    //     $cekUsername = $this->UserModel->cekUserUpdate($id_user, $usernameUpdate)->resultArray();
     //     if ($cekUsername) {
     //         if (count($cekUsername) > 0) {
     //             return $this->response->setJSON([

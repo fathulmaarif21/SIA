@@ -1,68 +1,62 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-namespace App\Controllers;
-
-use App\Models\ObatModel;
-use App\Models\TrxPenjualanModel;
-use Config\Services;
-
-
-class User extends BaseController
+class User extends CI_Controller
 {
-    protected $dataObat;
     public function __construct()
     {
-        $this->dataObat = new ObatModel(Services::request());
-        $this->trxPenjualan = new TrxPenjualanModel(Services::request());
+        parent::__construct();
+        $this->load->model('ObatModel');
+        $this->load->model('TrxPenjualanModel');
+        date_default_timezone_set('Asia/Ujung_Pandang');
     }
-    public function index()
-    {
-        return view('user/index');
-    }
+
+    // public function index()
+    // {
+    //     $this->load->view('user/index');
+    // }
 
     public function dataObat()
     {
         $data['title'] = 'Data Obat';
-        return view('dataObat/index', $data);
+        $this->load->view('dataObat/index', $data);
     }
     public function trxPenjualan()
     {
         $data['title'] = 'Trx Penjualan';
-        return view('trxPenjualan/index', $data);
+        $this->load->view('trxPenjualan/index', $data);
     }
     public function detailTrxPenjualan($kd_trx)
     {
-        $data = $this->trxPenjualan->getDetailTrxPenjualanByTime($kd_trx)->getResult();
+        $data = $this->TrxPenjualanModel->getDetailTrxPenjualanByTime($kd_trx)->result();
         echo json_encode($data);
     }
 
 
     public function ajax_list()
     {
-        if ($this->request->getMethod(true) == 'POST') {
-            $lists =  $this->dataObat->get_datatables();
-            $data = [];
-            $no = $this->request->getPost("start");
-            foreach ($lists as $list) {
-                $stok = $list->stok == 0 ? '<b style="color: red;">' . $list->stok . '</b>' : $list->stok;
-                $no++;
-                $row = [];
-                $row[] = $list->kd_obat;
-                $row[] = $list->nama_obat;
-                $row[] = $list->harga_jual;
-                $row[] = $stok;
-                //add html for action
-                $row[] = '';
-                $data[] = $row;
-            }
-            $output = [
-                "draw" => $this->request->getPost('draw'),
-                "recordsTotal" =>  $this->dataObat->count_all(),
-                "recordsFiltered" =>  $this->dataObat->count_filtered(),
-                "data" => $data
-            ];
-            echo json_encode($output);
+        $lists =  $this->ObatModel->get_datatables();
+        $data = [];
+        $no = $this->input->post("start");
+        foreach ($lists as $list) {
+            $stok = $list->stok == 0 ? '<b style="color: red;">' . $list->stok . '</b>' : $list->stok;
+            $no++;
+            $row = [];
+            $row[] = $list->kd_obat;
+            $row[] = $list->nama_obat;
+            $row[] = $list->harga_jual;
+            $row[] = $stok;
+            //add html for action
+            $row[] = '';
+            $data[] = $row;
         }
+        $output = [
+            "draw" => $this->input->post('draw'),
+            "recordsTotal" =>  $this->ObatModel->count_all(),
+            "recordsFiltered" =>  $this->ObatModel->count_filtered(),
+            "data" => $data
+        ];
+        echo json_encode($output);
     }
 
 
@@ -70,7 +64,7 @@ class User extends BaseController
     public function ajax_trx_penjualan()
     {
         $data = [];
-        $lists = $this->trxPenjualan->getTrxPenjualanByTime()->getResult();
+        $lists = $this->TrxPenjualanModel->getTrxPenjualanByTime()->result();
         foreach ($lists as $list) {
             $row = [];
             $row[] = $list->kd_transaksi;
