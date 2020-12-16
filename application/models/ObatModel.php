@@ -18,8 +18,8 @@ class ObatModel extends CI_Model
     {
         $q = $this->db->query("SELECT MAX(RIGHT(kd_obat,4)) AS kd_obat FROM master_obat");
         $kd = "";
-        if (count($q->getResultArray()) > 0) {
-            foreach ($q->getResult() as $k) {
+        if (count($q->num_rows()) > 0) {
+            foreach ($q->result() as $k) {
                 $tmp = ((int)$k->kd_obat) + 1;
                 $kd = sprintf("%04s", $tmp);
             }
