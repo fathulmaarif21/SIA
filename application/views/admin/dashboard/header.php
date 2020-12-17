@@ -21,6 +21,23 @@
     <link href="<?= base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/mycss.css">
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 300px;
+        }
+
+        #chartSaldo {
+            width: 100%;
+            height: 500px;
+            max-width: 100%;
+        }
+
+        #controls {
+            overflow: hidden;
+            padding-bottom: 3px;
+        }
+    </style>
 </head>
 
 <body id="page-top">

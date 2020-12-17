@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
 		$this->load->model('ObatModel', 'dataObat');
 		$this->load->model('TrxPenjualanModel', 'trxPenjualan');
 		$this->load->model('SupplierModel');
@@ -42,6 +43,37 @@ class Dashboard extends CI_Controller
 		echo json_encode($stok->num_rows());
 	}
 
+	public function donat_chart()
+	{
+		$bulan = date('m');
+		$data = $this->db->query("SELECT b.nama_obat, SUM(a.qty) as jml from detail_trx_penjualan a LEFT JOIN master_obat b on a.kd_obat = b.kd_obat
+		LEFT JOIN transkasi_penjualan c ON c.kd_transaksi = a.kd_transaksi
+	  WHERE month(c.waktu_trx) = '$bulan' GROUP by a.kd_obat ORDER by SUM(a.qty) desc limit 7")->result();
+		$array_obat = array();
+		foreach ($data as $value) {
+			array_push($array_obat, ['obat' => $value->nama_obat, 'jml' => floatval($value->jml)]);
+		}
+		echo json_encode($array_obat);
+	}
+	public function bar_chart()
+	{
+
+		$data = $this->db->query("SELECT DATE(a.waktu_trx) as tgl, COUNT(a.kd_transaksi) as jml, SUM(total_trx) as saldo from transkasi_penjualan a GROUP BY DATE(a.waktu_trx)")->result();
+		$array_trx = array();
+		foreach ($data as $value) {
+			// array_push($array_trx, ['trx' => $value->nama_trx, 'jml' => floatval($value->jml)]);
+			array_push($array_trx, [
+				'Date' => $value->tgl,
+				'Open' => floatval($value->jml),
+				'High' => floatval($value->jml),
+				'Low' => floatval($value->jml),
+				'Close' => floatval($value->jml),
+				'Volume' => floatval($value->saldo),
+				'Adj Close' => floatval($value->jml)
+			]);
+		}
+		echo json_encode($array_trx);
+	}
 	//--------------------------------------------------------------------
 
 }

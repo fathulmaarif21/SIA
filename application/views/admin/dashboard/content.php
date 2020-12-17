@@ -63,3 +63,24 @@
         </div>
     </div>
 </div>
+<div class="row mt-5 ml-4">
+    <div class="col-md-5">
+        <!-- <div class="card">
+            <div class="card-header">
+                <h4>Top Sale</h4>
+            </div>
+            <div class="card-body"> -->
+        <div id="chartdiv">
+        </div>
+        <!-- </div>
+        </div> -->
+
+    </div>
+    <div class="col-md-7">
+        <div id="controls"></div>
+        <div id="chartSaldo"></div>
+    </div>
+</div>
+<div class="row">
+
+</div>

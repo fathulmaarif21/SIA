@@ -2,15 +2,15 @@
 <html>
 
 <head>
-    <title>Login Form Design</title>
+    <title>Apotek</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /> -->
     <!-- <link rel="stylesheet" href="style.css"> -->
 
-    <link href="<?= base_url(); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="<?= base_url(); ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
     <style>
         * {
             margin: 0;
@@ -160,15 +160,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="myLeftCtn">
-                        <form method="POST" action="/login" class="myForm text-center">
+                        <form method="POST" action="<?= base_url('login/login'); ?>" class="myForm text-center">
                             <header>SIGN IN</header>
-                            <?php if (session()->getFlashdata('msg')) : ?>
-                                <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                            <?php if ($this->session->flashdata('msg')) : ?>
+                                <div class="alert alert-danger"><?= $this->session->flashdata('msg') ?></div>
                             <?php endif; ?>
                             <!-- <div class="alert alert-danger">teeees</div> -->
                             <div class="form-group">
                                 <i class="fas fa-user"></i>
-                                <input class="myInput" type="text" placeholder="Username" name="username" id="username" value="<?= old('username') ?>" required>
+                                <input class="myInput" type="text" placeholder="Username" name="username" id="username" required>
                             </div>
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
@@ -197,8 +197,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 
-    <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

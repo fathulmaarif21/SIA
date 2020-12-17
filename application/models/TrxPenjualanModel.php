@@ -10,8 +10,8 @@ class TrxPenjualanModel extends CI_Model
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
     var $table = "transkasi_penjualan";
-    var $column_order = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian');
-    var $column_search = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian');
+    var $column_order = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian', 'waktu_trx');
+    var $column_search = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian', 'waktu_trx');
     var $order = array('kd_transaksi ' => 'desc');
 
 

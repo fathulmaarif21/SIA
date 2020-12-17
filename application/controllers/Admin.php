@@ -6,6 +6,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cekAdmin();
         $this->load->model('ObatModel');
         $this->load->model('TrxPenjualanModel');
         $this->load->model('SupplierModel');
