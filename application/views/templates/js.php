@@ -1,23 +1,20 @@
-<!-- Bootstrap core JavaScript-->
-<script src="<?= base_url(); ?>/assets/vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url(); ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="<?= base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?= base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="<?= base_url(); ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2@10.js"></script>
+<!-- AdminLTE App -->
+<script src="<?= base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?= base_url(); ?>assets/dist/js/demo.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="<?= base_url(); ?>/assets/js/sb-admin-2.min.js"></script>
 <!-- sweetalert2 -->
-<script src="<?= base_url(); ?>/assets/js/sweetalert2@10.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
 
 
 <script>
     var table;
-    const pathArray = window.location.pathname.split("/");
-    $('a[href="/' + pathArray[1] + '"]').parent('li').addClass('active');
-
 
     function formatRupiah(angka, prefix) {
         let number_string = angka.toString(),

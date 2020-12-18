@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-success">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
             <li class="nav-item">

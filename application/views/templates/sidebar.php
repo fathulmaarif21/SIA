@@ -1,61 +1,82 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar elevation-4 sidebar-light-lime">
+    <a href="" class="brand-link navbar-light">
+        <img src="<?= base_url('assets/'); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-2" style="opacity: .8">
+        <span class="brand-text font-weight-light"><b>Apotek Najwa</b></span>
     </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="<?= base_url('assets/'); ?>img/undraw_profile.svg" class="img-circle elevation-2" alt="User Image">
+                <span class="brand-text "> <?= $this->session->userdata('nama'); ?></span>
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"></a>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Dashboard" class="nav-link <?php if ($this->uri->segment(1) == 'Dashboard') {
+                                                                                echo 'active';
+                                                                            } ?>">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">MENU</li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>/kasir" class="nav-link <?php if ($this->uri->segment(1) == 'kasir') {
+                                                                            echo 'active';
+                                                                        } ?>">
+                        <!-- <i class="nav-icon far fa-calendar-alt"></i> -->
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>
+                            Kasir
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>user/dataObat" class="nav-link <?php if ($this->uri->segment(2) == 'dataObat') {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                        <i class="nav-icon fas fa-briefcase-medical"></i>
+                        <p>
+                            Data Obat
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>user/trxPenjualan" class="nav-link <?php if ($this->uri->segment(2) == 'trxPenjualan') {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                        <i class="nav-icon fas fa-envelope-open-text"></i>
+                        <p>
+                            Data Transaksi Harian
+                        </p>
+                    </a>
+                </li>
+                <?php $this->load->view('templates/sidebarAdmin') ?>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>Dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>/kasir">
-            <i class="fas fa-cash-register"></i>
-            <span>Kasir</span></a>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        User
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
+    <!-- /.sidebar -->
+</aside>
 
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>user/dataObat">
-            <i class="fas fa-briefcase-medical"></i>
-            <span>Data Obat</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>user/trxPenjualan">
-            <i class="fas fa-envelope-open-text"></i>
-            <span>Data Transaksi Harian</span></a>
-    </li>
-    <hr class="sidebar-divider">
-    <!-- Heading -->
-    <?php
-    $this->load->view('templates/sidebarAdmin');
-    ?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
 
-
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-</ul>
+    </section>
+    <!-- Main content -->
+    <section class="content">

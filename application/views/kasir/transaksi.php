@@ -18,10 +18,10 @@
                 <h3>Rp. 0</h3>
             </div>
         </div> -->
-        <div class="card  mb-2 border-left-warning shadow  mb-2" style="background-color: greenyellow;">
+        <div class="card  mb-2  shadow  mb-2" style="background-color: #01ff70;">
             <div class="card-body">
                 <p class="card-text"><b>Total :</b></p>
-                <h2 class="card-title">Rp. <span id="totalTagihan">0</span></h2>
+                <h1 class="h2">Rp. <span id="totalTagihan">0</span></h1>
             </div>
         </div>
     </div>

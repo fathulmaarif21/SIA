@@ -1,4 +1,3 @@
- <!-- select2 -->
  <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script src="<?= base_url(); ?>assets/js/gsap.min.js"></script>
  <!-- Resources -->

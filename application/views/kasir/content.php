@@ -1,6 +1,6 @@
-<div class="card text-center">
-    <div class="card-header bg-primary text-white">
-        <h3>TRANSAKSI PENJUALAN</h3>
+<div class="card card-success">
+    <div class="card-header">
+        <h3 class="card-title">TRANSAKSI PENJUALAN</h3>
     </div>
     <div class="card-body shadow">
         <?php $this->load->view('kasir/transaksi'); ?>

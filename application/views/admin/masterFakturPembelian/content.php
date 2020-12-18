@@ -1,6 +1,6 @@
-<div class="card ">
-    <div class="card-header text-center bg-primary text-white">
-        <h3>Master Faktur Pembelian</h3>
+<div class="card card-success">
+    <div class="card-header">
+        <h3 class="card-title">Master Faktur Pembelian</h3>
     </div>
     <div class="card-body shadow">
         <table id="table_trx" class="table table-striped table-bordered" cellspacing="0" width="100%">

@@ -1,86 +1,86 @@
 <div class="row">
-    <div class="col-md-3 product">
-        <div class="effect-1"></div>
-        <div class="effect-2"></div>
-        <div class="dbox  dbox--color-3 shadow">
-            <div class="dbox__icon">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3 id="r_saldo"></h3>
+
+                <p>Saldo</p>
+            </div>
+            <div class="icon">
                 <i class="far fa-money-bill-alt"></i>
             </div>
-            <div class="dbox__body">
-                <div class="dbox__count" id="r_saldo"></div>
-                <span class="dbox__title">Saldo</span>
-            </div>
-
-            <div class="dbox__action">
-                <a href="<?= base_url('user'); ?>/trxPenjualan" class="dbox__action__btn btn btn-primary">More Info</a>
-            </div>
+            <a href="<?= base_url('user'); ?>/trxPenjualan" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3 product">
-        <div class="effect-3"></div>
-        <div class="effect-4"></div>
-        <div class="dbox dbox--color-2 shadow">
-            <div class="dbox__icon">
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3 id="r_trx"></h3>
+
+                <p>Jumlah Transaksi</p>
+            </div>
+            <div class="icon">
                 <i class="fas fa-exchange-alt"></i>
             </div>
-            <div class="dbox__body">
-                <div class="dbox__count" id="r_trx"></div>
-                <span class="dbox__title">Jumlah Transaksi</span>
-            </div>
-
-            <div class="dbox__action">
-                <a href="<?= base_url('user'); ?>/trxPenjualan" class="dbox__action__btn btn btn-warning">More Info</a>
-            </div>
+            <a href="<?= base_url('user'); ?>/trxPenjualan" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="dbox dbox--color-4 shadow">
-            <div class="dbox__icon">
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3 id="r_stok"></h3>
+
+                <p>Stok Obat Kosong</p>
+            </div>
+            <div class="icon">
                 <i class="far fa-meh-blank"></i>
             </div>
-            <div class="dbox__body">
-                <div class="dbox__count" id="r_stok"></div>
-                <span class="dbox__title">Stok Obat Kosong</span>
-            </div>
-            <div class="dbox__action">
-                <a href="<?= base_url('user'); ?>/dataObat" class="dbox__action__btn  btn btn-success">More Info</a>
-            </div>
+            <a href="<?= base_url('user'); ?>/dataObat" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="dbox dbox--color-1 shadow">
-            <div class="dbox__icon">
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3><?= $jml_expired; ?></h3>
+
+                <p>Total Obat Expired</p>
+            </div>
+            <div class="icon">
                 <i class="fas fa-skull-crossbones"></i>
             </div>
-            <div class="dbox__body">
-                <span class="dbox__count"><?= $jml_expired; ?></span>
-                <span class="dbox__title">Total Obat Expired</span>
-            </div>
-
-            <div class="dbox__action">
-                <button onclick="get_data_expired()" class="dbox__action__btn btn btn-danger">More Info</button>
-            </div>
+            <a href="#" onclick="get_data_expired()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    <!-- ./col -->
 </div>
-<div class="row mt-5 ml-4">
+<div class="row ">
     <div class="col-md-5">
-        <!-- <div class="card">
+        <div class="card card-info">
             <div class="card-header">
-                <h4>Top Sale</h4>
+                <h3 class="card-title"><i class="fas fa-chart-pie"></i> <b>Top 5</b></h3>
             </div>
-            <div class="card-body"> -->
-        <div id="chartdiv">
+            <div id="chartdiv">
+            </div>
         </div>
-        <!-- </div>
-        </div> -->
-
     </div>
     <div class="col-md-7">
-        <div id="controls"></div>
-        <div id="chartSaldo"></div>
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-chart-bar"></i> <b>Chart Transaksi</b></h3>
+            </div>
+            <div id="controls"></div>
+            <div id="chartSaldo"></div>
+        </div>
     </div>
 </div>
+
 <div class="row">
 
 </div>

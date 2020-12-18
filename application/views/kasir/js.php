@@ -1,5 +1,5 @@
- <!-- select2 -->
- <script src="<?= base_url(); ?>assets/vendor/select2/js/select2.min.js"></script>
+ <!-- Select2 -->
+ <script src="<?= base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
  <script></script>
  <script>
      document.addEventListener('keydown', function(e) {
@@ -145,7 +145,6 @@
  </script>
  <script>
      function handleSubTotal() {
-
          $('.getData-FromInput').on('keyup change', function() {
              let kd_obat = $(this).data('kd_obat');
              let harga = $(this).data('harga');
@@ -281,61 +280,62 @@
                              $('form').each(function() {
                                  this.reset();
                              });
+                             // untuk print
+                             //                      $('#printThis').html(`<div class="row rowNota">
+                             //     <div id="table_nota" class="col-md-4">
+                             //         <table class="table table-borderless">
+                             //             <thead>
+                             //                 <tr>
+                             //                     <td colspan="4">
+                             //                         <h3 style="text-align:center">STRUK PEMBELIAN OBAT</h3>
+                             //                     </td>
+                             //                 </tr>
+                             //                 <tr>
+                             //                     <td colspan="4">
+                             //                         <h4 style="text-align:center">Apotek</h4>
+                             //                     </td>
+                             //                 </tr>
+                             //                 <tr>
+                             //                     <td colspan="2"><b>Kd Nota :<span>${res.id_nota}</span></b></td>
+                             //                     <td colspan="2"><b>Tanggal : 2020-09-99</b></td>
+                             //                 </tr>
+                             //                 <tr>
+                             //                     <th>Obat</th>
+                             //                     <th>Harga</th>
+                             //                     <th>Qty</th>
+                             //                     <th>Sub</th>
+                             //                 </tr>
+                             //             </thead>
+                             //             <tbody>
+                             //                  ${allDataSimpan}
+                             //             </tbody>
+                             //             <tfoot>
+                             //                 <tr>
+                             //                     <td colspan="2">Total
+                             //                         <br>
+                             //                         Bayar
+                             //                         <br>
+                             //                         Kembalian
+                             //                     </td>
+                             //                     <td>Rp <br>Rp<br>Rp</td>
+                             //                     <td>
+                             //                         <span>${tagihan_simpan}</span>
+                             //                         <br>
+                             //                         <span >${bayar_simpan}</span>
+                             //                         <br>
+                             //                         <span >${kembalian_simpan}</span>
+                             //                     </td>
+                             //                 </tr>
+                             //             </tfoot>
+                             //         </table>
+                             //         </>
+                             //     </div>
+                             // </div>`);
 
-                             $('#printThis').html(`<div class="row rowNota">
-            <div id="table_nota" class="col-md-4">
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <td colspan="4">
-                                <h3 style="text-align:center">STRUK PEMBELIAN OBAT</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <h4 style="text-align:center">Apotek</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><b>Kd Nota :<span>${res.id_nota}</span></b></td>
-                            <td colspan="2"><b>Tanggal : 2020-09-99</b></td>
-                        </tr>
-                        <tr>
-                            <th>Obat</th>
-                            <th>Harga</th>
-                            <th>Qty</th>
-                            <th>Sub</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         ${allDataSimpan}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2">Total
-                                <br>
-                                Bayar
-                                <br>
-                                Kembalian
-                            </td>
-                            <td>Rp <br>Rp<br>Rp</td>
-                            <td>
-                                <span>${tagihan_simpan}</span>
-                                <br>
-                                <span >${bayar_simpan}</span>
-                                <br>
-                                <span >${kembalian_simpan}</span>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-                </>
-            </div>
-        </div>`);
 
 
-
-                             window.print();
+                             //   window.print();
+                             //  $('.rowNota').remove();  hapus row nota
 
                              //   $('#table_nota').append(data.table_print);
                              //   // Swal.fire(
@@ -346,7 +346,6 @@
                              //   $('#no_nota').val(data.autokode_nota);
                              //   $('#printThis').show();
 
-                             $('.rowNota').remove();
 
                              //   // $('#printThis').hide();
                              //   $("#id_obat").val('').trigger('change')
