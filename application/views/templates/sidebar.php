@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-header">MENU</li>
                 <li class="nav-item">
-                    <a href="<?= base_url(); ?>/kasir" class="nav-link <?php if ($this->uri->segment(1) == 'kasir') {
+                    <a href="<?= base_url(); ?>kasir" class="nav-link <?php if ($this->uri->segment(1) == 'kasir') {
                                                                             echo 'active';
                                                                         } ?>">
                         <!-- <i class="nav-icon far fa-calendar-alt"></i> -->
