@@ -1,9 +1,9 @@
-<?= $this->include('templates/header'); ?>
+<?php $this->load->view('templates/header'); ?>
 
-<?= $this->include('templates/topbar'); ?>
-<?= $this->include('templates/sidebar'); ?>
-<?= $this->include('admin/userManagement/content'); ?>
-<?= $this->include('templates/footer'); ?>
+<?php $this->load->view('templates/topbar'); ?>
+<?php $this->load->view('templates/sidebar'); ?>
+<?php $this->load->view('admin/userManagement/content'); ?>
+<?php $this->load->view('templates/footer'); ?>
 <div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -33,17 +33,6 @@
                             <option value="2">Karyawan</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Foto</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="fileUpdate" id="fileUpdate">
-                                <label class="custom-file-label" for="fileUpdate">Pilih Foto</label>
-                            </div>
-                        </div>
-                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" id="btnSaveUser" class="btn btn-primary">Simpan</button>
@@ -54,5 +43,5 @@
     </div>
 </div>
 
-<?= $this->include('templates/js'); ?>
-<?= $this->include('admin/userManagement/js'); ?>
+<?php $this->load->view('templates/js'); ?>
+<?php $this->load->view('admin/userManagement/js'); ?>

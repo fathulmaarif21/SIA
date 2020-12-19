@@ -12,7 +12,6 @@
                         <th>User Name</th>
                         <th>Sebagai</th>
                         <th>Waktu Input</th>
-                        <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -26,7 +25,6 @@
                             <td><?= $val->username; ?></td>
                             <td><?= $val->role; ?></td>
                             <td><?= $val->waktu_buat; ?></td>
-                            <td><img src="<?= base_url(); ?>/img/<?= $val->foto; ?>" alt="..." class="img-thumbnail setImg"></td>
                             <td>
                                 <button type="button" onclick="edit_user(<?= $val->id; ?>)" class="btn btn-warning">Edit</button>
                                 <button type="button" onclick="delete_user(<?= $val->id; ?>)" class="btn btn-danger">Hapus</button>

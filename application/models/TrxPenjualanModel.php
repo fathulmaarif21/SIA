@@ -47,6 +47,8 @@ class TrxPenjualanModel extends CI_Model
         } else if (isset($this->order)) {
             $order = $this->order;
             $this->db->order_by(key($order), $order[key($order)]);
+        } else {
+            $this->db->order_by('waktu_trx', 'DESC'); // saya add sneiri untuk order default
         }
     }
 

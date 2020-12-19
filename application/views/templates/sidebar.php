@@ -57,7 +57,7 @@
                     <a href="<?= base_url(); ?>user/trxPenjualan" class="nav-link <?php if ($this->uri->segment(2) == 'trxPenjualan') {
                                                                                         echo 'active';
                                                                                     } ?>">
-                        <i class="nav-icon fas fa-envelope-open-text"></i>
+                        <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
                             Data Transaksi Harian
                         </p>

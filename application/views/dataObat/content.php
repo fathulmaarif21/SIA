@@ -8,9 +8,9 @@
                 <tr>
                     <th>Id Obat</th>
                     <th>Nama Obat</th>
-                    <th>harga_jual</th>
-                    <th>stok</th>
-                    <th>Action</th>
+                    <th>Kemasan</th>
+                    <th>Harga_jual</th>
+                    <th>Stok</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,9 +20,9 @@
                 <tr>
                     <th>Id Obat</th>
                     <th>Nama Obat</th>
+                    <th>Kemasan</th>
                     <th>Sastra</th>
                     <th>stok</th>
-                    <th>Action</th>
                 </tr>
             </tfoot>
         </table>

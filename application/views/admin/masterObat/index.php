@@ -22,6 +22,10 @@
                         <input type="text" class="form-control" name="nama_obat" value="" id="nama_obat">
                     </div>
                     <div class="form-group">
+                        <label for="kemasan" class="col-form-label">Kemasan:</label>
+                        <input type="text" class="form-control" name="kemasan" value="" id="kemasan">
+                    </div>
+                    <div class="form-group">
                         <label for="harga_jual" class="col-form-label">Harga Jual:</label>
                         <input type="text" class="form-control" name="harga_jual" value="" id="harga_jual">
                     </div>

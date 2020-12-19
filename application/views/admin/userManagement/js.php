@@ -1,11 +1,6 @@
  <!-- select2 -->
- <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
+ <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
  <script>
-     $('.custom-file-input').on('change', function() {
-         let filename = $(this).val().split('\\').pop();
-         $(this).next('.custom-file-label').addClass("selected").html(filename);
-     });
-
      $(document).ready(function() {
 
          $('#bologna-list a').on('click', function(e) {
@@ -25,13 +20,10 @@
      $('#form_create').submit(function(e) {
          e.preventDefault();
          $.ajax({
-             url: '<?= base_url('admin/userManagement'); ?>', //URL submit
-             type: "post", //method Submit
-             data: new FormData(this), //penggunaan FormData
-             processData: false,
-             contentType: false,
-             cache: false,
-             async: false,
+             url: '<?= base_url('admin/saveNewUser'); ?>', //URL submit
+             type: "POST",
+             data: $("#form_create").serialize(),
+             dataType: "JSON", //penggunaan FormData
              success: function(data) {
                  console.log(data)
                  if (data.success) {
@@ -50,7 +42,7 @@
              },
              error: function(xhr, status, error) {
                  console.log(xhr.responseText);
-                 alert('Error adding / update data');
+                 alert('Error adding / add');
              }
          });
      });
@@ -61,21 +53,16 @@
 
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('/admin/userById') ?>/" + id,
+             url: "<?php echo base_url('/admin/getUserByid') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
-
-                 console.log(data);
                  $('[name="id_user"]').val(data.id);
-                 $('[name="old_fileName"]').val(data.foto);
                  $('[name="namaUpdate"]').val(data.nama);
                  $('[name="usernameUpdate"]').val(data.username);
                  $('[name="roleUpdate"]').val(data.role_id).trigger('change');
                  $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
                  $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
-
-
              },
              error: function(jqXHR, textStatus, errorThrown) {
                  alert('Error get data from ajax');
@@ -125,18 +112,14 @@
          // ajax adding data to database
          // var formData = new FormData($('#form')[0]);
          $.ajax({
-             url: '<?= base_url('admin/editUser'); ?>', //URL submit
-             type: "post", //method Submit
-             data: new FormData(this), //penggunaan FormData
-             processData: false,
-             contentType: false,
-             cache: false,
-             async: false,
+             url: '<?= base_url('admin/ubahUser'); ?>', //URL submit
+             type: "POST",
+             data: $("#form_user").serialize(),
+             dataType: "JSON", //penggunaan FormData
              success: function(data) {
-                 console.log(data)
                  if (data.success) {
                      Swal.fire(
-                         'Berhasil Tambah User',
+                         'Berhasil ubah User',
                          `${data.msg}`,
                          'success'
                      )

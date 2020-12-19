@@ -8,6 +8,7 @@
                 <tr>
                     <th>Kd Obat</th>
                     <th>Nama Obat</th>
+                    <th>Kemasan</th>
                     <th>Harga Jual</th>
                     <th>Stok</th>
                     <th>Waktu Input</th>

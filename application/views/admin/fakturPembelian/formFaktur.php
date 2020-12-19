@@ -57,7 +57,7 @@
                     <div class="card mb-4 border-left-primary shadow  mb-2">
                         <div class="card-body">
                             <p class="card-text"><b>Total :</b></p>
-                            <h2 class="card-title">Rp. <span id="totalTagihan">0</span></h2>
+                            <h2 class="h2">Rp. <span id="totalTagihan">0</span></h2>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" type="button"><i class="fas fa-save"></i> Simpan Data</button>

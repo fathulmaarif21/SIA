@@ -44,10 +44,10 @@ class User extends CI_Controller
             $row = [];
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
+            $row[] = $list->kemasan;
             $row[] = $list->harga_jual;
             $row[] = $stok;
             //add html for action
-            $row[] = '';
             $data[] = $row;
         }
         $output = [

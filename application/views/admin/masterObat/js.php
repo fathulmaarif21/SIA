@@ -10,7 +10,9 @@
 
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
-             "order": [], //Initial no order.
+             "order": [
+                 [5, "desc"]
+             ],
              autoWidth: true,
              responsive: true,
 
@@ -22,11 +24,9 @@
 
              //Set column definition initialisation properties.
              "columnDefs": [{
-                     "targets": [-1], //last column
-                     "orderable": false, //set not orderable
-                 },
-
-             ],
+                 "targets": [-1], //last column
+                 "orderable": false, //set not orderable
+             }, ],
 
          });
 

@@ -12,11 +12,11 @@
     <div class="card-body">
         <div class="tab-content mt-3">
             <div class="tab-pane active" id="createUser" role="tabpanel">
-                <?= $this->include('admin/userManagement/createUser'); ?>
+                <?php $this->load->view('admin/userManagement/createUser'); ?>
             </div>
 
             <div class="tab-pane" id="tableUsers" role="tabpanel" aria-labelledby="history-tab">
-                <?= $this->include('admin/userManagement/tableUsers'); ?>
+                <?php $this->load->view('admin/userManagement/tableUsers'); ?>
             </div>
         </div>
     </div>

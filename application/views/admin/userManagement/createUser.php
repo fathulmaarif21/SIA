@@ -23,17 +23,7 @@
                     <option value="2">Karyawan</option>
                 </select>
             </div>
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Foto</span>
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="file" id="inputfotoGroupFile01">
-                        <label class="custom-file-label" for="inputGroupFile01">Pilih Foto</label>
-                    </div>
-                </div>
-            </div>
+
             <button type="submit" id="" class="btn btn-primary">Submit</button>
         </div>
     </form>

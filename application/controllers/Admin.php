@@ -11,7 +11,7 @@ class Admin extends CI_Controller
         $this->load->model('TrxPenjualanModel');
         $this->load->model('SupplierModel');
         $this->load->model('FakturPembelianModel');
-        // $this->load->model('UserModel');
+        $this->load->model('UserModel');
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
 
@@ -38,12 +38,14 @@ class Admin extends CI_Controller
     {
         $kd_obat = $this->input->post('kd_obat');
         $nama_obat = $this->input->post('nama_obat');
+        $kemasan = $this->input->post('kemasan');
         $harga_jual = $this->input->post('harga_jual');
         $stok = $this->input->post('stok');
         // $autokode = $this->ObatModel->autoKdObat();
         // echo 'O' . date('dm') . $autokode;
         $update = [
             "nama_obat" => $nama_obat,
+            "kemasan" => $kemasan,
             "harga_jual" => $harga_jual,
             "stok" => $stok
         ];
@@ -61,6 +63,7 @@ class Admin extends CI_Controller
         $ObatModel = [
             'kd_obat' => date('dm') . 'O' . $autoKdObat,
             'nama_obat' => $this->input->post('addNamaObat'),
+            'kemasan' => $this->input->post('addkemasan'),
             'harga_jual' => $this->input->post('addHargaJual'),
             'stok' => 0
         ];
@@ -81,6 +84,7 @@ class Admin extends CI_Controller
             $row = [];
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
+            $row[] = $list->kemasan;
             $row[] = $list->harga_jual;
             $row[] = $list->stok;
             $row[] = $list->waktu_input;
@@ -327,132 +331,92 @@ class Admin extends CI_Controller
     public function getUserByid($id)
     {
 
-        echo json_encode($this->UserModel->find($id));
+        echo json_encode($this->UserModel->obatById($id));
     }
 
-    // public function addUser()
-    // {
-    //     $userName = $this->input->post('username');
+    public function saveNewUser()
+    {
+        $userName = $this->input->post('username');
 
-    //     $validated = $this->validate([
-    //         'file' => [
-    //             'uploaded[file]',
-    //             'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
-    //             'max_size[file,4096]',
-    //         ],
-    //     ]);
-    //     $cekUsername = $this->UserModel->where('username', $userName)->find();
-    //     if ($cekUsername) {
-    //         if ($userName == $cekUsername[0]->username) {
-    //             return $this->response->setJSON([
-    //                 'success' => false,
-    //                 'data' => $cekUsername[0]->username,
-    //                 'msg' => "username Sudah Ada !"
-    //             ]);
-    //         }
-    //     }
+        $cekUsername = $this->UserModel->cekUserAdd($userName);
+        if ($cekUsername) {
+            if ($cekUsername->num_rows() > 0) {
+                $response = [
+                    'success' => false,
+                    'data' => $userName,
+                    'msg' => "username Sudah Ada !"
+                ];
+            } else {
+                $data = [
+                    'nama' => $this->input->post('nama'),
+                    'username'  => $userName,
+                    'password'  =>  password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'role_id'  => $this->input->post('role')
+                ];
 
-    //     $data = [
-    //         'nama' => $this->input->post('nama'),
-    //         'username'  => $userName,
-    //         'foto'  => 'undraw_profile.svg',
-    //         'password'  =>  password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-    //         'role_id'  => $this->input->post('role')
-    //     ];
+                $save = $this->UserModel->addUser($data);
+                $response = [
+                    'success' => true,
+                    'data' => $save,
+                    'msg' => "berhasil tambah user"
+                ];
+            }
+        } else {
+            $response = [
+                'success' => false,
+                'data' => $userName,
+                'msg' => "Gagal Update"
+            ];
+        }
 
-    //     $avatar = $this->request->getFile('file');
-    //     if ($avatar != '') {
-    //         if ($validated) {
-    //             $avatar->move('img');
-    //             $data['foto']  = $avatar->getName();
-    //             $save = $this->UserModel->save($data);
-    //             $response = [
-    //                 'success' => true,
-    //                 'data' => $save,
-    //                 'msg' => "Image has been uploaded successfully"
-    //             ];
-    //         } else {
-    //             $response = [
-    //                 'success' => false,
-    //                 'data' => $avatar,
-    //                 'msg' => "Gagal Upload File"
-    //             ];
-    //         }
-    //     } else {
-    //         $save = $this->UserModel->save($data);
-    //         $response = [
-    //             'success' => true,
-    //             'data' => $save,
-    //             'msg' => "berhasil tambah user"
-    //         ];
-    //     }
-    //     return $this->response->setJSON($response);
-    // }
 
-    // public function updateUser()
-    // {
-    //     $id_user = $this->input->post('id_user');
-    //     $old_fileName = $this->input->post('old_fileName');
-    //     $usernameUpdate = $this->input->post('usernameUpdate');
-    //     helper(['form', 'url']);
-    //     $validated = $this->validate([
-    //         'fileUpdate' => [
-    //             'uploaded[fileUpdate]',
-    //             'mime_in[fileUpdate,image/jpg,image/jpeg,image/gif,image/png]',
-    //             'max_size[fileUpdate,4096]',
-    //         ],
-    //     ]);
-    //     $cekUsername = $this->UserModel->cekUserUpdate($id_user, $usernameUpdate)->resultArray();
-    //     if ($cekUsername) {
-    //         if (count($cekUsername) > 0) {
-    //             return $this->response->setJSON([
-    //                 'success' => false,
-    //                 'data' => $usernameUpdate,
-    //                 'msg' => "username Sudah Ada !"
-    //             ]);
-    //         }
-    //     }
 
-    //     $data = [
-    //         'nama' => $this->input->post('namaUpdate'),
-    //         'username'  => $usernameUpdate,
-    //         'foto'  => $old_fileName,
-    //         'role_id'  => $this->input->post('roleUpdate')
-    //     ];
+        echo json_encode($response);
+    }
 
-    //     $avatar = $this->request->getFile('fileUpdate');
-    //     if ($avatar != '') {
-    //         if ($validated) {
-    //             $avatar->move('img');
-    //             $data['foto']  = $avatar->getName();
-    //             $save = $this->UserModel->update($id_user, $data);;
-    //             $response = [
-    //                 'success' => true,
-    //                 'data' => $save,
-    //                 'msg' => "Image has been uploaded successfully"
-    //             ];
-    //         } else {
-    //             $response = [
-    //                 'success' => false,
-    //                 'data' => $avatar->getName(),
-    //                 'msg' => "Gagal Upload File"
-    //             ];
-    //         }
-    //     } else {
-    //         $save = $this->UserModel->update($id_user, $data);;
-    //         $response = [
-    //             'success' => true,
-    //             'data' => $save,
-    //             'msg' => "berhasil Ubah"
-    //         ];
-    //     }
-    //     return $this->response->setJSON($response);
-    // }
+    public function ubahUser()
+    {
+        $id_user = $this->input->post('id_user');
+        $usernameUpdate = $this->input->post('usernameUpdate');
+
+        $cekUsername = $this->UserModel->cekUserUpdate($id_user, $usernameUpdate);
+        if ($cekUsername) {
+            if ($cekUsername->num_rows() > 0) {
+                $response = [
+                    'success' => false,
+                    'data' => $usernameUpdate,
+                    'msg' => "username Sudah Ada !"
+                ];
+            } else {
+                $data = [
+                    'nama' => $this->input->post('namaUpdate'),
+                    'username'  => $usernameUpdate,
+                    'role_id'  => $this->input->post('roleUpdate')
+                ];
+
+
+                $save = $this->UserModel->updateUser($id_user, $data);;
+                $response = [
+                    'success' => true,
+                    'data' => '',
+                    'msg' => "berhasil Ubah"
+                ];
+            }
+        } else {
+            $response = [
+                'success' => false,
+                'data' => $usernameUpdate,
+                'msg' => "Gagal Update"
+            ];
+        }
+
+        echo json_encode($response);
+    }
     public function deleteUserById($id)
     {
         // $img = $this->UserModel->where('id', $id)->find();
         // unlink("img/" . $img);
-        $this->UserModel->where('id', $id)->delete();
+        $this->UserModel->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
 }
