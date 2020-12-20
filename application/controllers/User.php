@@ -63,7 +63,18 @@ class User extends CI_Controller
     // trx penjualan
     public function ajax_trx_penjualan()
     {
+        $sumtotal = $this->TrxPenjualanModel->sum_total_trx_hari_ini(date(date('Y-m-d')))->row();
         $data = [];
+        $total = [];
+        $total[] = '';
+        $total[] = '';
+        $total[] = '';
+        $total[] = '<b>Total : </b>';
+        $total[] = $sumtotal->total_pertgl == null ? '<b>Rp. 0 </b>' : '<b>Rp. ' . $sumtotal->total_pertgl . '</b>';
+        $total[] = '';
+        $total[] = '';
+        $total[] = '';
+        $data[] = $total;
         $lists = $this->TrxPenjualanModel->getTrxPenjualanByTime()->result();
         foreach ($lists as $list) {
             $row = [];

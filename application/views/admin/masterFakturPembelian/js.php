@@ -19,9 +19,11 @@
                          <td>${data[index].harga_beli}</td>
                          <td>${data[index].sub_total}</td>
                          <td>${data[index].tgl_expired}</td>
-                         <td> <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteDtlTrx(${data[index].id_dtl_pembelian})" title="Delete" ><i class="fas fa-trash"></i> Delete</a></td>
+                        
                      </tr>`);
                  }
+                 //  tombol delete sa kome dlu
+                 //  <td> <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteDtlTrx(${data[index].id_dtl_pembelian})" title="Delete" ><i class="fas fa-trash"></i> Delete</a></td>
 
 
                  $('#modal_detail_trx').modal('show'); // show bootstrap modal when complete loaded

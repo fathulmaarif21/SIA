@@ -84,7 +84,7 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteUser') ?>/" + id,
+                     url: "<?= base_url('/admin/deleteUserById') ?>/" + id,
                      type: "GET",
                      dataType: "JSON",
                      success: function(data) {

@@ -1,8 +1,8 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar elevation-4 sidebar-light-lime">
     <a href="" class="brand-link navbar-light">
-        <img src="<?= base_url('assets/'); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-2" style="opacity: .8">
-        <span class="brand-text font-weight-light"><b>Apotek Najwa</b></span>
+        <img src="<?= base_url('assets/'); ?>dist/img/logo SIA.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-2" style="opacity: .8">
+        <span class="brand-text font-weight-light"><b>Apotek Ajwa</b></span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -63,7 +63,10 @@
                         </p>
                     </a>
                 </li>
-                <?php $this->load->view('templates/sidebarAdmin') ?>
+                <?php if ($this->session->userdata('role_id') == '1') : ?>
+                    <?php $this->load->view('templates/sidebarAdmin') ?>
+                <?php endif ?>
+
 
             </ul>
         </nav>

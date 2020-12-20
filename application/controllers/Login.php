@@ -29,7 +29,7 @@ class Login extends CI_Controller
                     'logged_in' => TRUE
                 ];
                 $this->session->set_userdata($ses_data);
-                redirect('Dashboard');
+                redirect('Home');
             } else {
                 $this->session->set_flashdata('msg', 'Password Salah!');
                 redirect('login');

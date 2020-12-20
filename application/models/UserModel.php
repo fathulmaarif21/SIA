@@ -44,7 +44,7 @@ class UserModel extends CI_Model
     }
     function delete_by_id($id)
     {
-        $this->db->where('kd_obat', $id);
+        $this->db->where('id', $id);
         $this->db->delete($this->table);
     }
 }

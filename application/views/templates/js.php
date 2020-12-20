@@ -4,6 +4,8 @@
 <script src="<?= base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script src="<?= base_url(); ?>assets/js/sweetalert2@10.js"></script>
+<!-- Bootstrap Switch -->
+<script src="<?= base_url(); ?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url(); ?>assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -14,6 +16,15 @@
 
 
 <script>
+    $("input[data-bootstrap-switch]").each(function() {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+    function darkMode() {
+        let dm = $('#dmode').is(':checked');
+        dm ? $('body').addClass('dark-mode') : $('body').removeClass('dark-mode');
+    }
+
     var table;
 
     function formatRupiah(angka, prefix) {

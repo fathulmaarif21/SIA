@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title><?= $title; ?></title>
-    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/AdminLTELogo.png">
+    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logo SIA.png">
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/datatables.min.css">
     <!-- Google Font: Source Sans Pro -->
