@@ -33,6 +33,11 @@ class Admin extends CI_Controller
         $data =  $this->ObatModel->obatById($kdObat);
         echo json_encode($data);
     }
+    function get_no_faktur($kdObat)
+    {
+        $data =  $this->ObatModel->getNofaktur($kdObat)->result();
+        echo json_encode($data);
+    }
 
     public function updateObat()
     {
@@ -89,8 +94,10 @@ class Admin extends CI_Controller
             $row[] = $list->stok;
             $row[] = $list->waktu_input;
             //add html for action
-            $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_obat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-edit"></i> Edit</a>
-                <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteObat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-trash-alt"></i> Delete</a>';
+            $row[] =
+                '<a class="btn btn-sm btn-success" data-toggle="modal" data-target="#noFakturModal" href="javascript:void(0)" title="No_Faktur" onclick="getFaktur(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-eye"></i> No Faktur</a>
+            <a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_obat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-edit"></i> Edit</a>
+            <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteObat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-trash-alt"></i> Delete</a>';
 
             $data[] = $row;
         }
@@ -185,7 +192,7 @@ class Admin extends CI_Controller
             $no++;
             $row = [];
             $row[] = $list->no_faktur;
-            $row[] = $list->id_suplier;
+            $row[] = $list->nama_supplier;
             $row[] = $list->total_trx;
             $row[] = $list->tgl_beli;
             $row[] = $list->waktu_input;

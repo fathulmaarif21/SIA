@@ -19,6 +19,7 @@
                          <td>${data[index].harga_beli}</td>
                          <td>${data[index].sub_total}</td>
                          <td>${data[index].tgl_expired}</td>
+                         <td> <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteDtlTrx(${data[index].id_dtl_pembelian})" title="Delete" ><i class="fas fa-trash"></i> Delete</a></td>
                         
                      </tr>`);
                  }
@@ -43,7 +44,9 @@
 
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
-             "order": [], //Initial no order.
+             "order": [
+                 [4, "desc"]
+             ],
              autoWidth: true,
              responsive: true,
 

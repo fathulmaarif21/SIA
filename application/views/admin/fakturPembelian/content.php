@@ -10,7 +10,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#formSupplier" role="tab" aria-controls="deals" aria-selected="false"><i class="fas fa-user-tie"></i> Tambah Supplier</a>
             </li>
+            <li class="nav-item ml-5 float-right">
+                <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#Shortcut"><i class="fas fa-info-circle"></i> Shortcut</button>
+            </li>
         </ul>
+
     </div>
     <div class="card-body">
         <div class="tab-content mt-3">

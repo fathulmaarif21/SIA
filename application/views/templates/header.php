@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title; ?></title>
-    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logo SIA.png">
+    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logoSIA.png">
     <!-- select2 -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/datatables/datatables.min.css">
     <!-- Select2 -->

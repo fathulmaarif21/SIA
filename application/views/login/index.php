@@ -5,7 +5,7 @@
     <title>Apotek Ajwa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logo SIA.png">
+    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logoSIA.png">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /> -->
     <!-- <link rel="stylesheet" href="style.css"> -->
@@ -36,7 +36,7 @@
 
         .myRightCtn {
             position: relative;
-            background-image: linear-gradient(45deg, white, black);
+            background-image: linear-gradient(45deg, #A1E8AF, #33CA7F);
             border-radius: 25px;
             height: 100%;
             padding: 25px;
@@ -57,7 +57,7 @@
         }
 
         .myLeftCtn header {
-            color: blueviolet;
+            color: #33CA7F;
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 20px;
@@ -109,7 +109,8 @@
         }
 
         .myLeftCtn .butt {
-            background: linear-gradient(45deg, #bb36fd, #9b00e8);
+            background: linear-gradient(45deg, #A1E8AF, #33CA7F);
+
             color: #fff;
             width: 230px;
             border: none;
@@ -121,7 +122,7 @@
         }
 
         .myLeftCtn .butt:hover {
-            background: linear-gradient(45deg, #c85bff, #b726ff);
+            background: linear-gradient(45deg, #33CA7F, #6a994e);
         }
 
         .myLeftCtn .butt:focus {
@@ -130,7 +131,7 @@
 
         .myLeftCtn .fas {
             position: relative;
-            color: #bb36fd;
+            color: #33CA7F;
             left: 36px;
         }
 
