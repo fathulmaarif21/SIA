@@ -9,7 +9,7 @@ class TriggerModel extends CI_Model
         // detail Pembelian
         $this->db->trans_start();
         // trigger kurang stok sebelum update detail pembelian
-        $this->db->query("CREATE TRIGGER kurangStokBfUpdate 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS kurangStokBfUpdate 
         BEFORE UPDATE ON detail_pembelian
         FOR EACH ROW 
         BEGIN
@@ -17,7 +17,7 @@ class TriggerModel extends CI_Model
         END");
         // trigger TAMBAH stok SETELAH update detail pembelian
         // $this->db->query("DROP TRIGGER IF EXISTS tambahStokAfterUpdate");
-        $this->db->query("CREATE TRIGGER tambahStokAfterUpdate 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS tambahStokAfterUpdate 
         AFTER UPDATE ON detail_pembelian
         FOR EACH ROW 
         BEGIN
@@ -25,7 +25,7 @@ class TriggerModel extends CI_Model
         END");
 
         // TAMBAH STOK OBAT SETELAH INSERT
-        $this->db->query("CREATE TRIGGER tambah_stok 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS tambah_stok 
         AFTER INSERT ON detail_pembelian
         FOR EACH ROW 
         BEGIN
@@ -33,7 +33,7 @@ class TriggerModel extends CI_Model
         END");
 
         // kURANG STOK OBAT SETELAH DELETE
-        $this->db->query("CREATE TRIGGER kurang_stok_hapus 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS kurang_stok_hapus 
         AFTER DELETE ON detail_pembelian
         FOR EACH ROW 
         BEGIN
@@ -42,14 +42,14 @@ class TriggerModel extends CI_Model
 
         // TABLE DETAIL TRANSAKSI PENJUALAN
         // TAMBAH STOK OBAT SETELAH DELETE
-        $this->db->query("CREATE TRIGGER hapus_trx_restorestok 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS hapus_trx_restorestok 
         AFTER DELETE ON detail_trx_penjualan
         FOR EACH ROW 
         BEGIN
         UPDATE master_obat SET stok = stok + OLD.qty WHERE kd_obat = OLD.kd_obat;
         END");
         // kURANG STOK OBAT SETELAH INSERT
-        $this->db->query("CREATE TRIGGER pengurangan_stok 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS pengurangan_stok 
         AFTER INSERT ON detail_trx_penjualan
         FOR EACH ROW 
         BEGIN
@@ -58,7 +58,7 @@ class TriggerModel extends CI_Model
 
         // TABLE FAKTUR PEMBELIAN
         // HAPUS DETAIL PEMBELIAN
-        $this->db->query("CREATE TRIGGER hapus_dtl_pembelian 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS hapus_dtl_pembelian 
         BEFORE DELETE ON faktur_pembelian
         FOR EACH ROW 
         BEGIN
@@ -67,7 +67,7 @@ class TriggerModel extends CI_Model
 
         // TABLE TRANSKASI PENJUALAN
         // HAPUS SETAIL TRANSKASI
-        $this->db->query("CREATE TRIGGER hapus_trx_penjualan 
+        $this->db->query("CREATE TRIGGER IF NOT EXISTS hapus_trx_penjualan 
         BEFORE DELETE ON transkasi_penjualan
         FOR EACH ROW 
         BEGIN

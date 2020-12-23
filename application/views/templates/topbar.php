@@ -30,17 +30,17 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item mt-2 mr-5">
-            <a href="#" class="nav-link d-inline">Dakr Mode</a>
+            <a href="#" class="nav-link d-inline">Dakr_Mode</a>
             <input class="d-inline" type="checkbox" id="dmode" name="my-checkbox" onchange="darkMode()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
         </li>
-        <li class="mr-3 nav-item">
+        <li class=" nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
 
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown mr-3">
+        <li class="nav-item dropdown ">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fas fa-sign-out-alt"></i>
             </a>

@@ -90,7 +90,7 @@ class Admin extends CI_Controller
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
             $row[] = $list->kemasan;
-            $row[] = $list->harga_jual;
+            $row[] = rupiah($list->harga_jual);
             $row[] = $list->stok;
             $row[] = $list->waktu_input;
             //add html for action
@@ -129,9 +129,9 @@ class Admin extends CI_Controller
             $row[] = $list->nama_pembeli;
             $row[] = $list->alamat_pembeli;
             $row[] = $list->note;
-            $row[] = $list->total_trx;
-            $row[] = $list->total_bayar;
-            $row[] = $list->kembalian;
+            $row[] = rupiah($list->total_trx);
+            $row[] = rupiah($list->total_bayar);
+            $row[] = rupiah($list->kembalian);
             $row[] = $list->waktu_trx;
             //add html for action
             // onclick="detail_trx(' . "'" . $value->kd_transaksi . "'" . ')"
@@ -193,7 +193,7 @@ class Admin extends CI_Controller
             $row = [];
             $row[] = $list->no_faktur;
             $row[] = $list->nama_supplier;
-            $row[] = $list->total_trx;
+            $row[] = rupiah($list->total_trx);
             $row[] = $list->tgl_beli;
             $row[] = $list->waktu_input;
             //add html for action
@@ -221,30 +221,43 @@ class Admin extends CI_Controller
         $totaltrx = str_replace(".", "", $this->input->post('totaltrx'));
         $arr_kd_obat = $this->input->post('kd_obat');
         $arr_qty = $this->input->post('qty');
-        $arr_harga_beli = $this->input->post('harga_beli');
+        $arr_harga_beli = str_replace(".", "", $this->input->post('harga_beli'));
         $arr_sub_total = str_replace(".", "", $this->input->post('subTotal'));
         $arr_tglExp = $this->input->post('tglExp');
-        $dataFaktur = [
-            "no_faktur" => $noFaktur,
-            "id_suplier " => $suplier,
-            "total_trx" => $totaltrx,
-            "tgl_beli" => $tglFaktur,
-        ];
-        $detailTrx = [];
-        for ($i = 0; $i < count($arr_kd_obat); $i++) {
-            $detail = [
-                "no_faktur" => $noFaktur,
-                "kd_obat" => $arr_kd_obat[$i],
-                "qty" => $arr_qty[$i],
-                "harga_beli" => $arr_harga_beli[$i],
-                "sub_total" => $arr_qty[$i] * $arr_harga_beli[$i],
-                "tgl_expired" => $arr_tglExp[$i]
+        $cekFaktur  = $this->FakturPembelianModel->getDetailFaktur($noFaktur);
+        if ($cekFaktur->num_rows() > 0) {
+            $response = [
+                'success' => false,
+                'data' => $noFaktur,
+                'msg' => "Nomor Faktur Sudah Ada !"
             ];
-            array_push($detailTrx, $detail);
+        } else {
+            $dataFaktur = [
+                "no_faktur" => $noFaktur,
+                "id_suplier " => $suplier,
+                "total_trx" => $totaltrx,
+                "tgl_beli" => $tglFaktur,
+            ];
+            $detailTrx = [];
+            for ($i = 0; $i < count($arr_kd_obat); $i++) {
+                $detail = [
+                    "no_faktur" => $noFaktur,
+                    "kd_obat" => $arr_kd_obat[$i],
+                    "qty" => $arr_qty[$i],
+                    "harga_beli" => $arr_harga_beli[$i],
+                    "sub_total" => $arr_qty[$i] * $arr_harga_beli[$i],
+                    "tgl_expired" => $arr_tglExp[$i]
+                ];
+                array_push($detailTrx, $detail);
+            }
+            $this->FakturPembelianModel->addFakturPembelian($dataFaktur, $detailTrx);
+            $response = [
+                'success' => true,
+                'data' => $noFaktur,
+                'msg' => "Berhasil Tersimpan"
+            ];
         }
-        $this->FakturPembelianModel->addFakturPembelian($dataFaktur, $detailTrx);
-
-        echo json_encode($dataFaktur);
+        echo json_encode($response);
     }
 
     // supplier

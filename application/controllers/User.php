@@ -45,7 +45,7 @@ class User extends CI_Controller
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
             $row[] = $list->kemasan;
-            $row[] = $list->harga_jual;
+            $row[] = rupiah($list->harga_jual);
             $row[] = $stok;
             //add html for action
             $data[] = $row;
@@ -82,9 +82,9 @@ class User extends CI_Controller
             $row[] = $list->nama_pembeli;
             $row[] = $list->alamat_pembeli;
             $row[] = $list->note;
-            $row[] = $list->total_trx;
-            $row[] = $list->total_bayar;
-            $row[] = $list->kembalian;
+            $row[] = rupiah($list->total_trx);
+            $row[] = rupiah($list->total_bayar);
+            $row[] = rupiah($list->kembalian);
             //add html for action
             // onclick="detail_trx(' . "'" . $value->kd_transaksi . "'" . ')"
             $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->kd_transaksi . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>';

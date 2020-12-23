@@ -80,7 +80,7 @@
                  <tr id="${res.id}">
                         <td scope="row">${res.id}</td>
                         <td class="namafornota">${res.nama_obat}</td>
-                        <td><input type="number" id="hb${res.id}"  class="form-control harga_beli" min="1" value='' name="harga_beli[]"  required></td>
+                        <td><input type="text" id="hb${res.id}" onkeyup="formathb(this)"  class="form-control harga_beli"   name="harga_beli[]"  required></td>
                         <td>
                             <div class="form-group col-auto">
                                 <div class="">
@@ -113,10 +113,15 @@
         })
     });
 
+    function formathb(params) {
+        let hb = remove_str(params.value);
+        params.value = formatRupiah(hb, '');
+    }
+
     function handleSubTotal() {
         $('.getData-FromInput').on('keyup change', function() {
             let kd_obat = $(this).data('kd_obat');
-            let hargaBeli = $(`#hb${kd_obat}`).val();
+            let hargaBeli = remove_str($(`#hb${kd_obat}`).val());
             let stok = parseInt($(this).data('stok'));
             let qty = parseInt($(this).val());
 
@@ -172,32 +177,39 @@
                 confirmButtonText: 'Ya, Simpan!'
             }).then((result) => {
                 if (result.value) {
-                    console.log($('form').serialize());
-
+                    // console.log($('form').serialize());
                     $.ajax({
                         type: "POST",
                         url: "<?= base_url('admin/saveFakturPembelian'); ?>",
                         data: $('form').serialize() + "&totaltrx=" + $('#totalTagihan').text(),
-                        success: function(res) {
-                            console.table(res);
-                            $("#suplier").val('').trigger('change');
-                            $('#addList tr').remove();
-                            $('#totalTagihan').text('0');
-                            $('#NomorFaktur').val('');
-                            $('form').each(function() {
-                                this.reset();
-                            });
-                            Swal.fire(
-                                'Success',
-                                'Data Tersimpan',
-                                'success'
-                            )
+                        dataType: "JSON",
+                        success: function(data) {
+                            if (data.success) {
+                                $("#suplier").val('').trigger('change');
+                                $('#addList tr').remove();
+                                $('#totalTagihan').text('0');
+                                $('#NomorFaktur').val('');
+                                $('form').each(function() {
+                                    this.reset();
+                                });
+                                Swal.fire(
+                                    'Success',
+                                    `${data.data} ${data.msg}`,
+                                    'success'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Warning',
+                                    `${data.data} ${data.msg}`,
+                                    'warning'
+                                )
+                            }
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);
                             Swal.fire(
                                 'Error!',
-                                'coba cek dulu',
+                                'Report Server',
                                 'error'
                             )
                         }
