@@ -16,8 +16,8 @@
                          <td>${data[index].no_faktur}</td>
                          <td>${data[index].nama_obat}</td>
                          <td>${data[index].qty}</td>
-                         <td>${data[index].harga_beli}</td>
-                         <td>${data[index].sub_total}</td>
+                         <td>${formatRupiah(data[index].harga_beli)}</td>
+                         <td>${formatRupiah(data[index].sub_total)}</td>
                          <td>${data[index].tgl_expired}</td>
                          <td> <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteDtlTrx(${data[index].id_dtl_pembelian})" title="Delete" ><i class="fas fa-trash"></i> Delete</a></td>
                         
