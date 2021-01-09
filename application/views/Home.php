@@ -194,7 +194,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Anything you want
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; <?= date('Y'); ?> <a href="#">Apotek Najwa</a>.</strong>
+            <strong>Copyright &copy; <?= date('Y'); ?> <a href="#">Apotek Ajwa</a>.</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

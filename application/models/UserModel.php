@@ -7,7 +7,7 @@ class UserModel extends CI_Model
     var $table = 'user';
     public function getAllUser()
     {
-        $data = $this->db->query("SELECT a.*,b.role FROM user a LEFT JOIN user_role b ON a.role_id = b.id");
+        $data = $this->db->query("SELECT a.*,b.role  FROM user a LEFT JOIN user_role b ON a.role_id = b.id");
         return $data;
     }
     public function getUser($username)

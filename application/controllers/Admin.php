@@ -91,7 +91,7 @@ class Admin extends CI_Controller
             $row[] = $list->nama_obat;
             $row[] = $list->kemasan;
             $row[] = rupiah($list->harga_jual);
-            $row[] = $list->stok;
+            $row[] = $list->stok == 0 ? '<b style="color: red;">' . $list->stok . '</b>' : $list->stok;
             $row[] = $list->waktu_input;
             //add html for action
             $row[] =
