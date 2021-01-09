@@ -4,7 +4,6 @@
         Transaksi Pembelian
     </div> -->
         <div class="card-body">
-
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="tglFaktur">Tanggal Faktur Pembelian</label>

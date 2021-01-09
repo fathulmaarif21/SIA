@@ -107,6 +107,14 @@
                      )
                      return false
                  }
+                 if (res.stok <= 0) {
+                     Swal.fire(
+                         'Stok Kosong!',
+                         `Obat : ${res.nama_obat}`,
+                         'warning'
+                     )
+                     return false
+                 }
                  $('#addList').append(`
                  <tr id="${res.id}">
                         <td scope="row">${no++}</td>
@@ -271,7 +279,7 @@
                          },
                          dataType: "JSON",
                          success: function(res) {
-                             console.log(res);
+
                              console.log(res.id_nota);
                              $('#idNota').text(res.id_nota);
 
@@ -280,6 +288,12 @@
                              $('form').each(function() {
                                  this.reset();
                              });
+                             $('#totalTagihan').text('0');
+                             Swal.fire(
+                                 'Transaksi Berhasil',
+                                 `${res.id_nota}`,
+                                 'success'
+                             )
                              // untuk print
                              //                      $('#printThis').html(`<div class="row rowNota">
                              //     <div id="table_nota" class="col-md-4">

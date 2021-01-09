@@ -16,7 +16,7 @@
                          <td>${data[index].kd_transaksi}</td>
                          <td>${data[index].nama_obat}</td>
                          <td>${data[index].qty}</td>
-                         <td>${data[index].sub_total}</td>
+                         <td>${formatRupiah(data[index].sub_total)}</td>
                      </tr>`);
                  }
 
@@ -38,7 +38,9 @@
 
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
-             "order": [], //Initial no order.
+             "order": [
+                 [8, "desc"]
+             ], //Initial no order.
              autoWidth: true,
              responsive: true,
 

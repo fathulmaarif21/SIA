@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Top Navigation</title>
-    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logo SIA.png">
+    <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logoSIA.png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/fonts/font.css">
     <!-- Font Awesome Icons -->
@@ -28,19 +28,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
 
         .link:nth-child(1) a {
-            background: #20B2AA;
+            background: #2d6a4f;
         }
 
         .link:nth-child(2) a {
-            background: #FF1654;
+            background: #40916c;
         }
 
+        /* .link:nth-child(2) a {
+            background: #FF1654;
+        } */
+
         .link:nth-child(3) a {
-            background: #247BA0;
+            background: #52b788;
         }
 
         .link:nth-child(4) a {
-            background: orange;
+            background: #74c69d;
         }
 
         .btn_link {
@@ -85,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
                 <a href="" class="navbar-brand">
-                    <img src="<?= base_url(); ?>assets/dist/img/logo SIA.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="<?= base_url(); ?>assets/dist/img/logoSIA.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light">Apotek Ajwa</span>
                 </a>
 
@@ -143,18 +147,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                                 <div class="mt-3">
                                     <li class="link">
-                                        <a style="background: yellow;" href="<?= base_url('admin/viewFaktuPembelian'); ?>" data-toggle="tooltip" data-placement="top" title="Faktur Pembelian" class="btn btn_link"><i class=" fas fa-file-invoice fa-lg"></i></a>
+                                        <a style="background: #2b9348;" href="<?= base_url('admin/viewFaktuPembelian'); ?>" data-toggle="tooltip" data-placement="top" title="Faktur Pembelian" class="btn btn_link"><i class=" fas fa-file-invoice fa-lg"></i></a>
                                     </li>
                                     <li class="link">
-                                        <a style="background: grey;" href="<?= base_url('admin/viewUserManagement'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="User Management"><i class="fas fa-users-cog fa-lg"></i></a>
+                                        <a style="background: #55a630;" href="<?= base_url('admin/viewUserManagement'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="User Management"><i class="fas fa-users-cog fa-lg"></i></a>
                                     </li>
                                     <li class="link">
-                                        <a style="background: red;" href="<?= base_url('admin/viewMasterObat'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Obat"><i class="fas fa-briefcase-medical fa-lg"></i>
+                                        <a style="background: #80b918;" href="<?= base_url('admin/viewMasterObat'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Obat"><i class="fas fa-briefcase-medical fa-lg"></i>
                                             <p style="font-size: 19px;">Master</p>
                                         </a>
                                     </li>
                                     <li class="link">
-                                        <a style="background: blue;" href="<?= base_url('admin/viewMasterTrxPenjualan'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Transaksi Penjualan"><i class="fas fa-exchange-alt fa-lg"></i>
+                                        <a style="background: #aacc00;" href="<?= base_url('admin/viewMasterTrxPenjualan'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Transaksi Penjualan"><i class="fas fa-exchange-alt fa-lg"></i>
+                                            <p style="font-size: 19px;">Master</p>
+                                        </a>
+                                    </li>
+                                    <li class="link">
+                                        <a style="background: #aacc00;" href="<?= base_url('admin/masterFaktuPembelian'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Faktur Pembelian"><i class="fas fa-file-invoice fa-lg"></i>
+                                            <p style="font-size: 19px;">Master</p>
+                                        </a>
+                                    </li>
+                                    <li class="link">
+                                        <a style="background: #aacc00;" href="<?= base_url('admin/viewMasterSupplier'); ?>" class="btn btn_link" data-toggle="tooltip" data-placement="top" title="Master Supplier"><i class="fas fa-user-tie fa-lg"></i>
                                             <p style="font-size: 19px;">Master</p>
                                         </a>
                                     </li>

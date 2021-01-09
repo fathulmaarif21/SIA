@@ -7,6 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('UserModel');
+        // $this->load->model('TriggerModel');
     }
     public function index()
     {
@@ -29,6 +30,7 @@ class Login extends CI_Controller
                     'logged_in' => TRUE
                 ];
                 $this->session->set_userdata($ses_data);
+                // $this->TriggerModel->createTiger();
                 redirect('Home');
             } else {
                 $this->session->set_flashdata('msg', 'Password Salah!');

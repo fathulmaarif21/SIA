@@ -10,8 +10,8 @@ class FakturPembelianModel extends CI_Model
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
     var $table = "faktur_pembelian";
-    var $column_order = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
-    var $column_search = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input');
+    var $column_order = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input', 'supplier.nama_supplier');
+    var $column_search = array('no_faktur', 'id_suplier', 'total_trx', 'tgl_beli', 'waktu_input', 'supplier.nama_supplier');
     var $order = array('no_faktur' => 'desc');
 
 
@@ -27,6 +27,7 @@ class FakturPembelianModel extends CI_Model
     {
 
         $this->db->from($this->table);
+        $this->db->join('supplier', 'supplier.id_suplier = faktur_pembelian.id_suplier', 'left');
 
         $i = 0;
 

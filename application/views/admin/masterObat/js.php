@@ -32,6 +32,26 @@
 
      });
 
+     function getFaktur(id) {
+         $('.row_faktur').remove();
+         $.ajax({
+             url: "<?php echo base_url('admin/get_no_faktur') ?>/" + id,
+             type: "GET",
+             dataType: "JSON",
+             success: function(data) {
+                 for (let index = 0; index < data.length; index++) {
+                     $('#table_detail_faktur').append(`<tr class="row_faktur">
+                         <td>${index}</td>
+                         <td>${data[index].no_faktur }</td>
+                     </tr>`);
+                 }
+                 $('.modal-title').text('Faktur Obat');
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 alert('Error get data from ajax');
+             }
+         });
+     }
 
      function edit_obat(id) {
          save_method = 'update';

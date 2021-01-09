@@ -23,6 +23,7 @@
                             <th>Harga Beli</th>
                             <th>Sub Total</th>
                             <th>Tanggal Expired</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                 </table>

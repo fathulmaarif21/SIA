@@ -21,7 +21,7 @@
                     <th>Id Obat</th>
                     <th>Nama Obat</th>
                     <th>Kemasan</th>
-                    <th>Sastra</th>
+                    <th>Harga_jual</th>
                     <th>stok</th>
                 </tr>
             </tfoot>

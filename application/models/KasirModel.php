@@ -32,8 +32,8 @@ class KasirModel extends Model
         return $builder->getWhere(['kd_obat' => $id]);
     }
 
-    public function tes()
-    {
-        return $this->setDate();
-    }
+    // public function tes()
+    // {
+    //     return $this->setDate();
+    // }
 }
