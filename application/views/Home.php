@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Top Navigation</title>
+    <title>Home</title>
     <link rel="shortcut icon" type="" href="<?= base_url('assets/'); ?>dist/img/logoSIA.png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/fonts/font.css">
