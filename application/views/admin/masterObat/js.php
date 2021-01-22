@@ -73,6 +73,7 @@
                  $('[name="nama_obat"]').val(data.nama_obat);
                  $('[name="harga_jual"]').val(data.harga_jual);
                  $('[name="kemasan"]').val(data.kemasan);
+                 $('[name="prinsipal"]').val(data.prinsipal);
                  $('[name="stok"]').val(data.stok);
                  $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
                  $('.modal-title').text('Edit Obat'); // Set title to Bootstrap modal title

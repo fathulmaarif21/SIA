@@ -7,14 +7,18 @@
          $('.row_trx').remove();
          //Ajax Load data from ajax
          $.ajax({
-             url: "<?php echo base_url('admin/detailFakturPembelian') ?>/" + id,
-             type: "GET",
+             url: "<?php echo base_url('admin/detailFakturPembelian') ?>",
+             type: "POST",
+             data: {
+                 id: id
+             },
              dataType: "JSON",
              success: function(data) {
                  for (let index = 0; index < data.length; index++) {
                      $('#table_detail_trx').append(`<tr class="row_trx">
                          <td>${data[index].no_faktur}</td>
                          <td>${data[index].nama_obat}</td>
+                         <td>${data[index].no_batch}</td>
                          <td>${data[index].qty}</td>
                          <td>${formatRupiah(data[index].harga_beli)}</td>
                          <td>${formatRupiah(data[index].sub_total)}</td>
@@ -82,8 +86,11 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteFakturPembelian') ?>/" + id,
-                     type: "GET",
+                     url: "<?= base_url('/admin/deleteFakturPembelian') ?>",
+                     type: "POST",
+                     data: {
+                         id: id
+                     },
                      dataType: "JSON",
                      success: function(data) {
                          Swal.fire(
@@ -116,8 +123,11 @@
              if (result.isConfirmed) {
                  // ajax delete data to database
                  $.ajax({
-                     url: "<?= base_url('/admin/deleteDetailFaktur') ?>/" + id,
-                     type: "GET",
+                     url: "<?= base_url('/admin/deleteDetailFaktur') ?>",
+                     type: "POST",
+                     data: {
+                         id: id
+                     },
                      dataType: "JSON",
                      success: function(data) {
                          Swal.fire(

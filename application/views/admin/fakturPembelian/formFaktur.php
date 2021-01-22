@@ -40,6 +40,7 @@
                             <tr>
                                 <th scope="col">Kd Obat</th>
                                 <th scope="col">Nama Obat</th>
+                                <th scope="col">No Batch</th>
                                 <th scope="col">Harga Beli</th>
                                 <th scope="col" style="width: 8em;">qty</th>
                                 <th scope="col">Tgl Expired</th>

@@ -13,6 +13,10 @@
                 <input type="text" class="form-control" name="addkemasan" id="addkemasan" required>
             </div>
             <div class="form-group">
+                <label for="addprinsipal">Prinsipal</label>
+                <input type="text" class="form-control" name="addprinsipal" id="addprinsipal" required>
+            </div>
+            <div class="form-group">
                 <label for="addHargaJual">Harga Jual</label>
                 <input type="number" class="form-control" name="addHargaJual" id="addHargaJual" required>
             </div>

@@ -97,4 +97,10 @@ class TriggerModel extends CI_Model
 
         $this->db->trans_complete();
     }
+
+    public function tablecreate()
+    {
+        $this->db->query("ALTER TABLE master_obat ADD prinsipal VARCHAR(100) AFTER kemasan");
+        $this->db->query("ALTER TABLE detail_pembelian ADD no_batch  VARCHAR(100) AFTER kd_obat");
+    }
 }

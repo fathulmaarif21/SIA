@@ -80,6 +80,7 @@
                  <tr id="${res.id}">
                         <td scope="row">${res.id}</td>
                         <td class="namafornota">${res.nama_obat}</td>
+                        <td><input type="text" class="form-control" name="no_batch[]"  required></td>
                         <td><input type="text" id="hb${res.id}" onkeyup="formathb(this)"  class="form-control harga_beli"   name="harga_beli[]"  required></td>
                         <td>
                             <div class="form-group col-auto">
@@ -104,7 +105,7 @@
 
                 handleSubTotal();
                 updateTotalTagihan();
-                $(`input[name ="harga_beli[]"]:last`).focus();
+                $(`input[name ="no_batch[]"]:last`).focus();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 // console.log(xhr.);

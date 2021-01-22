@@ -44,6 +44,7 @@ class Admin extends CI_Controller
         $kd_obat = $this->input->post('kd_obat');
         $nama_obat = $this->input->post('nama_obat');
         $kemasan = $this->input->post('kemasan');
+        $prinsipal = $this->input->post('prinsipal');
         $harga_jual = $this->input->post('harga_jual');
         $stok = $this->input->post('stok');
         // $autokode = $this->ObatModel->autoKdObat();
@@ -51,6 +52,7 @@ class Admin extends CI_Controller
         $update = [
             "nama_obat" => $nama_obat,
             "kemasan" => $kemasan,
+            "prinsipal" => $prinsipal,
             "harga_jual" => $harga_jual,
             "stok" => $stok
         ];
@@ -69,6 +71,7 @@ class Admin extends CI_Controller
             'kd_obat' => date('dm') . 'O' . $autoKdObat,
             'nama_obat' => $this->input->post('addNamaObat'),
             'kemasan' => $this->input->post('addkemasan'),
+            'prinsipal' => $this->input->post('addprinsipal'),
             'harga_jual' => $this->input->post('addHargaJual'),
             'stok' => 0
         ];
@@ -90,6 +93,7 @@ class Admin extends CI_Controller
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
             $row[] = $list->kemasan;
+            $row[] = $list->prinsipal;
             $row[] = rupiah($list->harga_jual);
             $row[] = $list->stok == 0 ? '<b style="color: red;">' . $list->stok . '</b>' : $list->stok;
             $row[] = $list->waktu_input;
@@ -167,18 +171,21 @@ class Admin extends CI_Controller
         $data['title'] = 'Master Faktur Pembelian';
         $this->load->view('admin/masterFakturPembelian/index', $data);
     }
-    public function detailFakturPembelian($kdFaktur)
+    public function detailFakturPembelian()
     {
+        $kdFaktur = $this->input->post('id');
         $data = $this->FakturPembelianModel->getDetailFaktur($kdFaktur)->result();
         echo json_encode($data);
     }
-    public function deleteFakturPembelian($id)
+    public function deleteFakturPembelian()
     {
+        $id = $this->input->post('id');
         $this->FakturPembelianModel->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
-    public function deleteDetailFaktur($id)
+    public function deleteDetailFaktur()
     {
+        $id = $this->input->post('id');
         $this->FakturPembelianModel->deleteDtlFakturPembelian($id);
         echo json_encode(array("status" => TRUE));
     }
@@ -224,6 +231,7 @@ class Admin extends CI_Controller
         $arr_harga_beli = str_replace(".", "", $this->input->post('harga_beli'));
         $arr_sub_total = str_replace(".", "", $this->input->post('subTotal'));
         $arr_tglExp = $this->input->post('tglExp');
+        $arr_no_batch = $this->input->post('no_batch');
         $cekFaktur  = $this->FakturPembelianModel->getDetailFaktur($noFaktur);
         if ($cekFaktur->num_rows() > 0) {
             $response = [
@@ -243,6 +251,7 @@ class Admin extends CI_Controller
                 $detail = [
                     "no_faktur" => $noFaktur,
                     "kd_obat" => $arr_kd_obat[$i],
+                    "no_batch" => $arr_no_batch[$i],
                     "qty" => $arr_qty[$i],
                     "harga_beli" => $arr_harga_beli[$i],
                     "sub_total" => $arr_qty[$i] * $arr_harga_beli[$i],

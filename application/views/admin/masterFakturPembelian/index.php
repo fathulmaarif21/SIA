@@ -19,6 +19,7 @@
                         <tr>
                             <th>No Faktur</th>
                             <th>Obat</th>
+                            <th>No Batch</th>
                             <th>Qty</th>
                             <th>Harga Beli</th>
                             <th>Sub Total</th>

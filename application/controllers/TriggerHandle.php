@@ -17,4 +17,10 @@ class TriggerHandle extends CI_Controller
     {
         $this->TriggerModel->dropTrigger();
     }
+
+    public function createtable()
+    {
+        $this->TriggerModel->tablecreate();
+        echo 'berhasil tambah kolom prinsipal dan no batch';
+    }
 }
