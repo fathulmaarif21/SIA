@@ -279,6 +279,32 @@ class Admin extends CI_Controller
         echo json_encode($response);
     }
 
+    public function addDetailFaktur()
+    {
+        $no_faktur = $this->input->post('addno_faktur');
+        $kd_obat = $this->input->post('addkd_obat');
+        $no_batch = $this->input->post('addno_batch');
+        $qty = $this->input->post('addqty');
+        $harga_beli = $this->input->post('addharga_beli');
+        $tgl_expired = $this->input->post('addtgl_expired');
+        $detail = [
+            "no_faktur" => $no_faktur,
+            "kd_obat" => $kd_obat,
+            "no_batch" => $no_batch,
+            "qty" => $qty,
+            "harga_beli" => $harga_beli,
+            "sub_total" => $qty * $harga_beli,
+            "tgl_expired" => $tgl_expired
+        ];
+        $this->FakturPembelianModel->addFakturPembelian2($detail);
+        $response = [
+            'success' => true,
+            'data' => $no_faktur,
+            'msg' => "Berhasil Tersimpan"
+        ];
+        echo json_encode($response);
+    }
+
     // supplier
     public function getSupplier()
     {

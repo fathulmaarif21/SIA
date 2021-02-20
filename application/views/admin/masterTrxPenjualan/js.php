@@ -120,19 +120,12 @@
              },
 
          }, function(start, end) {
+             //  ("#id").css("display", "none");
+             $("#div_inquery").css("display", "block");
              startDate = start.format('DD/MM/YYYY');
              endDate = end.format('DD/MM/YYYY');
              dataTable.draw();
          })
-
-
-
-
-
-         // Datapicker 
-         //  $(".datepicker").datepicker({
-         //      "dateFormat": "yy-mm-dd"
-         //  });
 
          // DataTable
          var dataTable = $('#empTable').DataTable({
@@ -156,7 +149,5 @@
                  }
              },
          });
-
-
      });
  </script>

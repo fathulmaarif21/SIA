@@ -101,4 +101,12 @@ class FakturPembelianModel extends CI_Model
 
         // return $this->db->insertID();
     }
+    public function addFakturPembelian2($detailTrx)
+    {
+        $this->db->trans_start();
+        $this->db->insert('detail_pembelian', $detailTrx);
+        $this->db->trans_complete();
+
+        // return $this->db->insertID();
+    }
 }

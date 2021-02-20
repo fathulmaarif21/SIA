@@ -14,6 +14,4 @@
     </thead>
     <tbody>
     </tbody>
-
-
 </table>
