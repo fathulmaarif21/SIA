@@ -11,7 +11,7 @@ class ObatModel extends CI_Model
     }
     var $table = 'master_obat';
     var $column_order = array('', 'kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
-    var $column_search = array('', 'kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
+    var $column_search = array('kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
     var $order = array('kd_obat' => 'desc');
 
     public function dataObatByName($search)
