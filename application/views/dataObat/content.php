@@ -6,6 +6,7 @@
         <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Id Obat</th>
                     <th>Satuan</th>
                     <th>Nama Obat</th>
@@ -19,6 +20,7 @@
 
             <tfoot>
                 <tr>
+                    <th>#</th>
                     <th>Id Obat</th>
                     <th>Nama Obat</th>
                     <th>Satuan</th>

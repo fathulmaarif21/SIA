@@ -42,6 +42,7 @@ class User extends CI_Controller
             $stok = $list->stok == 0 ? '<b style="color: red;">' . $list->stok . '</b>' : $list->stok;
             $no++;
             $row = [];
+            $row[] = $no;
             $row[] = $list->kd_obat;
             $row[] = $list->satuan;
             $row[] = $list->nama_obat;

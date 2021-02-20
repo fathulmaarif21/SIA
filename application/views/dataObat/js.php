@@ -9,7 +9,7 @@
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
              "order": [
-                 [5, "asc"]
+                 [6, "asc"]
              ],
              autoWidth: true,
              responsive: true,
