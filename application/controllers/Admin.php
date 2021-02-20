@@ -144,7 +144,7 @@ class Admin extends CI_Controller
             $total[] = '';
             $total[] = '';
             $total[] = '<b>Total : </b>';
-            $total[] = $sumtotal->total_pertgl == null ? '<b>Rp. 0 </b>' : '<b>Rp. ' . $sumtotal->total_pertgl . '</b>';
+            $total[] = $sumtotal->total_pertgl == null ? '<b>Rp. 0 </b>' : '<b>' . rupiah($sumtotal->total_pertgl) . '</b>';
             $total[] = '';
             $total[] = '';
             $total[] = '';
