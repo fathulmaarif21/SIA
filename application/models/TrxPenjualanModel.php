@@ -143,6 +143,13 @@ class TrxPenjualanModel extends CI_Model
         $query = $this->db->query("SELECT sum(total_trx) as total_pertgl FROM transkasi_penjualan where date(waktu_trx) = '$tgl'");
         return $query;
     }
+    public function sum_total_trx_byDate($searchByFromdate, $searchByTodate)
+    {
+        $start = date('Y-m-d', strtotime(str_replace('/', '-', $searchByFromdate)));
+        $end = date('Y-m-d', strtotime(str_replace('/', '-', $searchByTodate)));
+        $query = $this->db->query("SELECT sum(total_trx) as total_pertgl FROM transkasi_penjualan where date(waktu_trx) BETWEEN '$start' AND '$end'");
+        return $query;
+    }
     public function data_transaksi($tgl)
     {
         $query = $this->db->query("SELECT * FROM transkasi_penjualan where date(waktu_trx) = '$tgl'");

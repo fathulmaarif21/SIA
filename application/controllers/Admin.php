@@ -136,6 +136,22 @@ class Admin extends CI_Controller
         $lists =  $this->TrxPenjualanModel->get_datatables();
         $data = [];
         $no = $this->input->post("start");
+
+        if (isset($_POST['searchByFromdate']) && isset($_POST['searchByTodate']) && $lists) {
+            $sumtotal = $this->TrxPenjualanModel->sum_total_trx_byDate($_POST['searchByFromdate'], $_POST['searchByTodate'])->row();
+            $total = [];
+            $total[] = '';
+            $total[] = '';
+            $total[] = '';
+            $total[] = '<b>Total : </b>';
+            $total[] = $sumtotal->total_pertgl == null ? '<b>Rp. 0 </b>' : '<b>Rp. ' . $sumtotal->total_pertgl . '</b>';
+            $total[] = '';
+            $total[] = '';
+            $total[] = '';
+            $total[] = '';
+            $data[] = $total;
+        };
+
         foreach ($lists as $list) {
             $no++;
             $row = [];
