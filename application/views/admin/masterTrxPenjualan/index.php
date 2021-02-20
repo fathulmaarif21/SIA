@@ -1,4 +1,6 @@
 <?php $this->load->view('templates/header'); ?>
+<!-- daterange picker -->
+<link rel="stylesheet" href="<?= base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.css">
 <?php $this->load->view('templates/topbar'); ?>
 <?php $this->load->view('templates/sidebar'); ?>
 <?php $this->load->view('admin/masterTrxPenjualan/content'); ?>

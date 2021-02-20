@@ -8,6 +8,7 @@
                 <tr>
                     <th>Kd Obat</th>
                     <th>Nama Obat</th>
+                    <th>Satuan</th>
                     <th>Kemasan</th>
                     <th>Prinsipal</th>
                     <th>Harga Jual</th>

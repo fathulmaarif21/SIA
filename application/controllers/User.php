@@ -43,6 +43,7 @@ class User extends CI_Controller
             $no++;
             $row = [];
             $row[] = $list->kd_obat;
+            $row[] = $list->satuan;
             $row[] = $list->nama_obat;
             $row[] = $list->kemasan;
             $row[] = rupiah($list->harga_jual);

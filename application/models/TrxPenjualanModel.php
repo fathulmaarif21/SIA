@@ -19,6 +19,16 @@ class TrxPenjualanModel extends CI_Model
     {
 
         $this->db->from($this->table);
+        ## Date search value
+        // $searchByFromdate =  $_POST['searchByFromdate'];
+        // $searchByTodate =  $_POST['searchByFromdate'];
+        $searchByFromdate = (isset($_POST['searchByFromdate'])) ? $_POST['searchByFromdate'] : '';
+        $searchByTodate = (isset($_POST['searchByTodate'])) ? $_POST['searchByTodate'] : '';
+        // Date filter
+        if ($searchByFromdate != '' && $searchByTodate != '') {
+            // $this->db->where("date(waktu_trx) BETWEEN $searchByFromdate AND $searchByTodate");
+            $this->db->where("date(waktu_trx)  BETWEEN ' " . date('Y-m-d', strtotime(str_replace('/', '-', $searchByFromdate))) . "'  AND  '" . date('Y-m-d', strtotime(str_replace('/', '-', $searchByTodate))) . "'");
+        }
 
         $i = 0;
 

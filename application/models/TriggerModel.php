@@ -100,7 +100,8 @@ class TriggerModel extends CI_Model
 
     public function tablecreate()
     {
-        $this->db->query("ALTER TABLE master_obat ADD prinsipal VARCHAR(100) AFTER kemasan");
-        $this->db->query("ALTER TABLE detail_pembelian ADD no_batch  VARCHAR(100) AFTER kd_obat");
+        $this->db->query("ALTER TABLE master_obat ADD IF NOT EXISTS satuan VARCHAR(100) AFTER nama_obat");
+        $this->db->query("ALTER TABLE master_obat ADD IF NOT EXISTS prinsipal VARCHAR(100) AFTER kemasan");
+        $this->db->query("ALTER TABLE detail_pembelian ADD IF NOT EXISTS no_batch  VARCHAR(100) AFTER kd_obat");
     }
 }

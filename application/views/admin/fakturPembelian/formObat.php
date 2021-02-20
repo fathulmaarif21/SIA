@@ -9,6 +9,10 @@
                 <input type="text" class="form-control" name="addNamaObat" id="addNamaObat" placeholder="Masukan Nama Obat" required>
             </div>
             <div class="form-group">
+                <label for="addkemasan">Satuan</label>
+                <input type="text" class="form-control" name="addsatuan" id="addsatuan" required>
+            </div>
+            <div class="form-group">
                 <label for="addkemasan">Kemasan</label>
                 <input type="text" class="form-control" name="addkemasan" id="addkemasan" required>
             </div>

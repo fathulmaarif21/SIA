@@ -1,6 +1,6 @@
 <div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">TRANSAKSI PENJUALAN</h3>
+        <h3 class="card-title">KASIR</h3>
         <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#Shortcut"><i class="fas fa-info-circle"></i> Shortcut</button>
     </div>
     <div class="card-body shadow">

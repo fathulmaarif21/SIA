@@ -119,14 +119,13 @@
                  <tr id="${res.id}">
                         <td scope="row">${no++}</td>
                         <td class="namafornota">${res.nama_obat}</td>
-                        <td>${formatRupiah(res.harga)}</td>
+                        <td><input type="number" id="hb${res.id}" data-kd_obat="${res.id}"  class="form-control cek_harga" name="harga[]" value="${res.harga}" ></td>
                         <td>
                             <div class="form-group col-auto">
                                 <div class="">
                                     <input type="hidden" class="form-control" name="kd_obat[]" value="${res.id}" readonly>
-                                    <input type="hidden" class="form-control" name="harga[]" value="${res.harga}" readonly>
                                     <input type="hidden" class="form-control" name="stok[]" value="${res.stok}" readonly>
-                                    <input type="number"  class="form-control getData-FromInput" data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='1' name="qty[]"  required>
+                                    <input type="number" id="qty${res.id}"  class="form-control getData-FromInput" data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='1' name="qty[]"  required>
                                     <div class="invalid-tooltip">
                                         Qty Lebih Dari Jumlah Stok
                                     </div>
@@ -143,6 +142,7 @@
                  handleSubTotal();
                  updateTotalTagihan();
                  $(".getData-FromInput:last").focus();
+                 //  $('input[name ="harga[]"]').focus();
              },
              error: function(xhr, ajaxOptions, thrownError) {
                  // console.log(xhr.);
@@ -153,9 +153,10 @@
  </script>
  <script>
      function handleSubTotal() {
-         $('.getData-FromInput').on('keyup change', function() {
+         $('.getData-FromInput').on('keyup change click', function() {
              let kd_obat = $(this).data('kd_obat');
-             let harga = $(this).data('harga');
+             //  let harga = $(this).data('harga');
+             let harga = $(`#hb${kd_obat}`).val();
              let stok = parseInt($(this).data('stok'));
              let qty = parseInt($(this).val());
 
@@ -167,14 +168,24 @@
              updateTotalTagihan();
 
 
-             //  klik tab for fokus
+             //   klik tab for fokus
              document.addEventListener('keydown', function(e) {
                  if (e.which === 9 || e.keyCode === 9) {
                      $('#totalBayar').focus();
                      e.preventDefault();
                  }
              });
+         });
+         $('.cek_harga').on('keyup change', function() {
+             let kd_obat2 = $(this).data('kd_obat');
+             let qty2 = parseInt($(`#qty${kd_obat2}`).val());
+             let harga2 = parseInt($(this).val());
 
+             //  ini subtotal
+             $(`.${kd_obat2}`).val(formatRupiah(harga2 * qty2, ''));
+
+             // update total tagihan
+             updateTotalTagihan();
 
          });
      }

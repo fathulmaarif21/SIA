@@ -10,9 +10,9 @@
 
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
-             "order": [
-                 [5, "desc"]
-             ],
+             //  "order": [
+             //      [6, "desc"]
+             //  ],
              autoWidth: true,
              responsive: true,
 
@@ -71,6 +71,7 @@
 
                  $('[name="kd_obat"]').val(data.kd_obat);
                  $('[name="nama_obat"]').val(data.nama_obat);
+                 $('[name="satuan"]').val(data.satuan);
                  $('[name="harga_jual"]').val(data.harga_jual);
                  $('[name="kemasan"]').val(data.kemasan);
                  $('[name="prinsipal"]').val(data.prinsipal);

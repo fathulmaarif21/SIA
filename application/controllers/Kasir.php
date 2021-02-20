@@ -25,7 +25,7 @@ class Kasir extends CI_Controller
             foreach ($data_trx as $value) {
                 $selectajax[] = array(
                     'id' => $value->kd_obat,
-                    'text' => $value->nama_obat . ' | Kemasan :' . $value->kemasan . ' | Stok = ' . $value->stok,
+                    'text' => $value->nama_obat . ' | Satuan : ' . $value->satuan . ' | Kemasan : ' . $value->kemasan . ' | Stok = ' . $value->stok . ' | Harga = ' . rupiah($value->harga_jual),
                 );
             }
             echo json_encode($selectajax);

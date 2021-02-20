@@ -10,14 +10,14 @@ class ObatModel extends CI_Model
         date_default_timezone_set('Asia/Ujung_Pandang');
     }
     var $table = 'master_obat';
-    var $column_order = array('kd_obat', 'nama_obat', 'kemasan', 'harga_jual', 'stok', 'date(waktu_input)');
-    var $column_search = array('kd_obat', 'nama_obat', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
+    var $column_order = array('', 'kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
+    var $column_search = array('', 'kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
     var $order = array('kd_obat' => 'desc');
 
     public function dataObatByName($search)
     {
         $this->db->from($this->table);
-        $this->db->select('kd_obat, nama_obat,kemasan,stok');
+        $this->db->select('*');
         $this->db->like('nama_obat', $search);
         $this->db->or_Like('kd_obat', $search);
         return $this->db->get();

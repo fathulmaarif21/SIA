@@ -7,6 +7,7 @@
             <thead>
                 <tr>
                     <th>Id Obat</th>
+                    <th>Satuan</th>
                     <th>Nama Obat</th>
                     <th>Kemasan</th>
                     <th>Harga_jual</th>
@@ -20,6 +21,7 @@
                 <tr>
                     <th>Id Obat</th>
                     <th>Nama Obat</th>
+                    <th>Satuan</th>
                     <th>Kemasan</th>
                     <th>Harga_jual</th>
                     <th>stok</th>

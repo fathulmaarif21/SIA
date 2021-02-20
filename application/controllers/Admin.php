@@ -20,6 +20,12 @@ class Admin extends CI_Controller
         // dd($this->ObatModel->findAll());
         $this->load->view('admin/dashboard/index');
     }
+    public function tes()
+    {
+        $var = '20/04/2012';
+        echo date('Y-m-d', strtotime(str_replace('/', '-', $var)));
+        // var_dump(date('Y-m-d', strtotime('17/02/2021')));
+    }
 
     // Master Obat
     public function viewMasterObat()
@@ -43,6 +49,7 @@ class Admin extends CI_Controller
     {
         $kd_obat = $this->input->post('kd_obat');
         $nama_obat = $this->input->post('nama_obat');
+        $satuan = $this->input->post('satuan');
         $kemasan = $this->input->post('kemasan');
         $prinsipal = $this->input->post('prinsipal');
         $harga_jual = $this->input->post('harga_jual');
@@ -51,6 +58,7 @@ class Admin extends CI_Controller
         // echo 'O' . date('dm') . $autokode;
         $update = [
             "nama_obat" => $nama_obat,
+            "satuan" => $satuan,
             "kemasan" => $kemasan,
             "prinsipal" => $prinsipal,
             "harga_jual" => $harga_jual,
@@ -70,6 +78,7 @@ class Admin extends CI_Controller
         $ObatModel = [
             'kd_obat' => date('dm') . 'O' . $autoKdObat,
             'nama_obat' => $this->input->post('addNamaObat'),
+            'satuan' => $this->input->post('addsatuan'),
             'kemasan' => $this->input->post('addkemasan'),
             'prinsipal' => $this->input->post('addprinsipal'),
             'harga_jual' => $this->input->post('addHargaJual'),
@@ -92,6 +101,7 @@ class Admin extends CI_Controller
             $row = [];
             $row[] = $list->kd_obat;
             $row[] = $list->nama_obat;
+            $row[] = $list->satuan;
             $row[] = $list->kemasan;
             $row[] = $list->prinsipal;
             $row[] = rupiah($list->harga_jual);
@@ -448,4 +458,8 @@ class Admin extends CI_Controller
         $this->UserModel->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
+
+
+    // Report
+
 }
