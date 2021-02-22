@@ -66,8 +66,7 @@
                 <?php if ($this->session->userdata('role_id') == '1') : ?>
                     <?php $this->load->view('templates/sidebarAdmin') ?>
                 <?php endif ?>
-
-
+                <?php $this->load->view('templates/sidebarReport') ?>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -1,0 +1,1 @@
+<script src="<?= base_url(); ?>/assets/vendor/datatables/datatables.min.js"></script>
