@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jan 2021 pada 05.27
+-- Waktu pembuatan: 08 Agu 2021 pada 10.52
 -- Versi server: 10.4.16-MariaDB
 -- Versi PHP: 7.4.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `detail_pembelian` (
   `id_dtl_pembelian` int(11) NOT NULL,
   `no_faktur` varchar(255) NOT NULL,
   `kd_obat` varchar(10) NOT NULL,
+  `no_batch` varchar(100) DEFAULT NULL,
   `harga_beli` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `sub_total` int(11) NOT NULL,
@@ -38,26 +39,17 @@ CREATE TABLE `detail_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `detail_pembelian`
+--
+
+INSERT INTO `detail_pembelian` (`id_dtl_pembelian`, `no_faktur`, `kd_obat`, `no_batch`, `harga_beli`, `qty`, `sub_total`, `tgl_expired`) VALUES
+(1, '4321424', '0708O0006', '23123', 10000, 1, 10000, '2020-02-01'),
+(2, '4321424', '0708O0001', '123', 3252000, 1, 3252000, '2040-02-01'),
+(4, '231dwsdewe', '0708O0006', '123123', 10000, 5, 50000, '2022-01-01');
+
+--
 -- Trigger `detail_pembelian`
 --
-DELIMITER $$
-CREATE TRIGGER `kurangStokBfUpdate` BEFORE UPDATE ON `detail_pembelian` FOR EACH ROW BEGIN
-        UPDATE master_obat SET stok = stok - OLD.qty WHERE kd_obat = OLD.kd_obat;
-        END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `kurang_stok_hapus` AFTER DELETE ON `detail_pembelian` FOR EACH ROW BEGIN
-        UPDATE master_obat SET stok = stok - OLD.qty WHERE kd_obat = OLD.kd_obat;
-        END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tambahStokAfterUpdate` AFTER UPDATE ON `detail_pembelian` FOR EACH ROW BEGIN
-        UPDATE master_obat SET stok = stok + NEW.qty WHERE kd_obat = NEW.kd_obat;
-        END
-$$
-DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `tambah_stok` AFTER INSERT ON `detail_pembelian` FOR EACH ROW BEGIN
         UPDATE master_obat SET stok = stok + NEW.qty WHERE kd_obat = NEW.kd_obat;
@@ -74,6 +66,7 @@ DELIMITER ;
 CREATE TABLE `detail_trx_penjualan` (
   `id_dtl_trx_jual` int(11) NOT NULL,
   `kd_transaksi` varchar(20) NOT NULL,
+  `no_faktur` varchar(255) NOT NULL,
   `kd_obat` varchar(10) NOT NULL,
   `qty` int(11) NOT NULL,
   `sub_total` int(11) NOT NULL
@@ -105,9 +98,21 @@ CREATE TABLE `faktur_pembelian` (
   `no_faktur` varchar(255) NOT NULL,
   `id_suplier` int(11) NOT NULL,
   `tgl_beli` date NOT NULL,
+  `jt_tempo` date NOT NULL,
+  `jml_harga` int(20) NOT NULL,
+  `ppn_persen` int(11) NOT NULL,
+  `ppn` int(20) NOT NULL,
   `total_trx` int(20) NOT NULL,
   `waktu_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `faktur_pembelian`
+--
+
+INSERT INTO `faktur_pembelian` (`no_faktur`, `id_suplier`, `tgl_beli`, `jt_tempo`, `jml_harga`, `ppn_persen`, `ppn`, `total_trx`, `waktu_input`) VALUES
+('231dwsdewe', 11, '2000-01-01', '2000-01-01', 50000, 10, 5000, 55000, '2021-08-07 11:38:34'),
+('4321424', 11, '2011-02-01', '2000-01-01', 3262000, 10, 326, 3588200, '2021-08-07 08:27:34');
 
 --
 -- Trigger `faktur_pembelian`
@@ -122,17 +127,45 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `laporan1`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `laporan1` (
+`kd_obat` varchar(10)
+,`nama_obat` varchar(50)
+,`harga_beli` int(11)
+,`penambahan` decimal(32,0)
+,`pengurangan` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `master_obat`
 --
 
 CREATE TABLE `master_obat` (
   `kd_obat` varchar(10) NOT NULL,
   `nama_obat` varchar(50) NOT NULL,
+  `satuan` varchar(100) DEFAULT NULL,
   `kemasan` varchar(255) NOT NULL,
+  `prinsipal` varchar(100) DEFAULT NULL,
   `harga_jual` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `waktu_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `master_obat`
+--
+
+INSERT INTO `master_obat` (`kd_obat`, `nama_obat`, `satuan`, `kemasan`, `prinsipal`, `harga_jual`, `stok`, `waktu_input`) VALUES
+('0708O0001', 'Glucose 10X 44 ml', 'KIT', 'tablet', '--', 20000, 1, '2021-08-07 17:45:16'),
+('0708O0002', 'HDL/LDL 2 X1 ml', 'KIT', 'botol', '--', 15000, 0, '2021-08-07 05:24:54'),
+('0708O0003', 'Multi panel', 'KIT', 'box', '--', 15000, 0, '2021-08-07 05:25:33'),
+('0708O0004', 'Vitamin', 'BOX', 'tablet', '--', 2500, 0, '2021-08-07 05:26:17'),
+('0708O0005', 'OBH 10 X 44 ML', 'KIT', 'botol', 'tes edit', 10000, 0, '2021-08-07 09:27:31'),
+('0708O0006', 'PARECETAMOL', 'BOX', 'tablet', '--', 2000, 6, '2021-08-07 18:01:58');
 
 -- --------------------------------------------------------
 
@@ -146,6 +179,14 @@ CREATE TABLE `supplier` (
   `hp` varchar(100) NOT NULL,
   `alamat` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `supplier`
+--
+
+INSERT INTO `supplier` (`id_suplier`, `nama_supplier`, `hp`, `alamat`) VALUES
+(10, 'Kima Farma', '09872888', 'jlan martandu'),
+(11, 'PT BRAYAN MEDIKAL', '0401020031', 'MAKASSAR');
 
 -- --------------------------------------------------------
 
@@ -216,6 +257,15 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Admin'),
 (2, 'Karyawan');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `laporan1`
+--
+DROP TABLE IF EXISTS `laporan1`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `laporan1`  AS SELECT `a`.`kd_obat` AS `kd_obat`, `c`.`nama_obat` AS `nama_obat`, `a`.`harga_beli` AS `harga_beli`, sum(`a`.`qty`) AS `penambahan`, 0 AS `pengurangan` FROM ((`detail_pembelian` `a` left join `faktur_pembelian` `b` on(`a`.`no_faktur` = `b`.`no_faktur`)) left join `master_obat` `c` on(`c`.`kd_obat` = `a`.`kd_obat`)) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -279,19 +329,19 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT untuk tabel `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
-  MODIFY `id_dtl_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_dtl_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_trx_penjualan`
 --
 ALTER TABLE `detail_trx_penjualan`
-  MODIFY `id_dtl_trx_jual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_dtl_trx_jual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
