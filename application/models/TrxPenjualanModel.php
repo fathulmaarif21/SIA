@@ -168,4 +168,12 @@ class TrxPenjualanModel extends CI_Model
         }
         // return $this->db->insertID();
     }
+    public function qtyDetailJual($kdObat)
+    {
+        $data = $this->db->query("SELECT SUM(qty) as qty FROM detail_trx_penjualan WHERE kd_obat ='$kdObat'");
+        if (!$data) {
+            return $error = $this->db->error();
+        }
+        return $data->row();
+    }
 }

@@ -123,6 +123,34 @@ class Admin extends CI_Controller
         ];
         echo json_encode($output);
     }
+    public function sinkronObatBykdObats($kd_obat)
+    {
+        // $kd_obat = '0708O0006';
+        $obatfaktur = $this->FakturPembelianModel->qtyObatFaktur($kd_obat);
+        $obatJual  = $this->TrxPenjualanModel->qtyDetailJual($kd_obat);
+        if ($obatfaktur && $obatJual) {
+            $qtyFaktur = ($obatfaktur->qty == null) ? 0 :  $obatfaktur->qty;
+            $qtyJual = ($obatJual->qty == null) ? 0 : $obatJual->qty;
+            $stok = intval($qtyFaktur) - intval($qtyJual);
+            $update = [
+                "stok" => $stok
+            ];
+            // $StokMaster = $this->ObatModel->obatById($kd_obat);
+            // var_dump($StokMaster);
+            $this->ObatModel->updateStokByObat($kd_obat, $update);
+            $status = true;
+            $pesan = 'Stok Telah disingkronkan';
+        } else {
+            $status = false;
+            $pesan = 'Gagal Select Data';
+        }
+        $response = [
+            'status' => $status,
+            'pesan' => $pesan
+        ];
+        echo json_encode($response);
+    }
+
     // end of master obat
     //--------------------------------------------------------------------
     // master trx penjualan
@@ -226,8 +254,12 @@ class Admin extends CI_Controller
             $row = [];
             $row[] = $list->no_faktur;
             $row[] = $list->nama_supplier;
+            $row[] = rupiah($list->jml_harga);
+            $row[] = rupiah($list->ppn);
+            $row[] = rupiah($list->ppn);
             $row[] = rupiah($list->total_trx);
             $row[] = $list->tgl_beli;
+            $row[] = $list->jt_tempo;
             $row[] = $list->waktu_input;
             //add html for action
             // onclick="detail_trx(' . "'" . $value->no_faktur . "'" . ')"
@@ -251,13 +283,17 @@ class Admin extends CI_Controller
         $noFaktur = $this->input->post('NomorFaktur');
         $suplier = $this->input->post('suplier');
         $tglFaktur = $this->input->post('tglFaktur');
-        $totaltrx = str_replace(".", "", $this->input->post('totaltrx'));
+        $jt_tempo = $this->input->post('jt_tempo');
         $arr_kd_obat = $this->input->post('kd_obat');
         $arr_qty = $this->input->post('qty');
-        $arr_harga_beli = str_replace(".", "", $this->input->post('harga_beli'));
-        $arr_sub_total = str_replace(".", "", $this->input->post('subTotal'));
         $arr_tglExp = $this->input->post('tglExp');
         $arr_no_batch = $this->input->post('no_batch');
+        $ppn_persen = $this->input->post('PPn');
+        $arr_harga_beli = str_replace(".", "", $this->input->post('harga_beli'));
+        $arr_sub_total = str_replace(".", "", $this->input->post('subTotal'));
+        $totaltrx = str_replace(".", "", $this->input->post('totaltrx'));
+        $jml_harga = str_replace(".", "", $this->input->post('jml_harga'));
+        $ppn = str_replace(".", "", $this->input->post('resultPPn'));
         $cekFaktur  = $this->FakturPembelianModel->getDetailFaktur($noFaktur);
         if ($cekFaktur->num_rows() > 0) {
             $response = [
@@ -271,6 +307,10 @@ class Admin extends CI_Controller
                 "id_suplier " => $suplier,
                 "total_trx" => $totaltrx,
                 "tgl_beli" => $tglFaktur,
+                "jt_tempo" => $jt_tempo,
+                "jml_harga" => $jml_harga,
+                "ppn_persen" => $ppn_persen,
+                "ppn" => $ppn,
             ];
             $detailTrx = [];
             for ($i = 0; $i < count($arr_kd_obat); $i++) {

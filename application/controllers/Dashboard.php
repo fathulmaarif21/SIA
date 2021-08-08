@@ -74,6 +74,11 @@ class Dashboard extends CI_Controller
 		}
 		echo json_encode($array_trx);
 	}
+	public function tes()
+	{
+		$data['title'] = 'Data Master Obat';
+		$this->load->view('tes', $data);
+	}
 	//--------------------------------------------------------------------
 
 }

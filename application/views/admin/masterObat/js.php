@@ -140,6 +140,11 @@
                  {
                      $('#modal_form').modal('hide');
                      reload_table();
+                     Swal.fire(
+                         'Sukses!',
+                         'Data Telah diedit',
+                         'success'
+                     )
                  }
                  $('#btnSave').text('save'); //change button text
                  $('#btnSave').attr('disabled', false); //set button enable

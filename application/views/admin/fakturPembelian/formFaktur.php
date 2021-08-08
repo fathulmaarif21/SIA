@@ -28,7 +28,12 @@
                     </select>
                 </div>
             </div>
-
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="jt_tempo">Jatuh Tempo</label>
+                    <input type="date" class="form-control" name="jt_tempo" id="jt_tempo" required>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card mt-4 shadow">
@@ -54,6 +59,38 @@
                     </table>
                 </div>
                 <div class="col-md-3">
+                    <!-- Horizontal Form -->
+                    <div class="card card-info">
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="jml_harga">Jumlah Harga</label>
+                                    <input type="text" class="form-control" value="0" name="jml_harga" id="jml_harga" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="PPn">PPn</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <input type="checkbox" id="myCheck" onclick="enablePPn()">
+                                            </span>
+                                        </div>
+                                        <input type="number" value="0" class="form-control" name="PPn" id="PPn" readonly>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> %</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="div_ppn" style="display: none;">
+                                    <input type="text" class="form-control" value="0" name="resultPPn" id="resultPPn" readonly>
+                                </div>
+                            </div>
+                            <!-- /.card-footer -->
+                        </form>
+                    </div>
+                    <!-- /.card -->
                     <div class="card mb-4 border-left-primary shadow  mb-2">
                         <div class="card-body">
                             <p class="card-text"><b>Total :</b></p>

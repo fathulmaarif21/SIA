@@ -20,7 +20,7 @@
     </a>
 </li>
 <li class="nav-item menu-open">
-    <a href="#" class="nav-link <?php if ($this->uri->segment(1) == 'admin') {
+    <a href="#" class="nav-link <?php if ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) !== 'viewFaktuPembelian' && $this->uri->segment(2) !== 'viewUserManagement') {
                                     echo 'active';
                                 } ?>">
         <i class="nav-icon fas fa-database"></i>

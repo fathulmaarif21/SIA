@@ -106,7 +106,7 @@
 
         Swal.fire({
             title: 'Yakin Hapus Faktur?',
-            text: "Transaksi yang telah di Hapus akan mengembalikan stok obat",
+            text: "Transaksi yang telah di Hapus akan mmempengaruhi stok Obat!!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -125,7 +125,7 @@
                     success: function(data) {
                         Swal.fire(
                             'Terhapus!',
-                            'Faktur Telah Terhapus',
+                            'Faktur Telah Terhapus, Tolong Sesuikan Stok Obat Secara Manual',
                             'success'
                         )
                         reload_table();
@@ -143,7 +143,7 @@
 
         Swal.fire({
             title: 'Yakin Hapus Detail Faktur?',
-            text: "Transaksi yang telah di Hapus akan mengembalikan stok obat",
+            text: "Transaksi yang telah di Hapus akan mmempengaruhi stok Obat!!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -162,7 +162,7 @@
                     success: function(data) {
                         Swal.fire(
                             'Terhapus!',
-                            'Detail Faktur Telah Terhapus',
+                            'Detail Faktur Telah Terhapus, Tolong Sesuikan Stok Obat Secara Manual',
                             'success'
                         )
                         $('#modal_detail_trx').modal('hide');
@@ -178,13 +178,14 @@
     $('#addqty').on('keyup change', function() {
         //  ini subtotal
         let hargaBeli = $('#addharga_beli').val();
-        let qty = $(this).val();
+        let qty = parseInt($(this).val());
         $(`#addsub_total`).val(formatRupiah(hargaBeli * qty, ''));
     });
 
     $("#formSubmitAddDetailFaktur").submit(function(e) {
         e.preventDefault();
-        if ($("#id_select_obat").val()) {
+        let valObat = $("#id_select_obat").val();
+        if (valObat == '') {
             Swal.fire(
                 'Obat Belum diisi!',
                 'Silahkan Pilih Obat',

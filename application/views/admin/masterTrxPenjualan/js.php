@@ -76,39 +76,7 @@
 
 
 
-         function deleteTrx(id) {
 
-             Swal.fire({
-                 title: 'Yakin Hapus Transaksi?',
-                 text: "Transaksi yang telah di Hapus akan mengembalikan stok obat",
-                 icon: 'warning',
-                 showCancelButton: true,
-                 confirmButtonColor: '#3085d6',
-                 cancelButtonColor: '#d33',
-                 confirmButtonText: 'Ya, Hapus!'
-             }).then((result) => {
-                 if (result.isConfirmed) {
-                     // ajax delete data to database
-                     $.ajax({
-                         url: "<?= base_url('/admin/deleteTrxPenjualanModel') ?>/" + id,
-                         type: "GET",
-                         dataType: "JSON",
-                         success: function(data) {
-                             Swal.fire(
-                                 'Terhapus!',
-                                 'Transaksi Telah Terhapus',
-                                 'success'
-                             )
-                             reload_table();
-                         },
-                         error: function(jqXHR, textStatus, errorThrown) {
-                             alert('Error deleting data');
-                         }
-                     });
-
-                 }
-             })
-         }
 
          // inquery by date
          var startDate;
@@ -154,4 +122,38 @@
              ]
          });
      });
+
+     function deleteTrx(id) {
+
+         Swal.fire({
+             title: 'Yakin Hapus Transaksi?',
+             text: "Transaksi yang telah di Hapus akan mengembalikan stok obat",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Ya, Hapus!'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 // ajax delete data to database
+                 $.ajax({
+                     url: "<?= base_url('/admin/deleteTrxPenjualanModel') ?>/" + id,
+                     type: "GET",
+                     dataType: "JSON",
+                     success: function(data) {
+                         Swal.fire(
+                             'Terhapus!',
+                             'Transaksi Telah Terhapus',
+                             'success'
+                         )
+                         reload_table();
+                     },
+                     error: function(jqXHR, textStatus, errorThrown) {
+                         alert('Error deleting data');
+                     }
+                 });
+
+             }
+         })
+     }
  </script>

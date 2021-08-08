@@ -8,8 +8,12 @@
                 <tr>
                     <th>No Faktur</th>
                     <th>Supplier</th>
+                    <th>Jumlah Harga</th>
+                    <th>PPn%</th>
+                    <th>PPn Rupiah</th>
                     <th>Total Transaksi</th>
                     <th>Tgl Transaksi</th>
+                    <th>Tgl Jth Tempo</th>
                     <th>Waktu Input</th>
                     <th>Action</th>
                 </tr>

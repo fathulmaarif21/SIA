@@ -23,6 +23,50 @@
         $(this).closest('tr').remove();
         updateTotalTagihan();
     });
+    // handle ppn cked
+    function enablePPn() {
+        var checkBox = document.getElementById("myCheck");
+        if (checkBox.checked == true) {
+            $('#PPn').val(10);
+            hitungPpn(true, 10)
+
+            $('#PPn').prop('readonly', false);
+            $('#div_ppn').show();
+        } else {
+            $('#PPn').val(0);
+            hitungPpn(false, 0)
+
+            $('#PPn').prop('readonly', true);
+            $('#div_ppn').hide();
+        }
+    }
+    $('#PPn').on('keyup change', function() {
+        hitungPpn(true, $(this).val())
+    });
+
+    function hitungPpn(cek, ppn) {
+        let val_jumlah = $('#jml_harga').val();
+        let jml_h = parseInt(remove_str(val_jumlah));
+        let total = jml_h,
+            resultPPn = 0;
+        if (cek) {
+            let int_ppn = parseInt(ppn);
+            resultPPn = jml_h * int_ppn / 100;
+            let t_tagihan = jml_h + resultPPn;
+            total = t_tagihan;
+
+            console.log(jml_h);
+            console.log(t_tagihan);
+        } else {
+            console.log('jmlbayar sama dengan total')
+        }
+        $('#resultPPn').val(formatRupiah(resultPPn, ''));
+        $('#totalTagihan').html(formatRupiah(total, ''));
+
+        // let ppn = parseInt($('#PPn').val());
+        // let t_tagihan = (jml_h * ppn / 100)
+        // console.log(t_tagihan);
+    }
 </script>
 <script>
     var no = 1;
@@ -153,6 +197,7 @@
                     return total + num;
                 });
             // update total tagihan
+            $('#jml_harga').val(formatRupiah(arrSubTotal, ''));
             $('#totalTagihan').html(formatRupiah(arrSubTotal, ''));
         }
 
@@ -188,6 +233,7 @@
                             if (data.success) {
                                 $("#suplier").val('').trigger('change');
                                 $('#addList tr').remove();
+                                $('#jml_harga').val('0');
                                 $('#totalTagihan').text('0');
                                 $('#NomorFaktur').val('');
                                 $('form').each(function() {
