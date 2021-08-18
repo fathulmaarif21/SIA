@@ -72,7 +72,6 @@ class Kasir extends CI_Controller
                 "total_trx" => $tagihan_simpan,
                 "total_bayar" => $bayar_simpan,
                 "kembalian" => $kembalian_simpan
-
             ];
 
             $detailTrx = [];

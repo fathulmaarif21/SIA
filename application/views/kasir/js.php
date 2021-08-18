@@ -226,11 +226,12 @@
          let arr_subtotal = cetakArrSubmit('subTotal').map(m => remove_str(m));
 
          var totalRowCount = $("#keranjangList tr").length - 1;
-
+         // catatn untuk nota sampe di sini mi
          let allDataSimpan = '';
          for (let index = 0; index < arr_kd_obat.length; index++) {
              allDataSimpan += listNote(arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
          }
+         console.log(allDataSimpan);
          if (totalRowCount == 0 || !bayar_simpan || tagihan_simpan > bayar_simpan || arr_qty.includes("") || isNaN(tagihan_simpan)) {
              if (!bayar_simpan) {
                  $('#bayar').addClass('is-invalid')
@@ -275,19 +276,22 @@
                  confirmButtonText: 'Ya, Simpan!'
              }).then((result) => {
                  if (result.value) {
+                     let data = {
+                         'tagihan_simpan': tagihan_simpan,
+                         'bayar_simpan': bayar_simpan,
+                         'kembalian_simpan': kembalian_simpan,
+                         'arr_kd_obat': arr_kd_obat,
+                         'arr_stok': arr_stok,
+                         'arr_qty': arr_qty,
+                         'arr_subtotal': arr_subtotal,
+                         'catatanPembeli': $("form").serializeArray()
+                     };
+                     console.log(data);
+                     return
                      $.ajax({
                          type: "POST",
                          url: "<?= base_url('kasir/submitTrx'); ?>",
-                         data: {
-                             'tagihan_simpan': tagihan_simpan,
-                             'bayar_simpan': bayar_simpan,
-                             'kembalian_simpan': kembalian_simpan,
-                             'arr_kd_obat': arr_kd_obat,
-                             'arr_stok': arr_stok,
-                             'arr_qty': arr_qty,
-                             'arr_subtotal': arr_subtotal,
-                             'catatanPembeli': $("form").serializeArray()
-                         },
+                         data: data,
                          dataType: "JSON",
                          success: function(res) {
 

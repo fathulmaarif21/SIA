@@ -255,7 +255,7 @@ class Admin extends CI_Controller
             $row[] = $list->no_faktur;
             $row[] = $list->nama_supplier;
             $row[] = rupiah($list->jml_harga);
-            $row[] = rupiah($list->ppn);
+            $row[] = $list->ppn_persen . ' %';
             $row[] = rupiah($list->ppn);
             $row[] = rupiah($list->total_trx);
             $row[] = $list->tgl_beli;

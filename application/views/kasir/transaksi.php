@@ -72,3 +72,131 @@
         </div>
     </div>
 </div>
+<div id="printThis">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Main content -->
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    <span> <img src="<?= base_url('assets/'); ?>dist/img/logoSIA.png" width="40"></span> AdminLTE, Inc.
+                                    <small class="float-right"><?= date("d/m/Y"); ?></small>
+                                </h4>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- info row -->
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                <address>
+                                    <strong>Jalan Nuri</strong><br>
+                                    Phone: (804) 123-5432<br>
+                                    Email: info@apotekajwa.com
+                                </address>
+                            </div>
+                        </div>
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                <table class="table table-borderless table-sm" id="rowNota">
+                                    <tr>
+                                        <th>No. Nota</th>
+                                        <th>:</th>
+                                        <th id="invoice_no_nota"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Tgl. Nota</th>
+                                        <th>:</th>
+                                        <th id="invoice_no_nota"><?= date("Y/m/d"); ?></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>:</th>
+                                        <th id="invoice_nama"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Alamat</th>
+                                        <th>:</th>
+                                        <th id="invoice_alamat"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Keterangan</th>
+                                        <th>:</th>
+                                        <th id="invoice_note"></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Nama Obat</th>
+                                            <th>Harga @</th>
+                                            <th>qty</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-6">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:50%">Total:</th>
+                                            <td id="invoice_Total">$250.30</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Bayar</th>
+                                            <td>$10.34</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kembalian:</th>
+                                            <td>$5.80</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                                    Payment
+                                </button>
+                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-download"></i> Generate PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.invoice -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+</div>

@@ -46,24 +46,24 @@
 
     function hitungPpn(cek, ppn) {
         let val_jumlah = $('#jml_harga').val();
-        let jml_h = parseInt(remove_str(val_jumlah));
+        let jml_h = parseFloat(remove_str(val_jumlah));
         let total = jml_h,
             resultPPn = 0;
         if (cek) {
-            let int_ppn = parseInt(ppn);
+            let int_ppn = parseFloat(ppn);
             resultPPn = jml_h * int_ppn / 100;
             let t_tagihan = jml_h + resultPPn;
-            total = t_tagihan;
+            total = parseInt(t_tagihan);
 
             console.log(jml_h);
             console.log(t_tagihan);
         } else {
             console.log('jmlbayar sama dengan total')
         }
-        $('#resultPPn').val(formatRupiah(resultPPn, ''));
+        $('#resultPPn').val(formatRupiah(parseInt(resultPPn), ''));
         $('#totalTagihan').html(formatRupiah(total, ''));
 
-        // let ppn = parseInt($('#PPn').val());
+        // let ppn = parseFloat($('#PPn').val());
         // let t_tagihan = (jml_h * ppn / 100)
         // console.log(t_tagihan);
     }
@@ -124,23 +124,23 @@
                  <tr id="${res.id}">
                         <td scope="row">${res.id}</td>
                         <td class="namafornota">${res.nama_obat}</td>
-                        <td><input type="text" class="form-control" name="no_batch[]"  required></td>
-                        <td><input type="text" id="hb${res.id}" onkeyup="formathb(this)"  class="form-control harga_beli"   name="harga_beli[]"  required></td>
+                        <td><input type="text" class="form-control form-control-sm" name="no_batch[]"  required></td>
+                        <td><input type="text" id="hb${res.id}" onkeyup="formathb(this)"  class="form-control form-control-sm harga_beli"   name="harga_beli[]"  required></td>
                         <td>
                             <div class="form-group col-auto">
                                 <div class="">
-                                    <input type="hidden" class="form-control" name="kd_obat[]" value="${res.id}" readonly>
-                                    <input type="hidden" class="form-control" name="harga[]" value="${res.harga}" readonly>
-                                    <input type="hidden" class="form-control" name="stok[]" value="${res.stok}" readonly>
-                                    <input type="number"  class="form-control getData-FromInput"  data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='' name="qty[]"  required>
+                                    <input type="hidden" class="form-control form-control-sm" name="kd_obat[]" value="${res.id}" readonly>
+                                    <input type="hidden" class="form-control form-control-sm" name="harga[]" value="${res.harga}" readonly>
+                                    <input type="hidden" class="form-control form-control-sm" name="stok[]" value="${res.stok}" readonly>
+                                    <input type="number"  class="form-control form-control-sm getData-FromInput"  data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='' name="qty[]"  required>
                                     <div class="invalid-tooltip">
                                         Qty Lebih Dari Jumlah Stok
                                     </div>
                                 </div>
                             </div>
                         </td>
-                        <td><input type="date" class="form-control" name="tglExp[]"  required></td>
-                        <td><input type="text" class="form-control ${res.id} " name="subTotal[]" value="0" readonly required></td>
+                        <td><input type="date" class="form-control form-control-sm" name="tglExp[]"  required></td>
+                        <td><input type="text" class="form-control form-control-sm ${res.id} " name="subTotal[]" value="0" readonly required></td>
                         <td>
                             <button type="button" class="btn btn-danger delRow"> <i class="fas fa-trash"></i></button>
                         </td>
@@ -167,8 +167,8 @@
         $('.getData-FromInput').on('keyup change', function() {
             let kd_obat = $(this).data('kd_obat');
             let hargaBeli = remove_str($(`#hb${kd_obat}`).val());
-            let stok = parseInt($(this).data('stok'));
-            let qty = parseInt($(this).val());
+            let stok = parseFloat($(this).data('stok'));
+            let qty = parseFloat($(this).val());
 
             //  ini subtotal
             $(`.${kd_obat}`).val(formatRupiah(hargaBeli * qty, ''));
