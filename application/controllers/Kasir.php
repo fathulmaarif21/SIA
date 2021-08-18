@@ -93,7 +93,7 @@ class Kasir extends CI_Controller
         } else {
             $data["id_nota"] = '';
         }
-        $data["status"] = 'sukses';
+        $data["status"] = true;
 
 
         echo json_encode($data);

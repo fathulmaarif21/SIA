@@ -166,8 +166,6 @@
              qty > stok ? $(this).addClass('is-invalid') : $(this).removeClass('is-invalid')
              // update total tagihan
              updateTotalTagihan();
-
-
              //   klik tab for fokus
              document.addEventListener('keydown', function(e) {
                  if (e.which === 9 || e.keyCode === 9) {
@@ -180,10 +178,8 @@
              let kd_obat2 = $(this).data('kd_obat');
              let qty2 = parseInt($(`#qty${kd_obat2}`).val());
              let harga2 = parseInt($(this).val());
-
              //  ini subtotal
              $(`.${kd_obat2}`).val(formatRupiah(harga2 * qty2, ''));
-
              // update total tagihan
              updateTotalTagihan();
 
@@ -218,6 +214,7 @@
          let arr_stok = cetakArrSubmit('stok');
          let arr_qty = cetakArrSubmit('qty');
 
+         // catatn untuk nota sampe di sini mi
          let arrnama = [];
          $('.namafornota ').each(function() {
              arrnama.push($(this).text());
@@ -226,12 +223,6 @@
          let arr_subtotal = cetakArrSubmit('subTotal').map(m => remove_str(m));
 
          var totalRowCount = $("#keranjangList tr").length - 1;
-         // catatn untuk nota sampe di sini mi
-         let allDataSimpan = '';
-         for (let index = 0; index < arr_kd_obat.length; index++) {
-             allDataSimpan += listNote(arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
-         }
-         console.log(allDataSimpan);
          if (totalRowCount == 0 || !bayar_simpan || tagihan_simpan > bayar_simpan || arr_qty.includes("") || isNaN(tagihan_simpan)) {
              if (!bayar_simpan) {
                  $('#bayar').addClass('is-invalid')
@@ -286,6 +277,14 @@
                          'arr_subtotal': arr_subtotal,
                          'catatanPembeli': $("form").serializeArray()
                      };
+                     let allDataSimpan = '';
+                     for (let index = 0; index < arr_kd_obat.length; index++) {
+                         allDataSimpan += listNote(arr_kd_obat[index], arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
+                     }
+                     $("#invoice_nama").text(data.catatanPembeli[3].value);
+                     $("#invoice_alamat").text(data.catatanPembeli[4].value);
+                     $("#invoice_note").text(data.catatanPembeli[5].value);
+                     $("#detaillist_nota tbody").html(allDataSimpan);
                      console.log(data);
                      return
                      $.ajax({
@@ -294,21 +293,27 @@
                          data: data,
                          dataType: "JSON",
                          success: function(res) {
+                             if (res.status == true) {
+                                 let allDataSimpan = '';
+                                 for (let index = 0; index < arr_kd_obat.length; index++) {
+                                     allDataSimpan += listNote(arr_kd_obat[index], arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
+                                 }
+                                 console.log(res.id_nota);
+                                 $('#idNota').text(res.id_nota);
 
-                             console.log(res.id_nota);
-                             $('#idNota').text(res.id_nota);
+                                 $('#addList tr').remove();
 
-                             $('#addList tr').remove();
+                                 $('form').each(function() {
+                                     this.reset();
+                                 });
+                                 $('#totalTagihan').text('0');
+                                 Swal.fire(
+                                     'Transaksi Berhasil',
+                                     `${res.id_nota}`,
+                                     'success'
+                                 )
+                             }
 
-                             $('form').each(function() {
-                                 this.reset();
-                             });
-                             $('#totalTagihan').text('0');
-                             Swal.fire(
-                                 'Transaksi Berhasil',
-                                 `${res.id_nota}`,
-                                 'success'
-                             )
                              // untuk print
                              //                      $('#printThis').html(`<div class="row rowNota">
                              //     <div id="table_nota" class="col-md-4">
@@ -408,8 +413,8 @@
          return arrCetak;
      }
 
-     function listNote(arrnama, arr_harga, arr_qty, arr_subtotal) {
-         $('#rowNota tr').remove();
+     function listNote(kdObat, arrnama, arr_harga, arr_qty, arr_subtotal) {
+         //  $('#rowNota tr').remove();
          //  let arrnama = [];
          //  $('.namafornota ').each(function() {
          //      arrnama.push($(this).text());
@@ -435,10 +440,11 @@
 
 
          return `<tr>
+                    <td>${kdObat}</td>
                     <td>${arrnama}</td>
-                    <td>${arr_harga}</td>
+                    <td>${formatRupiah(arr_harga)}</td>
                     <td>${arr_qty}</td>
-                    <td>${arr_subtotal}</td>
+                    <td>${formatRupiah(arr_subtotal)}</td>
                 </tr>`;
 
      }

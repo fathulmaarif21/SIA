@@ -72,7 +72,8 @@
         </div>
     </div>
 </div>
-<div id="printThis">
+
+<div id="div_cetak">
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -100,29 +101,26 @@
                             </div>
                         </div>
                         <div class="row invoice-info">
-                            <div class="col-sm-4 invoice-col">
-                                <table class="table table-borderless table-sm" id="rowNota">
+                            <div class="col-auto invoice-col">
+                                <table class="table table-borderless table-sm tableLine" id="tablenota" style="width: 100%;">
                                     <tr>
                                         <th>No. Nota</th>
                                         <th>:</th>
                                         <th id="invoice_no_nota"></th>
-                                    </tr>
-                                    <tr>
-                                        <th>Tgl. Nota</th>
-                                        <th>:</th>
-                                        <th id="invoice_no_nota"><?= date("Y/m/d"); ?></th>
-                                    </tr>
-                                    <tr>
-                                        <th>Nama</th>
+                                        <th> Nama</th>
                                         <th>:</th>
                                         <th id="invoice_nama"></th>
                                     </tr>
                                     <tr>
-                                        <th>Alamat</th>
+                                        <th>Tgl. Nota</th>
+                                        <th>:</th>
+                                        <th><?= date("d/m/Y"); ?></th>
+                                        <th> Alamat</th>
                                         <th>:</th>
                                         <th id="invoice_alamat"></th>
                                     </tr>
                                     <tr>
+                                        <th colspan="3"></th>
                                         <th>Keterangan</th>
                                         <th>:</th>
                                         <th id="invoice_note"></th>
@@ -135,7 +133,7 @@
                         <!-- Table row -->
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped tableLine" id="detaillist_nota" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>Kode</th>

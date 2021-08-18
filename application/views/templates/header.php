@@ -24,19 +24,20 @@
                 visibility: hidden;
             }
 
-            #printThis,
-            #printThis * {
+            #div_cetak,
+            #div_cetak * {
                 visibility: visible;
             }
 
-            #printThis {
+            #div_cetak {
                 position: absolute;
                 left: 0;
                 top: 0;
+                right: 0;
             }
         }
 
-        #rowNota tr {
+        .tableLine tr {
             line-height: 14px;
         }
 
