@@ -31,13 +31,14 @@
         <div class="card shadow text-center text-gray-800">
             <div class="card-body font-weight-bold">
                 <div class="table-responsive-sm">
-                    <table id="keranjangList" class="table table-striped table-sm">
+                    <table id="keranjangList" class="table table-responsive table-striped w-auto small" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nama Obat</th>
-                                <th scope="col">Harga</th>
-                                <th scope="col" style="width: 8em;">qty</th>
+                                <th scope="col">Satuan</th>
+                                <th scope="col" style="width: 25%;">Harga</th>
+                                <th scope="col" style="width: 18%;">qty</th>
                                 <th scope="col">Subtotal</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -84,7 +85,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4>
-                                    <span> <img src="<?= base_url('assets/'); ?>dist/img/logoSIA.png" width="40"></span> AdminLTE, Inc.
+                                    <span> <img src="<?= base_url('assets/'); ?>dist/img/logoSIA.png" width="40"></span> Apotek Ajwa
                                     <small class="float-right"><?= date("d/m/Y"); ?></small>
                                 </h4>
                             </div>
@@ -133,11 +134,12 @@
                         <!-- Table row -->
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table table-striped tableLine" id="detaillist_nota" style="width: 100%;">
+                                <table class="table table-borderless tableLine" id="detaillist_nota" style="width: 100%;" border="0">
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
                                             <th>Nama Obat</th>
+                                            <th>Satuan</th>
                                             <th>Harga @</th>
                                             <th>qty</th>
                                             <th>Subtotal</th>

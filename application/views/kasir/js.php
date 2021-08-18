@@ -119,20 +119,21 @@
                  <tr id="${res.id}">
                         <td scope="row">${no++}</td>
                         <td class="namafornota">${res.nama_obat}</td>
-                        <td><input type="number" id="hb${res.id}" data-kd_obat="${res.id}"  class="form-control cek_harga" name="harga[]" value="${res.harga}" ></td>
+                        <td class="satuanfornota">${res.satuan}</td>
+                        <td><input type="number" id="hb${res.id}" data-kd_obat="${res.id}"  class="form-control form-control-sm  cek_harga" name="harga[]" value="${res.harga}" ></td>
                         <td>
                             <div class="form-group col-auto">
                                 <div class="">
-                                    <input type="hidden" class="form-control" name="kd_obat[]" value="${res.id}" readonly>
-                                    <input type="hidden" class="form-control" name="stok[]" value="${res.stok}" readonly>
-                                    <input type="number" id="qty${res.id}"  class="form-control getData-FromInput" data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='1' name="qty[]"  required>
+                                    <input type="hidden" class="form-control form-control-sm" name="kd_obat[]" value="${res.id}" readonly>
+                                    <input type="hidden" class="form-control form-control-sm" name="stok[]" value="${res.stok}" readonly>
+                                    <input type="number" id="qty${res.id}"  class="form-control form-control-sm getData-FromInput" data-nama_obat="${res.nama_obat}" data-kd_obat="${res.id}" data-stok="${res.stok}" data-harga="${res.harga}"  min="1" value='1' name="qty[]"  required>
                                     <div class="invalid-tooltip">
                                         Qty Lebih Dari Jumlah Stok
                                     </div>
                                 </div>
                             </div>
                         </td>
-                        <td><input type="text" class="form-control ${res.id} " name="subTotal[]" value="${res.harga}" readonly></td>
+                        <td><input type="text" class="form-control form-control-sm ${res.id} " name="subTotal[]" value="${res.harga}" readonly></td>
                         <td>
                             <button type="button" class="btn btn-danger delRow"> <i class="fas fa-trash"></i></button>
                         </td>

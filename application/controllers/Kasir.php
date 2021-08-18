@@ -38,6 +38,7 @@ class Kasir extends CI_Controller
         $selectajax = array(
             'id' => $value->kd_obat,
             'harga' => $value->harga_jual,
+            'satuan' => $value->satuan,
             'nama_obat' => $value->nama_obat,
             'stok' => $value->stok
         );
