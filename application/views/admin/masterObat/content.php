@@ -3,7 +3,8 @@
         <h3 class="card-title">Master Obat</h3>
     </div>
     <div class="card-body shadow">
-        <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <a href="<?= base_url('Excel/exportObat'); ?>" class="btn btn-warning  btn-sm mb-2">Export Excel</a>
+        <table id="table" class="table table-striped table-bordered table-sm  w-auto small" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Kd Obat</th>

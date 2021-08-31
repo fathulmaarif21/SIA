@@ -11,7 +11,7 @@ class FakturPembelianModel extends CI_Model
     }
     var $table = "faktur_pembelian";
     var $column_order = array('no_faktur', 'faktur_pembelian.id_suplier', 'total_trx', 'tgl_beli', 'jt_tempo', 'waktu_input', 'supplier.nama_supplier');
-    var $column_search = array('no_faktur', 'faktur_pembelian.id_suplier', 'total_trx', 'tgl_beli', 'jt_tempo', 'waktu_input', 'supplier.nama_supplier');
+    var $column_search = array('no_faktur', 'faktur_pembelian.id_suplier', 'total_trx', 'tgl_beli', 'waktu_input', 'supplier.nama_supplier');
     var $order = array('no_faktur' => 'desc');
 
 
@@ -116,5 +116,10 @@ class FakturPembelianModel extends CI_Model
             return $error = $this->db->error();
         }
         return $data->row();
+    }
+
+    public function getFakturBetDate($start, $end)
+    {
+        return $this->db->query("SELECT a.*, b.nama_supplier FROM  faktur_pembelian a LEFT JOIN supplier b ON a.id_suplier = b.id_suplier where a.tgl_beli BETWEEN '$start' and '$end'");
     }
 }

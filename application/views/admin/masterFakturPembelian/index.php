@@ -1,4 +1,6 @@
 <?php $this->load->view('templates/header'); ?>
+<!-- daterange picker -->
+<link rel="stylesheet" href="<?= base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.css">
 <?php $this->load->view('templates/topbar'); ?>
 <?php $this->load->view('templates/sidebar'); ?>
 <?php $this->load->view('admin/masterFakturPembelian/content'); ?>
@@ -85,7 +87,7 @@
                         </div>
                         <div class="form-group">
                             <label for="addtgl_expired">tgl_expired</label>
-                            <input type="date" class="form-control" value="0" name="addtgl_expired" id="addtgl_expired" required>
+                            <input type="date" class="form-control" name="addtgl_expired" id="addtgl_expired" required>
                         </div>
                     </div>
             </div>

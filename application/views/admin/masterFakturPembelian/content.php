@@ -1,27 +1,24 @@
 <div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">Master Faktur Pembelian</h3>
+        <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#tabel" role="tab" aria-controls="description" aria-selected="true"><i class="fas fa-exchange-alt"></i> Tabel Master Faktur Pembelian</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#inquery2" role="tab" aria-controls="history" aria-selected="false"><i class="fas fa-briefcase-medical"></i> Penelusuran Berdasarkan Tanggal Faktur</a>
+            </li>
+        </ul>
     </div>
     <div class="card-body shadow">
-        <table id="table_trx" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>No Faktur</th>
-                    <th>Supplier</th>
-                    <th>Jumlah Harga</th>
-                    <th>PPn%</th>
-                    <th>PPn Rupiah</th>
-                    <th>Total Transaksi</th>
-                    <th>Tgl Transaksi</th>
-                    <th>Tgl Jth Tempo</th>
-                    <th>Waktu Input</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
 
+        <div class="tab-content mt-3">
+            <div class="tab-pane active" id="tabel" role="tabpanel">
+                <?php $this->load->view('admin/masterFakturPembelian/tblFaktur'); ?>
+            </div>
 
-        </table>
+            <div class="tab-pane" id="inquery2" role="tabpanel" aria-labelledby="history-tab">
+                <?php $this->load->view('admin/masterFakturPembelian/inquery'); ?>
+            </div>
+        </div>
     </div>
 </div>

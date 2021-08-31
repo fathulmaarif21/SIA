@@ -14,6 +14,12 @@ class ObatModel extends CI_Model
     var $column_search = array('kd_obat', 'nama_obat', 'satuan', 'kemasan', 'harga_jual', 'stok', 'waktu_input');
     var $order = array('kd_obat' => 'desc');
 
+    public function getAllObat()
+    {
+        $this->db->from($this->table);
+        $this->db->select('*');
+        return $this->db->get();
+    }
     public function dataObatByName($search)
     {
         $this->db->from($this->table);

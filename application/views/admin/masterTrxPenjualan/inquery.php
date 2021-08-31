@@ -14,7 +14,8 @@
 </div>
 <div id="div_inquery" class="row" style="display: none;">
     <!-- Table -->
-    <table id='empTable' class="display dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <button id="btn_export_excel" class="btn btn-warning  btn-sm mb-2">Export Excel</button>
+    <table id='empTable' class="display dataTable table table-striped table-bordered table-sm table-responsive-sm" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Kode Trx</th>
@@ -28,6 +29,10 @@
                 <th>Action</th>
             </tr>
         </thead>
-
     </table>
 </div>
+<!-- export excel -->
+<form id="form_excel" action="<?= base_url('Excel/exporTrx'); ?>" method="post">
+    <input type="hidden" id="tgl_start" name="tgl_start" value="">
+    <input type="hidden" id="tgl_end" name="tgl_end" value="">
+</form>

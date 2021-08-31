@@ -55,10 +55,10 @@
             let t_tagihan = jml_h + resultPPn;
             total = parseInt(t_tagihan);
 
-            console.log(jml_h);
-            console.log(t_tagihan);
+            // console.log(jml_h);
+            // console.log(t_tagihan);
         } else {
-            console.log('jmlbayar sama dengan total')
+            // console.log('jmlbayar sama dengan total')
         }
         $('#resultPPn').val(formatRupiah(parseInt(resultPPn), ''));
         $('#totalTagihan').html(formatRupiah(total, ''));
@@ -346,7 +346,7 @@
             data: $('form').serialize(),
             dataType: "JSON",
             success: function(res) {
-                console.log(res);
+                // console.log(res);
                 $('#formSubmitAddObat').each(function() {
                     this.reset();
                 });

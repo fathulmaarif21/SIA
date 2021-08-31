@@ -105,9 +105,9 @@ class TrxPenjualanModel extends CI_Model
         }
         return $data;
     }
-    public function getDetailTrxPenjualanByTime($kd_trx)
+    public function getDetailTrxPenjualanByID($kd_trx)
     {
-        $data = $this->db->query("SELECT a.kd_transaksi,b.nama_obat,a.qty,a.sub_total FROM detail_trx_penjualan a LEFT JOIN master_obat b on a.kd_obat = b.kd_obat WHERE a.kd_transaksi ='$kd_trx'");
+        $data = $this->db->query("SELECT a.*,b.* FROM detail_trx_penjualan a LEFT JOIN master_obat b on a.kd_obat = b.kd_obat WHERE a.kd_transaksi ='$kd_trx'");
         if (!$data) {
             return $error = $this->db->error();
         }
@@ -175,5 +175,9 @@ class TrxPenjualanModel extends CI_Model
             return $error = $this->db->error();
         }
         return $data->row();
+    }
+    public function getTrxBetDate($start, $end)
+    {
+        return $this->db->query("SELECT * FROM `transkasi_penjualan` where date(waktu_trx) BETWEEN '$start' and '$end'");
     }
 }

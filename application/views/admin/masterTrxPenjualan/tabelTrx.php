@@ -1,4 +1,4 @@
-<table id="table_trx" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="table_trx" class="table table-striped table-bordered table-sm table-responsive-sm " cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Kode Trx</th>

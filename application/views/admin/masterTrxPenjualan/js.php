@@ -6,6 +6,7 @@
  <!-- date-range-picker -->
  <script src="<?= base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
  <script>
+     var tableNota;
      //  navigasi
      $('#bologna-list a').on('click', function(e) {
          e.preventDefault()
@@ -116,10 +117,21 @@
                      data.searchByTodate = endDate;
                  }
              },
-             dom: 'Bfrtip',
-             buttons: [
-                 'excel', 'pdf'
-             ]
+         });
+
+
+         $('#btn_export_excel').click(function() {
+             if (startDate == '' || endDate == '') {
+                 Swal.fire(
+                     'Tanggal Kosong!',
+                     'Silahkan Pilih Tanggal',
+                     'warning'
+                 )
+                 return;
+             }
+             $('#tgl_start').val(startDate);
+             $('#tgl_end').val(endDate);
+             $('#form_excel').submit();
          });
      });
 
@@ -155,5 +167,74 @@
 
              }
          })
+     }
+
+
+     function CetakNota(param) {
+         let id = $(param).data('id');
+         let nama = $(param).data('nama');
+         let alamat = $(param).data('alamat');
+         let note = $(param).data('note');
+         let tot_trx = $(param).data('tot_trx');
+         let tot_bayar = $(param).data('tot_bayar');
+         let kembali = $(param).data('kembali');
+         let tgl_nota = $(param).data('tgl_nota');
+         $('.row_trx').remove();
+         $.ajax({
+             url: "<?php echo site_url('user/detailTrxPenjualan') ?>/" + id,
+             type: "GET",
+             dataType: "JSON",
+             success: function(data) {
+                 for (let index = 0; index < data.length; index++) {
+                     $("#detaillist_nota tbody").append(`<tr class="row_trx">
+                     <td>${data[index].kd_transaksi}</td>
+                     <td>${data[index].nama_obat}</td>
+                     <td>${data[index].satuan}</td>
+                     <td>${formatRupiah(data[index].harga_jual)}</td>
+                     <td>${data[index].qty}</td>
+                     <td>${formatRupiah(data[index].sub_total)}</td>
+                     </tr>`);
+                 }
+                 //  $("#detaillist_nota tbody").html(tableNota);
+
+                 $("#invoice_nama").text(nama);
+                 $("#invoice_alamat").text(alamat);
+                 $("#invoice_note").text(note);
+                 $("#invoice_bayar").text(tot_bayar);
+                 $("#invoice_kembali").text(kembali);
+                 $("#invoice_Total").text(tot_trx);
+                 $("#invoice_tgl_nota").text(tgl_nota);
+
+                 $('#invoice_no_nota ').text(id);
+
+
+                 $('#modal_cetakNota').modal('show'); // show bootstrap modal when complete loaded
+                 $('.modal-title').text('Cetak Nota : ' + id); // Set title to Bootstrap modal title
+                 // print
+                 printElement(document.getElementById("printThis"));
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 alert('Error get data from ajax');
+             }
+         });
+     }
+
+     document.getElementById("btnPrint").onclick = function() {
+         window.print();
+     }
+
+     function printElement(elem) {
+         var domClone = elem.cloneNode(true);
+
+         var $printSection = document.getElementById("printSection");
+
+         if (!$printSection) {
+             var $printSection = document.createElement("div");
+             $printSection.id = "printSection";
+             document.body.appendChild($printSection);
+         }
+
+         $printSection.innerHTML = "";
+         $printSection.appendChild(domClone);
      }
  </script>

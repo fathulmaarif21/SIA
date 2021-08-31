@@ -56,7 +56,7 @@
             <div class="card-body">
                 <form class="needs-validation" novalidate>
                     <div class="form-group">
-                        <label for="totalBayar">Total Bayar</label>
+                        <label for="totalBayar">Jumlah Bayar</label>
                         <input type="text" class="form-control form-control-lg" name="totalBayar" id="totalBayar" placeholder="Bayar" required>
                     </div>
                     <div class="form-group">
@@ -68,13 +68,14 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit <i class="fas fa-angle-double-right"></i></button>
+                    <!-- <button type="button" onclick="showmodal()" class="btn btn-primary">print <i class="fas fa-angle-double-right"></i></button> -->
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div id="div_cetak">
+<div id="div_cetak" style="visibility: hidden;">
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -82,11 +83,11 @@
                     <!-- Main content -->
                     <div class="invoice p-3 mb-3">
                         <!-- title row -->
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row invoice-info">
+                            <div class="col-12 invoice-col">
                                 <h4>
                                     <span> <img src="<?= base_url('assets/'); ?>dist/img/logoSIA.png" width="40"></span> Apotek Ajwa
-                                    <small class="float-right"><?= date("d/m/Y"); ?></small>
+                                    <!-- <small class="float-right"><?= date("d/m/Y"); ?></small> -->
                                 </h4>
                             </div>
                             <!-- /.col -->
@@ -95,36 +96,31 @@
                         <div class="row invoice-info">
                             <div class="col-sm-4 invoice-col">
                                 <address>
-                                    <strong>Jalan Nuri</strong><br>
-                                    Phone: (804) 123-5432<br>
-                                    Email: info@apotekajwa.com
+                                    <strong>Jl. Daeng Pasau No. 9A Kel. Tahoa</strong><br>
+                                    No. Hp: 085241804046<br>
+                                    Email: rahmat.nur515@gmail.com
                                 </address>
                             </div>
                         </div>
                         <div class="row invoice-info">
-                            <div class="col-auto invoice-col">
+                            <div class="col-12 table-responsive invoice-col">
                                 <table class="table table-borderless table-sm tableLine" id="tablenota" style="width: 100%;">
                                     <tr>
-                                        <th>No. Nota</th>
-                                        <th>:</th>
-                                        <th id="invoice_no_nota"></th>
-                                        <th> Nama</th>
-                                        <th>:</th>
-                                        <th id="invoice_nama"></th>
+                                        <th style="width: 10%;">No. Nota :</th>
+                                        <td style="width: 40%;" id="invoice_no_nota"></td>
+                                        <th style="width: 15%;"> Nama :</th>
+                                        <td style="width: 35%;" id="invoice_nama"></td>
                                     </tr>
                                     <tr>
-                                        <th>Tgl. Nota</th>
-                                        <th>:</th>
-                                        <th><?= date("d/m/Y"); ?></th>
-                                        <th> Alamat</th>
-                                        <th>:</th>
-                                        <th id="invoice_alamat"></th>
+                                        <th>Tgl. Nota :</th>
+                                        <td><?= date("d/m/Y"); ?></td>
+                                        <th> Alamat :</th>
+                                        <td id="invoice_alamat"></td>
                                     </tr>
                                     <tr>
-                                        <th colspan="3"></th>
-                                        <th>Keterangan</th>
-                                        <th>:</th>
-                                        <th id="invoice_note"></th>
+                                        <th colspan="2"></th>
+                                        <th>Keterangan :</th>
+                                        <td id="invoice_note"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -132,9 +128,9 @@
                         <!-- /.row -->
 
                         <!-- Table row -->
-                        <div class="row">
-                            <div class="col-12 table-responsive">
-                                <table class="table table-borderless tableLine" id="detaillist_nota" style="width: 100%;" border="0">
+                        <div class="row nvoice-info">
+                            <div class="col-12 table-responsive invoice-col">
+                                <table class="table table-borderless table-sm tableLine" id="detaillist_nota" style="width: 100%;" border="0">
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
@@ -154,49 +150,72 @@
                         </div>
                         <!-- /.row -->
 
-                        <div class="row">
+                        <div class="row nvoice-info">
                             <!-- accepted payments column -->
-                            <div class="col-6">
+                            <div class="col-8">
                             </div>
                             <!-- /.col -->
-                            <div class="col-6">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tr>
-                                            <th style="width:50%">Total:</th>
-                                            <td id="invoice_Total">$250.30</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total Bayar</th>
-                                            <td>$10.34</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Kembalian:</th>
-                                            <td>$5.80</td>
-                                        </tr>
-                                    </table>
-                                </div>
+                            <div class="col-4 table-responsive invoice-col">
+                                <table class="table table-borderless tableLine">
+                                    <tr>
+                                        <th style="width:50%">Total :</th>
+                                        <td id="invoice_Total"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jumlah Bayar :</th>
+                                        <td id="invoice_bayar"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kembalian :</th>
+                                        <td id="invoice_kembali"></td>
+                                    </tr>
+                                </table>
                             </div>
-                            <!-- /.col -->
+                        </div>
+                        <div class="row">
+                            <div class="col-7"></div>
+                            <div class="col-5" style="text-align:center">
+                                Tanggal, <?= date("d/m/Y"); ?> <br><br><br><br><br>(_______________)
+                            </div>
                         </div>
                         <!-- /.row -->
-
-                        <!-- this row will not appear when printing -->
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                    Payment
-                                </button>
-                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Generate PDF
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.invoice -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            ...
+        </div>
+    </div>
+</div>
+
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#success_tic">Open Modal</button> -->
+
+<!-- Modal -->
+<div id="success_tic" class="modal fade" role="dialog">
+    <div class="modal-dialog  modal-dialog-centered ">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <a class="close" href="#" data-dismiss="modal">&times;</a>
+            <div class="page-body">
+                <h1 style="text-align:center;">
+                    <div class="checkmark-circle">
+                        <div class="background"></div>
+                        <div class="checkmark draw"></div>
+                    </div>
+                    <h1>
+                        <div class="head">
+                            <h4>Transaksi Berhasil!</h4>
+                            <button type="button" onclick="klikbtnPrint()" id="btn_print" class="btn btn-success"><i class="fas fa-print"></i> Cetak Nota?</button>
+                        </div>
+            </div>
+        </div>
+    </div>
+
 </div>

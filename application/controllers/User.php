@@ -16,6 +16,39 @@ class User extends CI_Controller
     //     $this->load->view('user/index');
     // }
 
+    public function tes()
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.bi.go.id/bi/antasena/antasena/v1/validasi/tandaTerima?idPelapor=135001000&kelompokInformasi=sozimhoegmi&periodeLaporan=vozukeberubfodoc&periodeData=lecolojoakevo",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "accept: application/json",
+                "authorization: Bearer AAIgYzFiNDM1Y2YwNzJlMTRmMmM5ZWE0Yzc2NjcwOWM4MjZwsIJdgyy42FEsvv0rKuq6FUkcWecvxXFKVszy9hL1CrpXlfkhostA0hPC4DEFA5IFDBl95o4v_RhP6OeJkIgn0Kskyovgit6amq7J0ykzVzoJ4-llgpKlf9z7Waie6c5rhntiFfKG4TpMEyPIczH9EkfL_V9tlEe1kyABQ92b6Q",
+                "x-bi-client-id: c1b435cf072e14f2c9ea4c766709c826"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+    }
+
+
     public function dataObat()
     {
         $data['title'] = 'Data Obat';
@@ -28,7 +61,7 @@ class User extends CI_Controller
     }
     public function detailTrxPenjualan($kd_trx)
     {
-        $data = $this->TrxPenjualanModel->getDetailTrxPenjualanByTime($kd_trx)->result();
+        $data = $this->TrxPenjualanModel->getDetailTrxPenjualanByID($kd_trx)->result();
         echo json_encode($data);
     }
 

@@ -19,24 +19,6 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/fonts/font.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/dist/css/adminlte.min.css">
     <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-
-            #div_cetak,
-            #div_cetak * {
-                visibility: visible;
-            }
-
-            #div_cetak {
-                position: absolute;
-                left: 0;
-                top: 0;
-                right: 0;
-            }
-        }
-
         .tableLine tr {
             line-height: 14px;
         }

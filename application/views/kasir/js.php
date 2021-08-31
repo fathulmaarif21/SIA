@@ -216,9 +216,13 @@
          let arr_qty = cetakArrSubmit('qty');
 
          // catatn untuk nota sampe di sini mi
-         let arrnama = [];
+         let arrnama = [],
+             satuanforNota = [];
          $('.namafornota ').each(function() {
              arrnama.push($(this).text());
+         });
+         $('.satuanfornota').each(function() {
+             satuanforNota.push($(this).text());
          });
          let arr_harga = cetakArrSubmit('harga');
          let arr_subtotal = cetakArrSubmit('subTotal').map(m => remove_str(m));
@@ -278,16 +282,8 @@
                          'arr_subtotal': arr_subtotal,
                          'catatanPembeli': $("form").serializeArray()
                      };
-                     let allDataSimpan = '';
-                     for (let index = 0; index < arr_kd_obat.length; index++) {
-                         allDataSimpan += listNote(arr_kd_obat[index], arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
-                     }
-                     $("#invoice_nama").text(data.catatanPembeli[3].value);
-                     $("#invoice_alamat").text(data.catatanPembeli[4].value);
-                     $("#invoice_note").text(data.catatanPembeli[5].value);
-                     $("#detaillist_nota tbody").html(allDataSimpan);
-                     console.log(data);
-                     return
+
+
                      $.ajax({
                          type: "POST",
                          url: "<?= base_url('kasir/submitTrx'); ?>",
@@ -297,97 +293,26 @@
                              if (res.status == true) {
                                  let allDataSimpan = '';
                                  for (let index = 0; index < arr_kd_obat.length; index++) {
-                                     allDataSimpan += listNote(arr_kd_obat[index], arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
+                                     allDataSimpan += listNote(satuanforNota[index], arr_kd_obat[index], arrnama[index], arr_harga[index], arr_qty[index], arr_subtotal[index]);
                                  }
-                                 console.log(res.id_nota);
-                                 $('#idNota').text(res.id_nota);
+                                 $("#detaillist_nota tbody").html(allDataSimpan);
 
+                                 $("#invoice_nama").text(data.catatanPembeli[3].value);
+                                 $("#invoice_alamat").text(data.catatanPembeli[4].value);
+                                 $("#invoice_note").text(data.catatanPembeli[5].value);
+                                 $("#invoice_bayar").text('Rp. ' + $('#totalBayar').val());
+                                 $("#invoice_kembali").text('Rp. ' + $('#tampilan_kembalian').val());
+                                 $("#invoice_Total").text('Rp. ' + $('#totalTagihan').text());
+
+                                 $('#invoice_no_nota ').text(res.id_nota);
+
+                                 $('#success_tic').modal('show');
                                  $('#addList tr').remove();
-
                                  $('form').each(function() {
                                      this.reset();
                                  });
                                  $('#totalTagihan').text('0');
-                                 Swal.fire(
-                                     'Transaksi Berhasil',
-                                     `${res.id_nota}`,
-                                     'success'
-                                 )
                              }
-
-                             // untuk print
-                             //                      $('#printThis').html(`<div class="row rowNota">
-                             //     <div id="table_nota" class="col-md-4">
-                             //         <table class="table table-borderless">
-                             //             <thead>
-                             //                 <tr>
-                             //                     <td colspan="4">
-                             //                         <h3 style="text-align:center">STRUK PEMBELIAN OBAT</h3>
-                             //                     </td>
-                             //                 </tr>
-                             //                 <tr>
-                             //                     <td colspan="4">
-                             //                         <h4 style="text-align:center">Apotek</h4>
-                             //                     </td>
-                             //                 </tr>
-                             //                 <tr>
-                             //                     <td colspan="2"><b>Kd Nota :<span>${res.id_nota}</span></b></td>
-                             //                     <td colspan="2"><b>Tanggal : 2020-09-99</b></td>
-                             //                 </tr>
-                             //                 <tr>
-                             //                     <th>Obat</th>
-                             //                     <th>Harga</th>
-                             //                     <th>Qty</th>
-                             //                     <th>Sub</th>
-                             //                 </tr>
-                             //             </thead>
-                             //             <tbody>
-                             //                  ${allDataSimpan}
-                             //             </tbody>
-                             //             <tfoot>
-                             //                 <tr>
-                             //                     <td colspan="2">Total
-                             //                         <br>
-                             //                         Bayar
-                             //                         <br>
-                             //                         Kembalian
-                             //                     </td>
-                             //                     <td>Rp <br>Rp<br>Rp</td>
-                             //                     <td>
-                             //                         <span>${tagihan_simpan}</span>
-                             //                         <br>
-                             //                         <span >${bayar_simpan}</span>
-                             //                         <br>
-                             //                         <span >${kembalian_simpan}</span>
-                             //                     </td>
-                             //                 </tr>
-                             //             </tfoot>
-                             //         </table>
-                             //         </>
-                             //     </div>
-                             // </div>`);
-
-
-
-                             //   window.print();
-                             //  $('.rowNota').remove();  hapus row nota
-
-                             //   $('#table_nota').append(data.table_print);
-                             //   // Swal.fire(
-                             //   //     'tes',
-                             //   //     data.no,
-                             //   //     'success'
-                             //   // )
-                             //   $('#no_nota').val(data.autokode_nota);
-                             //   $('#printThis').show();
-
-
-                             //   // $('#printThis').hide();
-                             //   $("#id_obat").val('').trigger('change')
-                             //   stotal = $('#stotal').val('0');
-                             //   $('.tampilanTotal').remove();
-
-
                          },
                          error: function(xhr, status, error) {
                              console.log(xhr.responseText);
@@ -414,39 +339,20 @@
          return arrCetak;
      }
 
-     function listNote(kdObat, arrnama, arr_harga, arr_qty, arr_subtotal) {
-         //  $('#rowNota tr').remove();
-         //  let arrnama = [];
-         //  $('.namafornota ').each(function() {
-         //      arrnama.push($(this).text());
-         //  });
-         //  let arr_kd_obat = cetakArrSubmit('kd_obat');
-         //  let arr_harga = cetakArrSubmit('harga');
-         //  let arr_qty = cetakArrSubmit('qty');
-         //  let arr_subtotal = cetakArrSubmit('subTotal');
-         //  for (let i = 0; i < arr_kd_obat.length; i++) {
-         //      //  const element = arr_kd_obat[i];
-         //      $('#rowNota').append(`
-         //      <tr>
-         //         <td>${arrnama[i]}</td>
-         //         <td>${arr_harga[i]}</td>
-         //         <td>${arr_qty[i]}</td>
-         //         <td>${arr_subtotal[i]}</td>
-         //     </tr>
-         //      `);
-         //  }
-         //  $("#notaTotalTagihan").text($('#totalTagihan').text());
-         //  $("#notaTotalBayar").text($('#totalBayar').val());
-         //  $("#notaKembalian").text($('#kembalian').val());
-
-
+     function listNote(satuanforNota, kdObat, arrnama, arr_harga, arr_qty, arr_subtotal) {
          return `<tr>
                     <td>${kdObat}</td>
+                    <td>${satuanforNota}</td>
                     <td>${arrnama}</td>
                     <td>${formatRupiah(arr_harga)}</td>
                     <td>${arr_qty}</td>
                     <td>${formatRupiah(arr_subtotal)}</td>
                 </tr>`;
 
+     }
+
+     function klikbtnPrint() {
+         window.print();
+         $('#success_tic').modal('hide');
      }
  </script>

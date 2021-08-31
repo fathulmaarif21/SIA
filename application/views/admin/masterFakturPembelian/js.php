@@ -1,7 +1,18 @@
 <script src="<?= base_url(); ?>assets/vendor/datatables/datatables.min.js"></script>
 <!-- Select2 -->
 <script src="<?= base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="<?= base_url(); ?>/assets/plugins/moment/moment.min.js"></script>
+<script src="<?= base_url(); ?>/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="<?= base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
+    //  navigasi
+    $('#bologna-list a').on('click', function(e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+
     $('#id_select_obat').select2({
         theme: "bootstrap4",
         width: '100%',
@@ -99,7 +110,65 @@
             ],
 
         });
+        // inquery by date
+        var startDate;
+        var endDate;
+        //Date range picker
+        $('#reservation').daterangepicker({
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
 
+        }, function(start, end) {
+            //  ("#id").css("display", "none");
+            $("#div_inquery").css("display", "block");
+            startDate = start.format('DD/MM/YYYY');
+            endDate = end.format('DD/MM/YYYY');
+            startDate = startDate.split('/').reverse().join('-');
+            endDate = endDate.split('/').reverse().join('-');
+            console.log(startDate);
+            console.log(endDate);
+
+            dataTable.draw();
+        })
+
+        // DataTable
+        var dataTable = $('#empTable').DataTable({
+            'processing': true,
+            'serverSide': true,
+            autoWidth: true,
+            responsive: true,
+            //  'serverMethod': 'post',
+            //  'searching': true, // Set false to Remove default Search Control
+            'ajax': {
+                'url': '<?= base_url('admin/dtFaktuPembelian'); ?>',
+                "type": "POST",
+                'data': function(data) {
+                    // Read values
+                    //  var from_date = startDate;
+                    //  var to_date = endDate;
+
+                    // Append to data
+                    data.searchByFromdate = startDate;
+                    data.searchByTodate = endDate;
+                }
+            },
+        });
+
+
+        $('#btn_export_excel').click(function() {
+            if (startDate == '' || endDate == '') {
+                Swal.fire(
+                    'Tanggal Kosong!',
+                    'Silahkan Pilih Tanggal',
+                    'warning'
+                )
+                return;
+            }
+            $('#tgl_start').val(startDate);
+            $('#tgl_end').val(endDate);
+            $('#form_excel').submit();
+        });
     });
 
     function deleteTrx(id) {
