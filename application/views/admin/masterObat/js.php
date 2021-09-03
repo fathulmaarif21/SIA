@@ -2,7 +2,7 @@
  <script src="<?= base_url(); ?>/assets/vendor/datatables/datatables.min.js"></script>
  <script>
      var save_method; //for save method string
-     var table;
+     var table, n0;
      $(document).ready(function() {
 
          //datatables
@@ -39,10 +39,12 @@
              type: "GET",
              dataType: "JSON",
              success: function(data) {
+                 n0 = 1;
                  for (let index = 0; index < data.length; index++) {
                      $('#table_detail_faktur').append(`<tr class="row_faktur">
-                         <td>${index}</td>
+                         <td>${n0++}</td>
                          <td>${data[index].no_faktur }</td>
+                         <td>${data[index].tgl_expired }</td>
                      </tr>`);
                  }
                  $('.modal-title').text('Faktur Obat');

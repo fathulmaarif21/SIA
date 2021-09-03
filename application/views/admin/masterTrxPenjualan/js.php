@@ -83,18 +83,34 @@
          var startDate;
          var endDate;
          //Date range picker
-         $('#reservation').daterangepicker({
-             locale: {
-                 format: 'DD/MM/YYYY'
-             },
+         //  $('#reservation').daterangepicker({
+         //      locale: {
+         //          format: 'DD/MM/YYYY'
+         //      },
 
-         }, function(start, end) {
-             //  ("#id").css("display", "none");
-             $("#div_inquery").css("display", "block");
-             startDate = start.format('DD/MM/YYYY');
-             endDate = end.format('DD/MM/YYYY');
-             dataTable.draw();
-         })
+         //  }, function(start, end) {
+         //      //  ("#id").css("display", "none");
+         //      $("#div_inquery").css("display", "block");
+         //      startDate = start.format('DD/MM/YYYY');
+         //      endDate = end.format('DD/MM/YYYY');
+         //      dataTable.draw();
+         //  })
+         $(function() {
+             $('#reservation').daterangepicker({
+                 opens: 'left',
+                 locale: {
+                     format: 'DD/MM/YYYY'
+                 },
+             }, function(start, end, label) {
+                 console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                 //  ("#id").css("display", "none");
+                 $("#div_inquery").css("display", "block");
+                 startDate = start.format('DD/MM/YYYY');
+                 endDate = end.format('DD/MM/YYYY');
+
+                 dataTable.draw();
+             });
+         });
 
          // DataTable
          var dataTable = $('#empTable').DataTable({

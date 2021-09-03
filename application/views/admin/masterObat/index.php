@@ -68,6 +68,7 @@
                         <tr>
                             <th>#</th>
                             <th>No Faktur</th>
+                            <th>Tanggl Exp Obat</th>
                         </tr>
                     </thead>
                 </table>

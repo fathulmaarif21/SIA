@@ -27,31 +27,53 @@ class Excel extends CI_Controller
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
 
-        // Set document properties
-        // $spreadsheet->getProperties()->setCreator('Andoyo - Java Web Media')
-        //     ->setLastModifiedBy('Andoyo - Java Web Medi')
-        //     ->setTitle('Office 2007 XLSX Test Document')
-        //     ->setSubject('Office 2007 XLSX Test Document')
-        //     ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
-        //     ->setKeywords('office 2007 openxml php')
-        //     ->setCategory('Test result file');
 
         // Add some data
         $spreadsheet->setActiveSheetIndex(0);
 
         if (!empty($data)) {
+            $noObat = 1;
             $abjad = range('A', 'Z');
             $i = 2;
             $bol_header = true;
+            $i2 = 0;
+            $spreadsheet->getActiveSheet()->SetCellValue('A1',  'No.');
             foreach ($data as $key => $val) {
+                $detailObat =  $this->dataObat->getNofaktur($val['kd_obat'])->result();
                 foreach (array_keys($val) as $k => $key) {
+                    $k++;
                     if ($bol_header === true) {
                         $spreadsheet->getActiveSheet()->SetCellValue($abjad[$k]  . '1',  strtoupper($key));
                     }
+                    // untuk nomor
+                    $spreadsheet->getActiveSheet()->SetCellValue('A' . $i,  $noObat);
+                    // datanya
                     $spreadsheet->getActiveSheet()->SetCellValue($abjad[$k]  . $i,  $val[$key]);
+                    $i2 = $k;
                 }
+                $i2++;
+                // heder detail
+                if ($bol_header === true) {
+                    $spreadsheet->getActiveSheet()->SetCellValue($abjad[$i2]  . '1',  'NO_FAKTUR');
+                    $spreadsheet->getActiveSheet()->SetCellValue($abjad[$i2 + 1]  . '1',  'TGL_EXP');
+                }
+                if (!empty($detailObat)) {
+                    foreach ($detailObat as $value) {
+                        $spreadsheet->getActiveSheet()->SetCellValue($abjad[$i2] . $i, $value->no_faktur);
+                        $spreadsheet->getActiveSheet()->SetCellValue($abjad[$i2 + 1] . $i, $value->tgl_expired);
+                        $i++;
+                    }
+                } else {
+                    $i++;
+                }
+
                 $bol_header = false;
-                $i++;
+                $noObat++;
+            }
+            for ($col = 'A'; $col !== $abjad[$i2 + 2]; $col++) {
+                $spreadsheet->getActiveSheet()
+                    ->getColumnDimension($col)
+                    ->setAutoSize(true);
             }
         }
 

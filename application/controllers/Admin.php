@@ -109,7 +109,7 @@ class Admin extends CI_Controller
             $row[] = $list->waktu_input;
             //add html for action
             $row[] =
-                '<a class="btn btn-sm btn-success" data-toggle="modal" data-target="#noFakturModal" href="javascript:void(0)" title="No_Faktur" onclick="getFaktur(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-eye"></i> No Faktur</a>
+                '<a class="btn btn-sm btn-info" data-toggle="modal" data-target="#noFakturModal" href="javascript:void(0)" title="No_Faktur" onclick="getFaktur(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-eye"></i> Detail</a>
             <a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_obat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-edit"></i> Edit</a>
             <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteObat(' . "'" . $list->kd_obat . "'" . ')"><i class="far fa-trash-alt"></i> Delete</a>';
 

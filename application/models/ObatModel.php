@@ -67,7 +67,7 @@ class ObatModel extends CI_Model
 
     function getNofaktur($kdObat)
     {
-        $query =  $this->db->query("SELECT b.no_faktur from master_obat a left JOIN detail_pembelian b on a.kd_obat= b.kd_obat  where a.kd_obat='$kdObat'");
+        $query =  $this->db->query("SELECT b.no_faktur,b.tgl_expired from master_obat a left JOIN detail_pembelian b on a.kd_obat= b.kd_obat  where a.kd_obat='$kdObat'");
         return $query;
     }
 
