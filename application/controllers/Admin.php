@@ -294,6 +294,43 @@ class Admin extends CI_Controller
         echo json_encode($output);
         // getTrxPenjualanModelByTime
     }
+
+    public function getfakturbyDate()
+    {
+        $tgl_start = $this->input->post('tgl_start');
+        $tgl_end = $this->input->post('tgl_end');
+        $data = [];
+        if (empty($tgl_start) || empty($tgl_end)) {
+            $status = false;
+        } else {
+            $status = true;
+            $lists = $this->FakturPembelianModel->getFakturBetDate($tgl_start, $tgl_end)->result();
+            foreach ($lists as $list) {
+                $row = [];
+                $row[] = $list->no_faktur;
+                $row[] = $list->nama_supplier;
+                $row[] = rupiah($list->jml_harga);
+                $row[] = $list->ppn_persen . ' %';
+                $row[] = rupiah($list->ppn);
+                $row[] = rupiah($list->total_trx);
+                $row[] = $list->tgl_beli;
+                $row[] = $list->jt_tempo;
+                $row[] = $list->waktu_input;
+                //add html for action
+                // onclick="detail_trx(' . "'" . $value->no_faktur . "'" . ')"
+                $row[] = '
+            <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->no_faktur . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
+            <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteTrx(' . "'" . $list->no_faktur . "'" . ')" title="Delete" ><i class="fas fa-trash"></i> Delete</a>
+            ';
+                $data[] = $row;
+            }
+        }
+        $output = [
+            'status' => $status,
+            'data' => $data
+        ];
+        echo json_encode($output);
+    }
     public function saveFakturPembelian()
     {
         $noFaktur = $this->input->post('NomorFaktur');

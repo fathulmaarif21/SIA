@@ -113,40 +113,70 @@
         // inquery by date
         var startDate;
         var endDate;
-        //Date range picker
-        // $('#reservation').daterangepicker({
-        //     locale: {
-        //         format: 'DD/MM/YYYY'
-        //     },
-
-        // }, function(start, end) {
-        //     //  ("#id").css("display", "none");
-        //     $("#div_inquery").css("display", "block");
-        //     startDate = start.format('DD/MM/YYYY');
-        //     endDate = end.format('DD/MM/YYYY');
-        //     startDate = startDate.split('/').reverse().join('-');
-        //     endDate = endDate.split('/').reverse().join('-');
-        //     console.log(startDate);
-        //     console.log(endDate);
-
-        //     dataTable.draw();
-        // })
 
         $(function() {
             $('#reservation').daterangepicker({
-                opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD/MM/YYYY'
+                },
             }, function(start, end, label) {
                 console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
                 //  ("#id").css("display", "none");
                 $("#div_inquery").css("display", "block");
                 startDate = start.format('YYYY-MM-DD')
                 endDate = end.format('YYYY-MM-DD')
-                console.log(startDate);
-                console.log(endDate);
-
-                dataTable.draw();
+                $('#tgl_start').val(startDate);
+                $('#tgl_end').val(endDate);
+                getbyDate();
             });
         });
+
+        function getbyDate() {
+            $('#empTable').DataTable().clear().draw();
+            if ($.fn.DataTable.isDataTable('#empTable')) {
+                $('#empTable').DataTable().destroy();
+            }
+
+            $.ajax({
+                url: "<?= base_url('admin/getfakturbyDate'); ?>",
+                data: $('#form_excel').serialize(),
+                datatype: "json",
+                type: "POST",
+                success: function(res) {
+                    let obj = JSON.parse(res);
+                    // datatable master
+                    if (obj.status) {
+                        $('#empTable').dataTable({
+                            "dom": 'rt',
+                            "searching": false,
+                            "order": false,
+                            "ordering": false,
+                            "paging": false,
+                            "data": obj.data,
+                        });
+                    } else {
+                        Swal.fire(
+                            'Peringatan',
+                            'Tanggal Tidak Valid',
+                            'warning'
+                        )
+                    }
+
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    Swal.fire(
+                        'Error!',
+                        xhr.responseText,
+                        'error'
+                    )
+                }
+
+            });
+
+        }
+
 
         // DataTable
         var dataTable = $('#empTable').DataTable({
