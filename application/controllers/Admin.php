@@ -199,7 +199,7 @@ class Admin extends CI_Controller
             // <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="deleteTrx(' . "'" . $list->kd_transaksi . "'" . ')" title="Delete" ><i class="fas fa-trash"></i> Delete</a>
             // ';
             $row[] = '
-            <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="detail_trx(' . $list->kd_transaksi . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
+            <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="detail_trx(' . "'$list->kd_transaksi'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
             <a class="btn btn-sm btn-success" href="javascript:void(0)"  onclick="CetakNota(this)" 
             data-id="' . $list->kd_transaksi . '"
             data-nama="' . $list->nama_pembeli . '"
