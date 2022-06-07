@@ -132,6 +132,17 @@
             });
         });
 
+        $('#btn_cari').click(function() {
+
+            $("#div_inquery").css("display", "block");
+
+            startDate = $('#TGL_AWAL').val();
+            endDate = $('#TGL_AKHIR').val();
+            $('#tgl_start').val(startDate);
+            $('#tgl_end').val(endDate);
+            getbyDate();
+        });
+
         function getbyDate() {
             $('#empTable').DataTable().clear().draw();
             if ($.fn.DataTable.isDataTable('#empTable')) {

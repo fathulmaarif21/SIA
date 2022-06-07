@@ -120,7 +120,7 @@
                         <td scope="row">${no++}</td>
                         <td class="namafornota">${res.nama_obat}</td>
                         <td class="satuanfornota">${res.satuan}</td>
-                        <td><input type="number" id="hb${res.id}" data-kd_obat="${res.id}"  class="form-control form-control-sm  cek_harga" name="harga[]" value="${res.harga}" ></td>
+                        <td><input type="number" id="hb${res.id}" data-kd_obat="${res.id}"  class="form-control form-control-sm  cek_harga" name="harga[]" value="${res.harga}" readonly ></td>
                         <td>
                             <div class="form-group col-auto">
                                 <div class="">

@@ -1,14 +1,3 @@
-<li class="nav-header">PEMBELIAN</li>
-<li class="nav-item">
-    <a href="<?= base_url(); ?>admin/viewFaktuPembelian" class="nav-link <?php if ($this->uri->segment(2) == 'viewFaktuPembelian') {
-                                                                                echo 'active';
-                                                                            } ?>">
-        <i class="fas fa-file-invoice  nav-icon"></i>
-        <p>
-            Faktur Pembelian
-        </p>
-    </a>
-</li>
 <li class="nav-header">DATA MASTER</li>
 <li class="nav-item">
     <a href="<?= base_url(); ?>admin/viewMasterObat" class="nav-link <?php if ($this->uri->segment(2) == 'viewMasterObat') {

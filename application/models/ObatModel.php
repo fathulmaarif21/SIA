@@ -162,8 +162,10 @@ class ObatModel extends CI_Model
         $plus3M = date('Y-m-d', strtotime("+2 months", strtotime($timenow)));
 
         // return  $this->db->query("SELECT a.*,b.nama_obat,b.stok FROM detail_pembelian a left join master_obat b ON a.kd_obat =b.kd_obat where tgl_expired BETWEEN '$timenow' AND '$plus3M'");
-        return  $this->db->query("SELECT a.*,b.nama_obat,b.stok FROM detail_pembelian a left join master_obat b ON a.kd_obat =b.kd_obat where tgl_expired <= '$plus3M'");
+        return  $this->db->query("SELECT a.*,b.nama_obat,b.stok, c.id FROM tbl_exp_date c left join detail_pembelian a on c.id_dtl_pembelian = a.id_dtl_pembelian left join master_obat b ON a.kd_obat =b.kd_obat where a.tgl_expired <= '$plus3M'");
     }
+
+
     public function updateStokByObat($kdObat, $stok)
     {
 

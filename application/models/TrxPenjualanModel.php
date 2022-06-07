@@ -12,7 +12,7 @@ class TrxPenjualanModel extends CI_Model
     var $table = "transkasi_penjualan";
     var $column_order = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian', 'waktu_trx');
     var $column_search = array('kd_transaksi ', 'id_user', 'nama_pembeli', 'alamat_pembeli', 'note', 'total_trx', 'total_bayar', 'kembalian', 'waktu_trx');
-    var $order = array('kd_transaksi ' => 'desc');
+    var $order = array('waktu_trx ' => 'desc');
 
 
     private function _get_datatables_query()
@@ -141,6 +141,11 @@ class TrxPenjualanModel extends CI_Model
     public function sum_total_trx_hari_ini($tgl)
     {
         $query = $this->db->query("SELECT sum(total_trx) as total_pertgl FROM transkasi_penjualan where date(waktu_trx) = '$tgl'");
+        return $query;
+    }
+    public function sum_total_trx_bulan($tgl)
+    {
+        $query = $this->db->query("SELECT sum(total_trx) as total_pertgl FROM transkasi_penjualan where EXTRACT(YEAR_MONTH FROM waktu_trx)='$tgl'");
         return $query;
     }
     public function sum_total_trx_byDate($searchByFromdate, $searchByTodate)

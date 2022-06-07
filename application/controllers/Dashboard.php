@@ -25,10 +25,22 @@ class Dashboard extends CI_Controller
 		$data = $this->dataObat->get_obat_expired()->result();
 		echo json_encode($data);
 	}
+
+	public function delExpDate($id)
+	{
+		$data =  $this->db->query("DELETE FROM tbl_exp_date WHERE id='$id'");
+		echo json_encode($data);
+	}
 	// real time saldo
 	public function real_time_saldo()
 	{
 		$data = $this->trxPenjualan->sum_total_trx_hari_ini(date("Y-m-d"))->row();
+		$data_saldo = empty($data->total_pertgl) ? $data_saldo = '0' : $data_saldo = $data->total_pertgl;
+		echo json_encode($data_saldo);
+	}
+	public function real_time_saldo_by_month()
+	{
+		$data = $this->trxPenjualan->sum_total_trx_bulan(date("Ym"))->row();
 		$data_saldo = empty($data->total_pertgl) ? $data_saldo = '0' : $data_saldo = $data->total_pertgl;
 		echo json_encode($data_saldo);
 	}

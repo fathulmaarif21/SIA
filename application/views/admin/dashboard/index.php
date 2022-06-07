@@ -19,8 +19,10 @@
                             <th>Kd Obat</th>
                             <th>Nama obat</th>
                             <th>No Faktur</th>
+                            <th>No Batch</th>
                             <th>Expire_date</th>
                             <th>Jumlah</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                 </table>

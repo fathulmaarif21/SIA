@@ -9,9 +9,18 @@
      $(document).ready(function() {
          //  var xxxxx = getTimeServer() * 1000;
          //  var timeserver = new Date(xxxxx);
+         let saldoHarian = 0;
+         let oldsaldoHarian = 0;
          setInterval(function() {
              //  timeserver = startTime(String(timeserver));
-             document.getElementById('r_saldo').innerHTML = `${formatRupiah(realsaldo())}`;
+             if (saldoHarian != oldsaldoHarian) {
+                 document.getElementById('saldo_bulanan').innerHTML = `${formatRupiah(realsaldoPerbulan())}`;
+                 oldsaldoHarian = saldoHarian
+             }
+
+             saldoHarian = realsaldo();
+
+             document.getElementById('r_saldo').innerHTML = `${formatRupiah(saldoHarian)}`;
              document.getElementById('r_trx').innerHTML = realtrx();
              document.getElementById('r_stok').innerHTML = realstok();
          }, 1000);
@@ -21,6 +30,17 @@
          let real_saldo = $.ajax({
              type: 'GET',
              url: '<?= base_url('Dashboard/real_time_saldo') ?>',
+             async: false,
+             success: function(data) {}
+         }).responseText;
+         let rs = JSON.parse(real_saldo);
+         return rs;
+     }
+
+     function realsaldoPerbulan() {
+         let real_saldo = $.ajax({
+             type: 'GET',
+             url: '<?= base_url('Dashboard/real_time_saldo_by_month') ?>',
              async: false,
              success: function(data) {}
          }).responseText;
@@ -62,8 +82,10 @@
                         <td>${data[index].kd_obat }</td>
                         <td>${data[index].nama_obat}</td>
                         <td>${data[index].no_faktur}</td>
-                        <td>${data[index].tgl_expired}</td>
+                        <td>${data[index].no_batch}</td>
+                        <td>${data[index].tgl_expired}</td> 
                         <td>${data[index].stok}</td>
+                        <td><button type="button" onclick="deleteExp(${data[index].id})" class="btn btn-danger btn-sm">Danger</button></td>
                     </tr>`);
                  }
 
@@ -78,7 +100,38 @@
          });
 
      }
+
+     function deleteExp(params) {
+
+
+         Swal.fire({
+             title: 'Hapus Dari List Expired?',
+             text: "",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Ya!'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 // ajax delete data to database
+                 $.ajax({
+                     url: "<?= base_url('Dashboard/delExpDate') ?>/" + params,
+                     type: "GET",
+                     dataType: "JSON",
+                     success: function(data) {
+                         get_data_expired()
+                     },
+                     error: function(jqXHR, textStatus, errorThrown) {
+                         alert('Error deleting data');
+                     }
+                 });
+
+             }
+         })
+     }
  </script>
+
 
 
 

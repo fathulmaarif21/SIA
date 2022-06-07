@@ -31,7 +31,7 @@ class Login extends CI_Controller
                 ];
                 $this->session->set_userdata($ses_data);
                 // $this->TriggerModel->createTiger();
-                redirect('Home');
+                redirect('Dashboard');
             } else {
                 $this->session->set_flashdata('msg', 'Password Salah!');
                 redirect('login');

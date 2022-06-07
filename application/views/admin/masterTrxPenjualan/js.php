@@ -53,9 +53,9 @@
 
              "processing": true, //Feature control the processing indicator.
              "serverSide": true, //Feature control DataTables' server-side processing mode.
-             //  "order": [
-             //      [8, "desc"]
-             //  ], //Initial no order.
+             "order": [
+                 [8, "desc"]
+             ], //Initial no order.
              autoWidth: true,
              responsive: true,
 
@@ -68,6 +68,10 @@
              //Set column definition initialisation properties.
              "columnDefs": [{
                      "targets": [-1], //last column
+                     "orderable": false, //set not orderable
+                 },
+                 {
+                     "targets": [7], //last column
                      "orderable": false, //set not orderable
                  },
 
@@ -104,12 +108,21 @@
              }, function(start, end, label) {
                  console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
                  //  ("#id").css("display", "none");
-                 $("#div_inquery").css("display", "block");
+
                  startDate = start.format('DD/MM/YYYY');
                  endDate = end.format('DD/MM/YYYY');
 
                  dataTable.draw();
              });
+         });
+
+         $('#btn_cari').click(function() {
+
+             $("#div_inquery").css("display", "block");
+
+             startDate = $('#TGL_AWAL').val();
+             endDate = $('#TGL_AKHIR').val();
+             dataTable.draw();
          });
 
          // DataTable
