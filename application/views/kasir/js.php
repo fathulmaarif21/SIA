@@ -148,6 +148,12 @@
              error: function(xhr, ajaxOptions, thrownError) {
                  // console.log(xhr.);
                  console.log(xhr.responseText);
+                 Swal.fire(
+                     'Error!',
+                     xhr.responseText,
+                     'error'
+                 )
+                 window.location.reload();
              }
          })
      });
@@ -318,9 +324,10 @@
                              console.log(xhr.responseText);
                              Swal.fire(
                                  'Error!',
-                                 'coba cek dulu',
+                                 xhr.responseText,
                                  'error'
                              )
+                             window.location.reload();
                          }
                      });
                  }
