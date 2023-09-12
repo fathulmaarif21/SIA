@@ -207,6 +207,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button id="btnPrint" type="button" class="btn btn-success">Print</button>
+                <button onclick="klikbtnPrint_thermal()" id="btn_thermal" type="button" class="btn btn-warning" disabled>Print Thermal</button>
             </div>
         </div>
     </div>

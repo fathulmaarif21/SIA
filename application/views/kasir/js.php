@@ -59,7 +59,8 @@
      }
  </script>
  <script>
-     var no = 1;
+     var no = 1,
+         dataPrint; //ini
      $(document).ready(function() {
 
 
@@ -318,6 +319,18 @@
                                      this.reset();
                                  });
                                  $('#totalTagihan').text('0');
+                                 //ini
+                                 dataPrint = {
+                                     'order_id': res.id_nota,
+                                     'tagihan_simpan': tagihan_simpan,
+                                     'bayar_simpan': bayar_simpan,
+                                     'kembalian_simpan': kembalian_simpan,
+                                     'arrnama': arrnama,
+                                     'satuanforNota': satuanforNota,
+                                     'arr_qty': arr_qty,
+                                     'arr_harga': arr_harga,
+                                     'arr_subtotal': arr_subtotal,
+                                 };
                              }
                          },
                          error: function(xhr, status, error) {
@@ -347,19 +360,62 @@
      }
 
      function listNote(satuanforNota, kdObat, arrnama, arr_harga, arr_qty, arr_subtotal) {
-         return `<tr>
-                    <td>${kdObat}</td>
-                    <td>${satuanforNota}</td>
-                    <td>${arrnama}</td>
-                    <td>${formatRupiah(arr_harga)}</td>
-                    <td>${arr_qty}</td>
+         // <tr>
+
+         //             <td class="description">${arrnama}</td>
+         //             <td class="quantity">${arr_qty}</td>
+         //             <td class="price">${formatRupiah(arr_harga)}</td>
+         //             <td>${formatRupiah(arr_subtotal)}</td>
+         //         </tr>
+         return `
+                <tr>
+                    <td colspan="3">${arrnama}</td>
+                </tr>
+                <tr>
+                    <td>@ ${formatRupiah(arr_harga)}</td>
+                    <td width="7%">${arr_qty}x</td>
                     <td>${formatRupiah(arr_subtotal)}</td>
-                </tr>`;
+                </tr>
+                `;
 
      }
 
      function klikbtnPrint() {
          window.print();
          $('#success_tic').modal('hide');
+     }
+
+     //ini
+     function klikbtnPrint_thermal() {
+         //  window.print();
+         $('#success_tic').modal('hide');
+
+         $.ajax({
+             type: "POST",
+             url: "<?= base_url('Cetak/cetak'); ?>",
+             data: dataPrint,
+             dataType: "JSON",
+             success: function(res) {
+                 console.log(res);
+                 //  if (res.code != "00") {
+                 //      Swal.fire(
+                 //          'Error!',
+                 //          "gagal cetak Nota",
+                 //          'error'
+                 //      )
+                 //  }
+                 dataPrint = [];
+             },
+             error: function(xhr, status, error) {
+                 console.log(xhr.responseText);
+                 Swal.fire(
+                     'Error!',
+                     xhr.responseText,
+                     'error'
+                 )
+                 dataPrint = [];
+                 //  window.location.reload();
+             }
+         });
      }
  </script>

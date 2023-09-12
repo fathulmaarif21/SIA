@@ -122,7 +122,19 @@ class User extends CI_Controller
             $row[] = rupiah($list->kembalian);
             //add html for action
             // onclick="detail_trx(' . "'" . $value->kd_transaksi . "'" . ')"
-            $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->kd_transaksi . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>';
+            $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" onclick="detail_trx(' . "'" . $list->kd_transaksi . "'" . ')" title="detail" ><i class="fas fa-info"></i> Detail</a>
+            <a class="btn btn-sm btn-success" href="javascript:void(0)"  onclick="CetakNota(this)" 
+            data-id="' . $list->kd_transaksi . '"
+            data-nama="' . $list->nama_pembeli . '"
+            data-alamat="' . $list->alamat_pembeli . '"
+            data-note="' . $list->note . '"
+            data-tot_trx="' . rupiah($list->total_trx) . '"
+            data-tot_bayar="' . rupiah($list->total_bayar) . '"
+            data-kembali="' . rupiah($list->kembalian) . '"
+            data-tgl_nota="' . date('d/m/Y', strtotime($list->waktu_trx)) . '"
+            title="detail" ><i class="fas fa-print"></i> Nota</a>
+            
+            ';
             $data[] = $row;
         }
         $output = [

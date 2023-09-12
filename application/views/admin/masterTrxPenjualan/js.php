@@ -46,6 +46,7 @@
      }
  </script>
  <script>
+     var dataPrint = [];
      $(document).ready(function() {
 
          //datatables
@@ -165,7 +166,7 @@
      });
 
      function deleteTrx(id) {
-
+         console.log(id)
          Swal.fire({
              title: 'Yakin Hapus Transaksi?',
              text: "Transaksi yang telah di Hapus akan mengembalikan stok obat",
@@ -199,7 +200,8 @@
      }
 
 
-     function CetakNota(param) {
+     async function CetakNota(param) {
+         $('#btn_thermal').attr("disabled", true);
          let id = $(param).data('id');
          let nama = $(param).data('nama');
          let alamat = $(param).data('alamat');
@@ -209,11 +211,17 @@
          let kembali = $(param).data('kembali');
          let tgl_nota = $(param).data('tgl_nota');
          $('.row_trx').remove();
-         $.ajax({
+         await $.ajax({
              url: "<?php echo site_url('user/detailTrxPenjualan') ?>/" + id,
              type: "GET",
              dataType: "JSON",
              success: function(data) {
+                 let arrnama = [];
+                 let satuanforNota = [];
+                 let arr_qty = [];
+                 let arr_harga = [];
+                 let arr_subtotal = [];
+
                  for (let index = 0; index < data.length; index++) {
                      $("#detaillist_nota tbody").append(`<tr class="row_trx">
                      <td>${data[index].kd_transaksi}</td>
@@ -223,8 +231,27 @@
                      <td>${data[index].qty}</td>
                      <td>${formatRupiah(data[index].sub_total)}</td>
                      </tr>`);
+
+                     arrnama.push(data[index].nama_obat)
+                     satuanforNota.push(data[index].satuan)
+                     arr_qty.push(data[index].qty)
+                     arr_harga.push(data[index].harga_jual)
+                     arr_subtotal.push(data[index].sub_total)
                  }
                  //  $("#detaillist_nota tbody").html(tableNota);
+
+                 dataPrint = {
+                     'order_id': id,
+                     'tagihan_simpan': replaceRp(tot_trx),
+                     'bayar_simpan': replaceRp(tot_bayar),
+                     'kembalian_simpan': replaceRp(kembali),
+                     'arrnama': arrnama,
+                     'satuanforNota': satuanforNota,
+                     'arr_qty': arr_qty,
+                     'arr_harga': arr_harga,
+                     'arr_subtotal': arr_subtotal,
+                 };
+                 $('#btn_thermal').removeAttr("disabled");
 
                  $("#invoice_nama").text(nama);
                  $("#invoice_alamat").text(alamat);
@@ -265,5 +292,50 @@
 
          $printSection.innerHTML = "";
          $printSection.appendChild(domClone);
+     }
+
+     function klikbtnPrint_thermal() {
+         //  window.print();
+         $('#success_tic').modal('hide');
+
+         $.ajax({
+             type: "POST",
+             url: "<?= base_url('Cetak/cetak'); ?>",
+             data: dataPrint,
+             dataType: "JSON",
+             success: function(res) {
+                 console.log(res);
+                 //  if (res.code != "00") {
+                 //      Swal.fire(
+                 //          'Error!',
+                 //          "gagal cetak Nota",
+                 //          'error'
+                 //      )
+                 //  }
+
+             },
+             error: function(xhr, status, error) {
+                 console.log(xhr.responseText);
+                 Swal.fire(
+                     'Error!',
+                     xhr.responseText,
+                     'error'
+                 )
+
+                 //  window.location.reload();
+             }
+         });
+         $('#btn_thermal').attr("disabled", true);
+     }
+
+     function replaceRp(inputString) {
+         // Input string
+         // Remove non-numeric characters
+         var numericString = inputString.replace(/\D/g, ''); // This removes all non-digit characters
+
+         // Convert the numeric string to a number
+         return parseInt(numericString, 10); // Parse as base 10
+
+
      }
  </script>

@@ -3,6 +3,50 @@
 <?php $this->load->view('templates/sidebar'); ?>
 <?php $this->load->view('trxPenjualan/content'); ?>
 <?php $this->load->view('templates/footer'); ?>
+<style>
+    /* @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #div_cetak,
+        #div_cetak * {
+            visibility: visible !important;
+        }
+
+        #div_cetak {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+        }
+    } */
+
+    @media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printSection,
+        #printSection * {
+            visibility: visible;
+        }
+
+        #printSection {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+
+        }
+    }
+</style>
 <div class="modal fade bd-example-modal-xl" id="modal_detail_trx" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

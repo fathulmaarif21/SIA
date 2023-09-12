@@ -76,116 +76,167 @@
 </div>
 
 <div id="div_cetak" style="visibility: hidden;">
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Main content -->
-                    <div class="invoice p-3 mb-3">
-                        <!-- title row -->
-                        <div class="row invoice-info">
-                            <div class="col-12 invoice-col">
-                                <h4>
-                                    <span> <img src="<?= base_url('assets/'); ?>dist/img/logoSIA.png" width="40"></span> Apotek Ajwa
-                                    <!-- <small class="float-right"><?= date("d/m/Y"); ?></small> -->
-                                </h4>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- info row -->
-                        <div class="row invoice-info">
-                            <div class="col-sm-4 invoice-col">
-                                <address>
-                                    <strong>Jl. Daeng Pasau No. 9A Kel. Tahoa</strong><br>
-                                    No. Hp: 085241804046<br>
-                                    Email: rahmat.nur515@gmail.com
-                                </address>
-                            </div>
-                        </div>
-                        <div class="row invoice-info">
-                            <div class="col-12 table-responsive invoice-col">
-                                <table class="table table-borderless table-sm tableLine" id="tablenota" style="width: 100%;">
-                                    <tr>
-                                        <th style="width: 10%;">No. Nota :</th>
-                                        <td style="width: 40%;" id="invoice_no_nota"></td>
-                                        <th style="width: 15%;"> Nama :</th>
-                                        <td style="width: 35%;" id="invoice_nama"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tgl. Nota :</th>
-                                        <td><?= date("d/m/Y"); ?></td>
-                                        <th> Alamat :</th>
-                                        <td id="invoice_alamat"></td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2"></th>
-                                        <th>Keterangan :</th>
-                                        <td id="invoice_note"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.row -->
 
-                        <!-- Table row -->
-                        <div class="row nvoice-info">
-                            <div class="col-12 table-responsive invoice-col">
-                                <table class="table table-borderless table-sm tableLine" id="detaillist_nota" style="width: 100%;" border="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Kode</th>
-                                            <th>Nama Obat</th>
-                                            <th>Satuan</th>
-                                            <th>Harga @</th>
-                                            <th>qty</th>
-                                            <th>Subtotal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+    <style>
+        #ticket {
+            font-size: 5px;
+            font-family: 'Times New Roman';
+        }
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
+        /* #ticket table {
+            border-top: 1px solid black;
+            border-collapse: collapse;
+        } */
 
-                        <div class="row nvoice-info">
-                            <!-- accepted payments column -->
-                            <div class="col-8">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4 table-responsive invoice-col">
-                                <table class="table table-borderless tableLine">
-                                    <tr>
-                                        <th style="width:50%">Total :</th>
-                                        <td id="invoice_Total"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Jumlah Bayar :</th>
-                                        <td id="invoice_bayar"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kembalian :</th>
-                                        <td id="invoice_kembali"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-7"></div>
-                            <div class="col-5" style="text-align:center">
-                                Tanggal, <?= date("d/m/Y"); ?> <br><br><br><br><br>(_______________)
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.invoice -->
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
+        /* #ticket td.description,
+        th.description {
+            width: 75px;
+            max-width: 75px;
+        }
+
+        #ticket td.quantity,
+        th.quantity {
+            max-width: 5px;
+            word-break: break-all;
+        }
+
+        #ticket td.price,
+        th.price {
+            width: 25px;
+            max-width: 25px;
+            word-break: break-all;
+        } */
+
+        #ticket .centered {
+            text-align: center;
+            align-content: center;
+        }
+
+        #ticket .ticket {
+            width: 155px;
+            max-width: 155px;
+        }
+
+        #ticket img {
+            /* max-width: inherit;
+            width: inherit; */
+            padding-left: 20px;
+            width: 2%;
+
+            /* background-size: 60px 60px; */
+        }
+
+        #ticket table {
+            /* border-style: double none double none; */
+            text-transform: uppercase;
+            white-space: nowrap;
+            font-weight: bold;
+            border-collapse: collapse;
+        }
+
+        .center_logo {
+            padding-left: 100px;
+        }
+    </style>
+    <!-- 
+                            <div id="legalcopy" class="tableitem">
+                                <p class="legal"><strong>Log:</strong> <?= $this->session->userdata('nama'); ?>
+                                    <br>
+                                    <?= date("d-m-Y h:i:s"); ?>
+                                </p>
+                            </div> -->
+
+    <div class="ticket" style="font-family: 'Times New Roman'; width: 300px;
+            max-width: 300px;">
+        <div class="center_logo">
+            <img src="http://localhost/SIA/assets/dist/img/logoSIA.png" width="10%" alt="Logo">
+        </div>
+        <p style="padding-left:60px;">Apotek Kiya Medika</p>
+        <div style="font-size: 13px;">
+            <p>
+                Address : Jl. Jend. Ahmad Yani, Pondambea</br>
+                Phone : 0853-4269-7757</br>
+            </p>
+            <hr style="max-width: 220px; margin-left:0; border-top: 1px dashed">
+            <p>
+                Order ID : <span id="invoice_no_nota"></span> <br>
+                Operator: <?= $this->session->userdata('nama'); ?> <br>
+                Time : <?= date("d-m-Y h:i:s"); ?>
+            </p>
+            <hr style="max-width: 220px; margin-left:0; border-top: 1px dashed">
+        </div>
+        <div style="font-size: 10px;">
+            <table style=" text-transform: uppercase; font-weight: bold; border-collapse: collapse; " width="100%" id="detaillist_nota">
+                <tbody>
+                    <tr>
+                        <td colspan="3">nama obat sdsdsd</td>
+                    </tr>
+                    <tr>
+                        <td>@ 1.000.000</td>
+                        <td width="7%">1 x</td>
+                        <td> 10.000.000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">nama obat sdsdsd</td>
+                    </tr>
+                    <tr>
+                        <td>1 x</td>
+                        <td> 1.000.000</td>
+                        <td> 10.000.000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">nama obat sdsdsd</td>
+                    </tr>
+                    <tr>
+                        <td>1 x</td>
+                        <td> 1.000.000</td>
+                        <td> 10.000.000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">nama obat sdsdsd</td>
+                    </tr>
+                    <tr>
+                        <td>1 x</td>
+                        <td> 1.000.000</td>
+                        <td> 10.000.000</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>1.00</td>
+                        <td>STICKER PACK</td>
+                        <td class="price">$10.00</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>TOTAL</td>
+                        <td>$55.00</td>
+                    </tr> -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th align="right" colspan="2">Total :</th>
+                        <td id="invoice_Total"></td>
+                    </tr>
+                    <tr>
+                        <th align="right" colspan="2">Jumlah Bayar :</th>
+                        <td id="invoice_bayar"></td>
+                    </tr>
+                    <tr>
+                        <th align="right" colspan="2">Kembalian :</th>
+                        <td id="invoice_kembali"></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <hr style="max-width: 220px; margin-left:0; border-top: 1px dashed">
+            <p class="centered">TERIMA KASIH
+                <br>Semoga Sehat Selalu
+            </p>
+        </div>
+    </div>
+
+    <!--End Invoice-->
+
 </div>
+
 
 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -213,9 +264,14 @@
                         <div class="head">
                             <h4>Transaksi Berhasil!</h4>
                             <button type="button" onclick="klikbtnPrint()" id="btn_print" class="btn btn-success"><i class="fas fa-print"></i> Cetak Nota?</button>
+                            <button type="button" onclick="klikbtnPrint_thermal()" class="btn btn-success"><i class="fas fa-print"></i> Print Thermal</button>
                         </div>
             </div>
         </div>
     </div>
 
 </div>
+<script>
+    var logoprint = "<?= base_url('assets/'); ?>dist/img/logoSIA.png";
+    console.log(logoprint)
+</script>

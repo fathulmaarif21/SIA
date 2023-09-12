@@ -17,6 +17,7 @@
         }
     }
 
+
     #success_tic .page-body {
         max-width: 300px;
         background-color: #FFFFFF;

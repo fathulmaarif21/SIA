@@ -66,7 +66,7 @@ class Kasir extends CI_Controller
 
             $allTrx = [
                 "kd_transaksi" => $autokode,
-                "id_user" => '1',
+                "id_user" => $this->session->userdata('user_id'),
                 "nama_pembeli" => $nama,
                 "alamat_pembeli" => $alamat,
                 "note" => $note,
